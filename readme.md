@@ -8,29 +8,40 @@ https://plotly.com/~RLUND/46/#plot
 
 https://plotly.com/~RLUND/43/#plot
 
-## Setup
 
 This project was created with Python 3.7.7 & miniconda version 4.8.1 using Windows 10.
 
-See instructions to install miniconda: https://docs.conda.io/en/latest/miniconda.html. 
+To install miniconda: https://docs.conda.io/en/latest/miniconda.html. 
 
-Create a new environment:
 
-``` conda create [environment_name]```
+# Setup
+From the (anaconda) console:
 
-enter new environemnt:
+  ####    Create a new conda environment:
 
-```conda activate [environment_name]```
+``` 
+    conda create --name [environment_name]
+```
 
+Enter the new environment:
+
+```
+    conda activate [environment_name]
+```
+
+#### Install jupyter and extensions
 
 To follow this tutorial with jupyter lab you will need to install jupyter lab (1.2.6 was used in the creation of this workbook)
 
-To run plotly in a jupyter workbook you will need to do the following:
+``` 
+    conda install jupyterlab=1.2
+```
+
+To run plotly in a jupyter workbook you will need to do the following described here https://plotly.com/python/getting-started/#jupyterlab-support-python-35
+:
 
 
 ```
-conda install jupyterlab=1.2
-
 conda install "ipywidgets=7.5" 
 
 Avoid "JavaScript heap out of memory" errors during extension installation
@@ -59,7 +70,21 @@ unset NODE_OPTIONS
 set NODE_OPTIONS
 
 ```
+#### To deploy to plotly studio
 
-https://plotly.com/python/getting-started/#jupyterlab-support-python-35
+```
+conda install chart_studio
+```
+You will need to create an account (for free):
+
+https://plotly.com/python/getting-started-with-chart-studio/
+
+You will also need to create a file called 'plotly_credentials.py' which contains your chart studio username and API key.
+
+```
+USERNAME=[your username]
+API_KEY=[your API Key]
+```
+
 
 
