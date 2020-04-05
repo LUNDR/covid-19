@@ -1,6 +1,6 @@
 # Visualizations of Corona Virus Data with Python and Plotly 
 
-Tutorial to create and deploy visualizations of data on Corona Virus from https://opendata.ecdc.europa.eu
+Tutorial to create and deploy visualizations of data on Covid-19from https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
 
 Examples can be seen here:
 
@@ -37,8 +37,9 @@ To follow this tutorial with jupyter lab you will need to install jupyter lab (1
     conda install jupyterlab=1.2
 ```
 
-To run plotly in a jupyter workbook you will need to do the following described here https://plotly.com/python/getting-started/#jupyterlab-support-python-35
-:
+To run plotly in a jupyter workbook you will need to do the following described here https://plotly.com/python/getting-started/#jupyterlab-support-python-35:
+
+(note that this will require node to be installed)
 
 
 ```
@@ -70,6 +71,11 @@ unset NODE_OPTIONS
 set NODE_OPTIONS
 
 ```
+## Install other packages
+
+``` conda install pandas```
+
+
 #### To deploy to plotly studio
 
 ```
@@ -85,6 +91,6 @@ You will also need to create a file called 'plotly_credentials.py' which contain
 USERNAME=[your username]
 API_KEY=[your API Key]
 ```
+#### displaying static pictures inline 
 
-
-
+``` conda install -c plotly plotly-orca ```
