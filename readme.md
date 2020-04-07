@@ -37,6 +37,13 @@ To follow this tutorial with jupyter lab you will need to install jupyter lab (1
     conda install jupyterlab=1.2
 ```
 
+To install nodejs 
+
+```
+    conda install nodejs
+```
+
+
 To run plotly in a jupyter workbook you will need to do the following described here https://plotly.com/python/getting-started/#jupyterlab-support-python-35:
 
 (note that this will require node to be installed)
@@ -64,6 +71,8 @@ jupyter labextension install plotlywidget@4.6.0 --no-build
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
 
+# Wait ... this may take a while
+
 # Unset NODE_OPTIONS environment variable
 # (OS X/Linux)
 unset NODE_OPTIONS
@@ -79,7 +88,7 @@ set NODE_OPTIONS
 #### To deploy to plotly studio
 
 ```
-conda install chart_studio
+pip install chart_studio
 ```
 You will need to create an account (for free):
 
