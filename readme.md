@@ -37,7 +37,7 @@ To follow this tutorial with jupyter lab you will need to install jupyter lab (1
     conda install jupyterlab=1.2
 ```
 
-To install nodejs 
+To install nodejs (if you do not already hav this installed)
 
 ```
     conda install nodejs
@@ -46,7 +46,7 @@ To install nodejs
 
 To run plotly in a jupyter workbook you will need to do the following described here https://plotly.com/python/getting-started/#jupyterlab-support-python-35:
 
-(note that this will require node to be installed)
+
 
 
 ```
@@ -100,6 +100,7 @@ You will also need to create a file called 'plotly_credentials.py' which contain
 USERNAME=[your username]
 API_KEY=[your API Key]
 ```
-#### displaying static pictures inline 
 
-``` conda install -c plotly plotly-orca ```
+If you want to use plotly dash
+
+``` conda install dash ```
