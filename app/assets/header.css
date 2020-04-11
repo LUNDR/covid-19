@@ -1,0 +1,23 @@
+.app-header {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: thin lightgrey solid;
+}
+
+.app-header .app-header--title {
+    font-size: 22px;
+    padding-left: 5px;
+}
+
+
+.app-footer {
+    height: 60px;
+    line-height: 60px;
+    border-top: thin lightgrey solid;
+}
+
+.app-footer .app-footer--title {
+    font-size: 22px;
+    padding-left: 5px;
+    background-color:#C0C0C0
+}
