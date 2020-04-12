@@ -723,6 +723,7 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 
 
 app = dash.Dash(__name__)
+application = app.server
 
 app.layout = html.Div([
     html.Div(
@@ -769,7 +770,7 @@ app.layout = html.Div([
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True, use_reloader=False )
+    application.run(debug=True, port = 8080,use_reloader=False) 
 
 
 ######
