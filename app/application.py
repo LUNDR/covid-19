@@ -720,24 +720,29 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 app = dash.Dash(__name__, external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap-grid.min.css"])
 application = app.server
 app.title = 'COVID-19 Data Dashboard'
-#app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
+app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
 app.layout = html.Div(
     html.Div([
         html.Div([
             html.H1(children='Covid-19 Data Dashboard',
-                style = { 'width': '74%'}),
+                style = { 'width': '74%',
+                'textposition': 'center}),
             html.Img(
                         src ="assets/seed.jpg",
           
-                        style = { 'width': '10%',
-                                   'height': '5%'}),
+                        style = { 'width': '5%',
+                                   'height': '5%',
+                                   'position': 'relative',
+                                   'margin-top': 0,
+                                   'margin-right': 0,
+                                   'float': 'right'}),
 
                     
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
                                 ''', style = { 'width': '74%'})
-                                ],className = "row"),
+                                ],className = "header"),
             
     
     html.Div([
@@ -774,7 +779,7 @@ app.layout = html.Div(
             html.H3(children='Dash board created with Python and Plotly',
                 style = { 'width': '74%'})
                 ],className = "row"),
-               ]), style ={'margin':'8%'}
+               ]), style ={'margin':'2%'}
 
 )
 
