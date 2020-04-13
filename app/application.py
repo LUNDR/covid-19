@@ -782,7 +782,7 @@ app.layout = html.Div(
             html.H3(children='Dash board created with Python and Plotly',
                 className="nine columns")
                 ],className = "row"),
-               ], className='ten columns offset-by-one')
+               ], className='twelve columns')
 
 )
 
