@@ -750,7 +750,8 @@ app.layout = html.Div(
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
                                 ''', style = { 'width': '74%',
-                                'display': 'inline-block'})
+                                'display': 'inline-block',
+                                'margin':'1.5%'})
                                 ],className = "header"),
             
     
@@ -762,16 +763,18 @@ app.layout = html.Div(
                            
                         )],
                         style = { 'width': '49.75%',
-                        'display': 'inline-block'}),
+                        'display': 'inline-block',
+                        'margin':'1.5%'}),
                              
              html.Div([
                         dcc.Graph(
                             figure= fig2,
                            
                         )], style = { 'width': '49.75%',
-                        'display': 'inline-block'})
+                        'display': 'inline-block',
+                        'margin':'1.5%'})
             ], className='row',
-            style = {'margin':'1.5%'}),
+            style = {}),
                         
     html.Div([
              html.Div([
@@ -779,20 +782,23 @@ app.layout = html.Div(
                             figure= fig3,
                            
                         )], style = { 'width': '49.75%',
-                        'display': 'inline-block'}),
+                        'display': 'inline-block',
+                        'margin':'1.5%'}),
                              
              html.Div([
                         dcc.Graph(
                             figure= fig4,
                            
                         )], style = { 'width': '49.75%',
-                        'display': 'inline-block'})
+                        'display': 'inline-block',
+                        'margin':'1.5%'})
             ], className='row', 
-            style = {'margin':'1.5%'}),         
+            style = {}),         
 
         html.Div([
-            html.H3(children='Dash board created with Python and Plotly',
-                style = { 'width': '74%'})
+            html.P(children='Dash board created with Python and Plotly',
+                style = { 'width': '74%',
+                'margin':'1.5%'})
                 ],className = "row"),
                ]), style ={'background-color' :"#f2f3f4" }
 
