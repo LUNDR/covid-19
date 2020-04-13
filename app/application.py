@@ -742,8 +742,10 @@ app.layout = html.Div(
              html.Div([
                         dcc.Graph(
                             figure= map1,
+                            
                            
-                        )], className= "six columns"),
+                        )],
+                        style = { 'width': '49.75%'}),
                              
              html.Div([
                         dcc.Graph(
