@@ -762,7 +762,7 @@ app.layout = html.Div(
                             
                            
                         )],
-                        style = { 'width': '49.75%',
+                        style = { 'width': '45%',
                         'display': 'inline-block',
                         'margin':'1.5%'}),
                              
@@ -770,7 +770,7 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig2,
                            
-                        )], style = { 'width': '49.75%',
+                        )], style = { 'width': '45%',
                         'display': 'inline-block',
                         'margin':'1.5%'})
             ], className='row',
@@ -781,7 +781,7 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig3,
                            
-                        )], style = { 'width': '49.75%',
+                        )], style = { 'width': '45%',
                         'display': 'inline-block',
                         'margin':'1.5%'}),
                              
@@ -789,7 +789,7 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig4,
                            
-                        )], style = { 'width': '49.75%',
+                        )], style = { 'width': '45%',
                         'display': 'inline-block',
                         'margin':'1.5%'})
             ], className='row', 
