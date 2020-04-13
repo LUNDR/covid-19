@@ -726,15 +726,16 @@ app.layout = html.Div(
     html.Div([
         html.Div([
             html.H1(children='Covid-19 Data Dashboard',
-                className="nine columns"),
+                style = { 'width': '74%'}),
             html.Img(
                         src ="assets/seed.jpg",
-                        className ='three columns',
+          
+                        style = { 'width': '22%'})
 
                     ),
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
-                                ''', className = 'nine columns')
+                                ''', style = { 'width': '74%'})
                                 ],className = "row"),
             
     
@@ -751,7 +752,7 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig2,
                            
-                        )], className= "six columns")
+                        )], style = { 'width': '49.75%'})
             ], className='row'),
                         
     html.Div([
@@ -759,20 +760,20 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig3,
                            
-                        )], className= "six columns"),
+                        )], style = { 'width': '49.75%'}),
                              
              html.Div([
                         dcc.Graph(
                             figure= fig4,
                            
-                        )], className= "six columns")
+                        )], style = { 'width': '49.75%'})
             ], className='row'),         
 
         html.Div([
             html.H3(children='Dash board created with Python and Plotly',
-                className="nine columns")
+                style = { 'width': '74%'})
                 ],className = "row"),
-               ], className='twelve columns')
+               ])
 
 )
 
