@@ -724,49 +724,66 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 
 app = dash.Dash(__name__)
 application = app.server
+app.title = 'COVID-19 Data Dashboard'
+app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
 app.layout = html.Div([
-    html.Div(
-        className="app-header",
-        children=[
-            html.Div('Covid-19 Dashboard', className="app-header--title")
-        ]
-    ),
+    html.Div([
+        html.Div([
+            html.H1(children='Covid-19 Data Dashboard',
+                className="nine columns"),
+            html.Img(
+                        src ="assets/seed.jpg",
+                        className ='three columns',
+                        style ={
+                        'height': '14%',
+                        'width': '14%',
+                        'float': 'right',
+                        'position': 'relative',
+                        'margin-top': 20,
+                        'margin-right': 20
+                        },
+                    ),
+            html.Div(children = '''
+                                Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
+                                ''', className = 'nine columns')],className = "row"),
+            
+    
     html.Div([
              html.Div([
-        dcc.Graph(
-            figure= map1,
-           
-        )], className= "one-third column"),
+                        dcc.Graph(
+                            figure= map1,
+                           
+                        )], className= "six columns"),
+                             
              html.Div([
-        dcc.Graph(
-            figure= fig2,
-           
-        )], className= "one-third column"),
-             
+                        dcc.Graph(
+                            figure= fig2,
+                           
+                        )], className= "six columns")
+            ], className='row'),
+                        
+    html.Div([
              html.Div([
-        dcc.Graph(
-            figure= fig3,
-           
-        )], className= "one-third column")], className='row'),
-     html.Div([
-       html.Div([
-        dcc.Graph(
-            figure= fig4,
-           
-        )], className= "one-half column"),
+                        dcc.Graph(
+                            figure= fig3,
+                           
+                        )], className= "six columns"),
+                             
+             html.Div([
+                        dcc.Graph(
+                            figure= fig4,
+                           
+                        )], className= "six columns")
+            ], className='row'),                
 
-             html.Div([
-        dcc.Graph(
-            figure= fig1,
-           
-        )], className= "one-half column")],className='row'),
-    html.Div(
-        className="app-footer",
-        children=[
-            html.Div("I'm a footer", className="app-footer--title")
-        ]
-    )
+
+
+    html.Div([
+        html.Div([
+            html.H3(children='Dash board created with Python and Plotly',
+                className="nine columns"),
+            html.A('Code available on git hub', href ='https://github.com/LUNDR', target="_blank"), className = 'nine columns')],className = "row"),
 ])
 
 if __name__ == '__main__':
