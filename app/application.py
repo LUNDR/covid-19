@@ -743,15 +743,16 @@ app.layout = html.Div(
                 style = { 'width': '74%',
                 'text-align': 'left',
                 'display': 'inline-block',
-                'margin-top':'1.5%'}),
+                'margin-top':'0.5%',
+                'margin-left':'1.5%'}),
             html.Img(
                         src ="assets/seed.jpg",
           
                         style = { 'width': '5%',
-                                   'height': '3%',
+                                   'height': '5%',
                                    'position': 'relative',
                                    'margin-top': 0,
-                                   'margin-right': 0,
+                                   'margin-right': '1%',
                                    'float': 'right',
                                    'display': 'inline-block'}),
 
@@ -773,7 +774,7 @@ app.layout = html.Div(
                         )],
                         style = { 'width': '45%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%',
+                        'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
                              
              html.Div([
@@ -782,7 +783,7 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '45%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%',
+                        'margin-left':'1.5%',
                         'margin-top': '1.5%'})
             ], className='row',
             style = {}),
@@ -794,7 +795,7 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%',
+                        'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
                              
              html.Div([
@@ -803,7 +804,7 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%',
+                        'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
               html.Div([
                         dcc.Graph(
@@ -811,7 +812,7 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%',
+                        'margin-left':'1.5%',
                         'margin-top': '1.5%'})
             ], className='row', 
             style = {}),         
