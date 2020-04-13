@@ -734,7 +734,7 @@ app.layout = html.Div(
                 style = { 'width': '74%',
                 'text-align': 'left',
                 'display': 'inline-block',
-                'margin':'1.5%'}),
+                'margin-top':'1.5%'}),
             html.Img(
                         src ="assets/seed.jpg",
           
@@ -751,7 +751,7 @@ app.layout = html.Div(
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
                                 ''', style = { 'width': '74%',
                                 'display': 'inline-block',
-                                'margin':'1.5%'})
+                                'margin-bottom':'1.5%'})
                                 ],className = "header"),
             
     
