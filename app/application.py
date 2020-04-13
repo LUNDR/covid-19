@@ -717,7 +717,12 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 
 
 
-app = dash.Dash(__name__, external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap-grid.min.css"])
+app = dash.Dash(__name__, 
+                external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap-grid.min.css"],
+                meta_tags=[
+                {"name": "viewport", "content": "width=device-width, initial-scale=1"}
+                ]
+                )
 application = app.server
 app.title = 'COVID-19 Data Dashboard'
 app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
