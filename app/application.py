@@ -739,7 +739,7 @@ app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css
 app.layout = html.Div(
     html.Div([
         html.Div([
-            html.H1(children='Covid-19 Data Dashboard',
+            html.H2(children='Covid-19 Data Dashboard',
                 style = { 'width': '74%',
                 'text-align': 'left',
                 'display': 'inline-block',
@@ -773,7 +773,8 @@ app.layout = html.Div(
                         )],
                         style = { 'width': '60%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%'}),
+                        'margin-right':'1.5%',
+                        'margin-top': '1.5%'}),
                              
              html.Div([
                         dcc.Graph(
@@ -781,7 +782,8 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%'})
+                        'margin-right':'1.5%',
+                        'margin-top': '1.5%'})
             ], className='row',
             style = {}),
                         
@@ -792,7 +794,8 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%'}),
+                        'margin-right':'1.5%',
+                        'margin-top': '1.5%'}),
                              
              html.Div([
                         dcc.Graph(
@@ -800,14 +803,16 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%'}),
+                        'margin-right':'1.5%',
+                        'margin-top': '1.5%'}),
               html.Div([
                         dcc.Graph(
                             figure= fig4,
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin-right':'1.5%'})
+                        'margin-right':'1.5%',
+                        'margin-top': '1.5%'})
             ], className='row', 
             style = {}),         
 
