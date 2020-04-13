@@ -727,7 +727,7 @@ application = app.server
 app.title = 'COVID-19 Data Dashboard'
 app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
-app.layout = html.Div([
+app.layout = html.Div(
     html.Div([
         html.Div([
             html.H1(children='Covid-19 Data Dashboard',
@@ -746,7 +746,8 @@ app.layout = html.Div([
                     ),
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
-                                ''', className = 'nine columns')],className = "row"),
+                                ''', className = 'nine columns')
+                                ],className = "row"),
             
     
     html.Div([
@@ -775,16 +776,15 @@ app.layout = html.Div([
                             figure= fig4,
                            
                         )], className= "six columns")
-            ], className='row'),                
+            ], className='row'),         
 
-
-
-    html.Div([
         html.Div([
             html.H3(children='Dash board created with Python and Plotly',
-                className="nine columns"),
-            html.A('Code available on git hub', href ='https://github.com/LUNDR', target="_blank"), className = 'nine columns')],className = "row"),
-])
+                className="nine columns")
+                ],className = "row"),
+               ], className='ten columns offset-by-one')
+
+)
 
 if __name__ == '__main__':
     application.run(port=8080)
