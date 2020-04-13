@@ -733,7 +733,8 @@ app.layout = html.Div(
             html.H1(children='Covid-19 Data Dashboard',
                 style = { 'width': '74%',
                 'text-align': 'left',
-                'display': 'inline-block'}),
+                'display': 'inline-block',
+                'margin':'1.5%'}),
             html.Img(
                         src ="assets/seed.jpg",
           
@@ -769,7 +770,8 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '49.75%',
                         'display': 'inline-block'})
-            ], className='row'),
+            ], className='row',
+            style = {'margin':'1.5%'}),
                         
     html.Div([
              html.Div([
@@ -785,13 +787,14 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '49.75%',
                         'display': 'inline-block'})
-            ], className='row'),         
+            ], className='row', 
+            style = {'margin':'1.5%'}),         
 
         html.Div([
             html.H3(children='Dash board created with Python and Plotly',
                 style = { 'width': '74%'})
                 ],className = "row"),
-               ]), style ={'margin':'2%'}
+               ]), style ={'background-color' :"#f2f3f4" }
 
 )
 
