@@ -727,7 +727,8 @@ app.layout = html.Div(
         html.Div([
             html.H1(children='Covid-19 Data Dashboard',
                 style = { 'width': '74%',
-                'text-align': 'left'}),
+                'text-align': 'left',
+                'display': 'inline-block'}),
             html.Img(
                         src ="assets/seed.jpg",
           
@@ -736,12 +737,14 @@ app.layout = html.Div(
                                    'position': 'relative',
                                    'margin-top': 0,
                                    'margin-right': 0,
-                                   'float': 'right'}),
+                                   'float': 'right',
+                                   'display': 'inline-block'}),
 
                     
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
-                                ''', style = { 'width': '74%'})
+                                ''', style = { 'width': '74%',
+                                'display': 'inline-block'})
                                 ],className = "header"),
             
     
@@ -752,13 +755,15 @@ app.layout = html.Div(
                             
                            
                         )],
-                        style = { 'width': '49.75%'}),
+                        style = { 'width': '49.75%',
+                        'display': 'inline-block'}),
                              
              html.Div([
                         dcc.Graph(
                             figure= fig2,
                            
-                        )], style = { 'width': '49.75%'})
+                        )], style = { 'width': '49.75%',
+                        'display': 'inline-block'})
             ], className='row'),
                         
     html.Div([
@@ -766,13 +771,15 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig3,
                            
-                        )], style = { 'width': '49.75%'}),
+                        )], style = { 'width': '49.75%',
+                        'display': 'inline-block'}),
                              
              html.Div([
                         dcc.Graph(
                             figure= fig4,
                            
-                        )], style = { 'width': '49.75%'})
+                        )], style = { 'width': '49.75%',
+                        'display': 'inline-block'})
             ], className='row'),         
 
         html.Div([
