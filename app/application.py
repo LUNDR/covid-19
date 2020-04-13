@@ -730,9 +730,9 @@ app.layout = html.Div(
             html.Img(
                         src ="assets/seed.jpg",
           
-                        style = { 'width': '22%'})
+                        style = { 'width': '22%'}),
 
-                    ),
+                    
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
                                 ''', style = { 'width': '74%'})
