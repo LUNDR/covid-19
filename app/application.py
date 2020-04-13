@@ -95,7 +95,11 @@ data['death_rate'] = data['total_deaths']/data['total_cases']*100
 
 #Shorten to DRC
 data = data.replace({'Democratic_Republic_of_the_Congo':'D.R.C'}, regex=True)
-
+data = data.replace({'Falkland_Islands_(Malvinas)':'Falklands'}, regex=True)
+data = data.replace({'Democratic_Republic_of_the_Congo':'D.R.C'}, regex=True)
+data = data.replace({'Cases_on_an_international_conveyance_Japan':'Cruise Ship (Japan)'}, regex=True)
+data = data.replace({'Saint_Vincent_and_the_Grenadines':'St.Vincent & the Grenadines'}, regex=True)
+data = data.replace({'United_States_Virgin_Islands':'U.S Virgin Islands'}, regex=True)
 
 # Formatting
 ## colours
@@ -717,6 +721,11 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 
 
 
+
+
+
+
+
 app = dash.Dash(__name__, 
                 external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap-grid.min.css"],
                 meta_tags=[
@@ -762,15 +771,15 @@ app.layout = html.Div(
                             
                            
                         )],
-                        style = { 'width': '45%',
+                        style = { 'width': '60%',
                         'display': 'inline-block',
                         'margin':'1.5%'}),
                              
              html.Div([
                         dcc.Graph(
-                            figure= fig2,
+                            figure= fig1,
                            
-                        )], style = { 'width': '45%',
+                        )], style = { 'width': '30%',
                         'display': 'inline-block',
                         'margin':'1.5%'})
             ], className='row',
@@ -779,17 +788,24 @@ app.layout = html.Div(
     html.Div([
              html.Div([
                         dcc.Graph(
-                            figure= fig3,
+                            figure= fig2,
                            
-                        )], style = { 'width': '45%',
+                        )], style = { 'width': '30%',
                         'display': 'inline-block',
                         'margin':'1.5%'}),
                              
              html.Div([
                         dcc.Graph(
+                            figure= fig3,
+                           
+                        )], style = { 'width': '30%',
+                        'display': 'inline-block',
+                        'margin':'1.5%'}),
+              html.Div([
+                        dcc.Graph(
                             figure= fig4,
                            
-                        )], style = { 'width': '45%',
+                        )], style = { 'width': '30%',
                         'display': 'inline-block',
                         'margin':'1.5%'})
             ], className='row', 
