@@ -748,7 +748,7 @@ app.layout = html.Div(
                         src ="assets/seed.jpg",
           
                         style = { 'width': '5%',
-                                   'height': '5%',
+                                   'height': '3%',
                                    'position': 'relative',
                                    'margin-top': 0,
                                    'margin-right': 0,
@@ -771,7 +771,7 @@ app.layout = html.Div(
                             
                            
                         )],
-                        style = { 'width': '60%',
+                        style = { 'width': '45%',
                         'display': 'inline-block',
                         'margin-right':'1.5%',
                         'margin-top': '1.5%'}),
@@ -780,7 +780,7 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= map1,
                            
-                        )], style = { 'width': '30%',
+                        )], style = { 'width': '45%',
                         'display': 'inline-block',
                         'margin-right':'1.5%',
                         'margin-top': '1.5%'})
