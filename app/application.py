@@ -767,21 +767,21 @@ app.layout = html.Div(
     html.Div([
              html.Div([
                         dcc.Graph(
-                            figure= map1,
+                            figure= fig1,
                             
                            
                         )],
                         style = { 'width': '60%',
                         'display': 'inline-block',
-                        'margin':'1.5%'}),
+                        'margin-right':'1.5%'}),
                              
              html.Div([
                         dcc.Graph(
-                            figure= fig1,
+                            figure= map1,
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin':'1.5%'})
+                        'margin-right':'1.5%'})
             ], className='row',
             style = {}),
                         
@@ -792,7 +792,7 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin':'1.5%'}),
+                        'margin-right':'1.5%'}),
                              
              html.Div([
                         dcc.Graph(
@@ -800,14 +800,14 @@ app.layout = html.Div(
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin':'1.5%'}),
+                        'margin-right':'1.5%'}),
               html.Div([
                         dcc.Graph(
                             figure= fig4,
                            
                         )], style = { 'width': '30%',
                         'display': 'inline-block',
-                        'margin':'1.5%'})
+                        'margin-right':'1.5%'})
             ], className='row', 
             style = {}),         
 
