@@ -225,8 +225,7 @@ sliders = [dict(
 )]
 
 ### layout
-figure['layout'] = {'height':600,
-                    'width': 900,
+figure['layout'] = {
                     'titlefont' :{
                         "size": title_font_size
                     },
@@ -291,8 +290,7 @@ data_ = [go.Bar(x = [' '.join(x.split('_')) for x in chart_data_2['countriesAndT
 ### layout
     
 layout = go.Layout(
-    height = 600,
-    width = 900,
+  
     title = "<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b>",
      font=dict(
                family="Arial",
@@ -509,8 +507,7 @@ annotations.append(dict(xref='paper',
     
 fig2 = go.Figure(plots)
 fig2.update_layout(yaxis_type="log",
-                  height = 600, 
-                  width = 900,
+
                   title=plot_title,
                   annotations = annotations,
                  titlefont ={
@@ -640,8 +637,7 @@ annotations.append(dict(xref='paper',
     
 fig3 = go.Figure(plots)
 fig3.update_layout(yaxis_type="log",
-                  height = 600, 
-                  width = 900,
+
                   title=plot_title,
                   annotations = annotations,
                  titlefont ={
@@ -705,8 +701,7 @@ for i in countries:
 
 fig4 = go.Figure(plots)
 fig4.update_layout(
-                  height = 600, 
-                  width = 700,
+
                   title=plot_title,
                 #plot_bgcolor = '#eeeeee',
                  # annotations = ,
@@ -735,14 +730,7 @@ app.layout = html.Div(
             html.Img(
                         src ="assets/seed.jpg",
                         className ='three columns',
-                        style ={
-                        'height': '14%',
-                        'width': '14%',
-                        'float': 'right',
-                        'position': 'relative',
-                        'margin-top': 20,
-                        'margin-right': 20
-                        },
+
                     ),
             html.Div(children = '''
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
