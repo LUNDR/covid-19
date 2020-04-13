@@ -773,7 +773,7 @@ app.layout = html.Div(
         html.Div([
             html.H3(children='Dash board created with Python and Plotly',
                 style = { 'width': '74%'})
-                ],className = "row"),style{'margin'='8%'},
+                ],className = "row"),style ={'margin'='8%'},
                ])
 
 )
