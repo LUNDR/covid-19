@@ -727,7 +727,7 @@ app.layout = html.Div(
         html.Div([
             html.H1(children='Covid-19 Data Dashboard',
                 style = { 'width': '74%',
-                'textposition': 'center}),
+                'text-align': 'left'}),
             html.Img(
                         src ="assets/seed.jpg",
           
