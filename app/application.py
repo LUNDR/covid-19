@@ -720,7 +720,7 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 app = dash.Dash(__name__, external_stylesheets=["https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap-grid.min.css"])
 application = app.server
 app.title = 'COVID-19 Data Dashboard'
-app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
+#app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
 app.layout = html.Div(
     html.Div([
@@ -731,7 +731,7 @@ app.layout = html.Div(
                         src ="assets/seed.jpg",
           
                         style = { 'width': '10%',
-                                   'height': '10%'}),
+                                   'height': '5%'}),
 
                     
             html.Div(children = '''
@@ -773,7 +773,7 @@ app.layout = html.Div(
         html.Div([
             html.H3(children='Dash board created with Python and Plotly',
                 style = { 'width': '74%'})
-                ],className = "row"),
+                ],className = "row"),style{'margin'='8%'},
                ])
 
 )
