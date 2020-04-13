@@ -720,7 +720,7 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 application = app.server
 app.title = 'COVID-19 Data Dashboard'
-#app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
+app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
 
 app.layout = html.Div(
     html.Div([
