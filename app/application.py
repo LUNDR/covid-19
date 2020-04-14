@@ -22,10 +22,6 @@ import dash_bootstrap_components as dbc
 
 from charts import fig1, fig2, fig3, fig4, headline, map1
 
-#### The app
-
-
-
 
 app = dash.Dash(__name__, 
                 external_stylesheets=[dbc.themes.BOOTSTRAP],
@@ -51,7 +47,7 @@ app.layout = html.Div(
                     
                                            
                 html.Div(children = '''
-                                    Visualizations of theon cases and deaths from COVID-19
+                                    Visualizations of data on cases and deaths from COVID-19 compiled by the European Centre for Disease Prevention and Control 
                                     ''', style = { 'width': '74%',
                                     'display': 'inline-block',
                                     'margin-bottom':'1.5%',

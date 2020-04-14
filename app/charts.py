@@ -139,7 +139,6 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 #Animated Map
 
-
 figure = {
     'data': [],
     'layout': {},
@@ -150,52 +149,54 @@ figure = {
 
 ### data
 
+day = days[-1]
 data_ = []
 traces = []
 
-day = days[-1]
+
 chart_data = data[data['date'] == day]
 for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
     colour = colours[cont]
     df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
-    data_dict ={'type':'scattergeo',
-                'locationmode':'ISO-3',
-                'locations' :df_sub['countryterritoryCode'].tolist(),
-                'marker' : dict(
+    data_dict = dict(type = 'scattergeo',
+                locationmode = 'ISO-3',
+                locations = df_sub['countryterritoryCode'].tolist(),
+                marker  = dict(
                             size = df_sub['total_cases']/200,
                             color = colour,
                             line_color= '#ffffff',
                             line_width=0.5,
                             sizemode = 'area'
                             ),
-                'name' :'{}'.format(cont),
-                'text' :['{}<BR>Total Cases: {}'.format(df_sub['countriesAndTerritories'][x],df_sub['total_cases'][x]) for x in range(len(df_sub))]
-               }
+                name = '{}'.format(cont),
+                text = ['{}<BR>Total Cases: {}'.format(df_sub['countriesAndTerritories'][x],df_sub['total_cases'][x]) for x in range(len(df_sub))]
+               )
     figure['data'].append(data_dict)
 
 
-## frames
+### frames & steps
 frames = []
-
 steps = []
+
 for day in days:
     chart_data = data[data['date'] == day]
     frame = {'data': [], 'name': str(day)}
     for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
         colour = colours[cont]
         df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
-        data_dict ={'type':'scattergeo',
-                'locationmode':'ISO-3',
-                'locations' :df_sub['countryterritoryCode'].tolist(),
-                'marker' : dict(
-                size = df_sub['total_cases']/200,
-                color = colour,
-                line_color= '#ffffff',
-                line_width=0.5,
-                sizemode = 'area'
-                ),
-                'name' :'{}'.format(cont),
-                'text' :['{}<BR>Total Cases: {}'.format(df_sub['countriesAndTerritories'][x],df_sub['total_cases'][x]) for x in range(len(df_sub))]}
+        data_dict = dict(type = 'scattergeo',
+                locationmode = 'ISO-3',
+                locations = df_sub['countryterritoryCode'].tolist(),
+                marker  = dict(
+                            size = df_sub['total_cases']/200,
+                            color = colour,
+                            line_color= '#ffffff',
+                            line_width=0.5,
+                            sizemode = 'area'
+                            ),
+                name = '{}'.format(cont),
+                text = ['{}<BR>Total Cases: {}'.format(df_sub['countriesAndTerritories'][x],df_sub['total_cases'][x]) for x in range(len(df_sub))]
+               )
         frame['data'].append(data_dict)
     figure['frames'].append(frame)
     
@@ -203,11 +204,11 @@ for day in days:
         method="animate",
         args=[
         [day],
-        {"frame": {"duration": 100,
-                   "redraw": True},
-         "mode": "immediate",
-         "transition": {"duration": 100,
-                        "easing": "quad-in"}}
+        dict(frame = dict(duration = 100,
+                   redraw = True),
+         mode = "immediate",
+         transition =  dict("duration": 100,
+                        "easing": "quad-in"))
     ],
         label = day,
         
@@ -222,21 +223,22 @@ for day in days:
 sliders = [dict(   
     y = 0,
     active=len(days)-1,
-    currentvalue={"prefix": "Date: ",
-                  "visible" :True},
-    transition = {"duration": 300},
-    pad={"t": 50},
+    currentvalue=dict(prefix = "",
+                  visible = True.
+                  offset = 200),
+    transition = dict(duration = 300),
+    pad=dict(t = 50),
     steps=steps
 )]
 
 ### layout
-figure['layout'] = {
-                    'titlefont' :{
-                        "size": title_font_size
-                    },
-                    'title_text':'<b> Covid-19 cases </b> <BR> As reported at ' + latest_data_string,
-                    'showlegend': True,
-                    'geo' : dict(
+figure['layout'] = dict(
+                    titlefont =dict(
+                        size =  title_font_size
+                    ),
+                    title_text = '<b> Covid-19 cases </b> <BR> As reported at ' + latest_data_string,
+                    showlegend =  True,
+                    geo = dict(
                         scope = 'world',
                         landcolor = 'rgb(217, 217, 217)',
                         coastlinecolor = '#ffffff',
@@ -244,21 +246,21 @@ figure['layout'] = {
                         countrycolor = '#ffffff',
                    
                     ),
-                    'updatemenus' :[dict(type ='buttons',
+                    updatemenus = [dict(type ='buttons',
                                         buttons=list([
                                             dict(
-                                                args=[None,{"frame": {"duration": 200,
-                                                                      "redraw": True},
-                                                            "mode": "immediate", 
-                                                            "transition": {"duration": 200,
-                                                                           "easing": "quad-in"}}],
+                                                args=[None,dict(frame = dict(duration =  200,
+                                                                      redraw = True),
+                                                            mode =  "immediate", 
+                                                            transition = dict(duration  = 200,
+                                                                           easing  = "quad-in"))],
                                                 label="Play",
                                                 method="animate"
                                             )
                                         ]
                                         ))],
-                    'sliders':sliders
-                   }
+                    sliders = sliders
+                   )
       
 map1 = go.Figure(figure)
 
@@ -753,6 +755,9 @@ for country in data['countriesAndTerritories'].unique():
 
 headline = go.Figure(traces)
 headline.update_layout( yaxis=dict(autorange="reversed"),
-                 title = '<b>Headline Figures: Cases and Deaths</b> <BR>' + latest_data_string)
+                 title = '<b>Headline Figures: Cases and Deaths</b> <BR>' + latest_data_string,
+                 titlefont ={
+                            "size": title_font_size
+                  })
 
 
