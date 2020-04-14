@@ -772,7 +772,8 @@ app.layout = html.Div(
                             
                            
                         )],
-                        style = { 'width': '45%',
+                        className = "six columns",
+                        style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
@@ -781,7 +782,9 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= map1,
                            
-                        )], style = { 'width': '45%',
+                        )],
+                        className = "six columns",
+                        style = { 
                         'display': 'inline-block',
                         'margin-left':'1.5%',
                         'margin-top': '1.5%'})
@@ -793,7 +796,9 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig2,
                            
-                        )], style = { 'width': '30%',
+                        )], 
+                        className = "six columns"
+                        style = { 
                         'display': 'inline-block',
                         'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
@@ -802,20 +807,27 @@ app.layout = html.Div(
                         dcc.Graph(
                             figure= fig3,
                            
-                        )], style = { 'width': '30%',
+                        )], 
+                        className = "six columns"
+                        style = {,
                         'display': 'inline-block',
                         'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
-              html.Div([
+
+            ], className='row', 
+            style = {}),
+    html.Div([
+                      html.Div([
                         dcc.Graph(
                             figure= fig4,
-                           
-                        )], style = { 'width': '30%',
+                            className = "six columns"
+                        )], 
+                        style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
-                        'margin-top': '1.5%'})
-            ], className='row', 
-            style = {}),         
+                        'margin-top': '1.5%'}),
+                        ], className='row', 
+            style = {}),
 
         html.Div([
             html.P(children='Dash board created with Python and Plotly',
