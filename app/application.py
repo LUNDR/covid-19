@@ -748,10 +748,10 @@ app.layout = html.Div(
                 'margin-left':'1.5%'}),
             html.Img(
                         src ="assets/seed.jpg",
-                        className = "two columns",
+                        className = "one columns",
           
                         style = {
-                                   'height': '5%',
+                                   'height': 'auto',
                                    'position': 'relative',
                                    'margin-top': 0,
                                    'margin-right': '1%',
@@ -763,7 +763,8 @@ app.layout = html.Div(
                                 Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
                                 ''', style = { 'width': '74%',
                                 'display': 'inline-block',
-                                'margin-bottom':'1.5%'})
+                                'margin-bottom':'1.5%',
+                                'margin-left':'1.5%'})
                                 ],className = "header"),
             
     
@@ -839,7 +840,7 @@ app.layout = html.Div(
             style = {}),
 
         html.Div([
-            html.P(children='Dash board created with Python and Plotly',
+            html.H5(children='Dash board created with Python and Plotly',
                     className = "nine columns",
                 style = {
                 'margin':'1.5%'})
