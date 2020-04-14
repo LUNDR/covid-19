@@ -797,7 +797,7 @@ app.layout = html.Div(
                             figure= fig2,
                            
                         )], 
-                        className = "six columns"
+                        className = "six columns",
                         style = { 
                         'display': 'inline-block',
                         'margin-left':'1.5%',
@@ -808,8 +808,8 @@ app.layout = html.Div(
                             figure= fig3,
                            
                         )], 
-                        className = "six columns"
-                        style = {,
+                        className = "six columns",
+                        style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
@@ -820,7 +820,7 @@ app.layout = html.Div(
                       html.Div([
                         dcc.Graph(
                             figure= fig4,
-                            className = "six columns"
+                            className = "six columns",
                         )], 
                         style = {
                         'display': 'inline-block',
