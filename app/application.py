@@ -770,7 +770,7 @@ app.layout = html.Div(
                                  ], className = "container",
                                  style = {'max-width' : 'none',
                                  'padding': 0,
-                                 'height': '3%'}),
+                                 'height': '0.5%'}),
 
                                 ],className = "header"),
             
