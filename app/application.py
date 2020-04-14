@@ -741,7 +741,7 @@ app.layout = html.Div(
         html.Div([
             html.Div([
                 html.H2(children='Covid-19 Data Dashboard',
-                    className = "nine columns",
+#                    className = "nine columns",
                     style = {
                     'text-align': 'left',
                     'display': 'inline-block',
@@ -773,7 +773,7 @@ app.layout = html.Div(
                                  'height': '3%',
                                  'float':'left'}),
 
-                                ],className = "header"),
+                                ],className = "header twelve columns"),
             
     
     html.Div([
