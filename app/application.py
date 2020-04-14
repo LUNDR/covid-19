@@ -774,12 +774,10 @@ app.title = 'COVID-19 Cases & Deaths Dashboard'
 
 
 app.layout = html.Div(
+html.Div([    
     html.Div([
-        html.Div([
             html.Div([
-                html.H2(children='Covid-19 Data Dashboard'),
-                ],
-#                    className = "nine columns",
+                html.H2(children='Covid-19 Data Dashboard',
                     style = {
                     'text-align': 'left',
                     'display': 'inline-block',
@@ -900,7 +898,7 @@ app.layout = html.Div(
        
                 ],className = "footer",
                 style ={'background-color': '#d3d3d3'})
-                ]), style ={'background-color': '#f2f3f4'}
+                ], style ={'background-color': '#f2f3f4'})
 
 )
 
