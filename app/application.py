@@ -750,8 +750,8 @@ app.layout = html.Div(
                         src ="assets/seed.jpg",
           
                         style = {
-                                   'max-width': '100%',
-                                   'max-height': '100%',
+                                   
+                                   'height': '3%',
                                    'position': 'relative',
                                    'margin-top': 0,
                                    'margin-right': '1%',
@@ -843,7 +843,7 @@ app.layout = html.Div(
             html.H5(children='Dashboard created with Python and Plotly',
                     
                     style ={
-                         'margin':'1.5%'})
+                         'margin-top':'1.5%'})
        
                 ],className = "footer",
                 style ={'background-color': '#d3d3d3'})
