@@ -207,8 +207,8 @@ for day in days:
         dict(frame = dict(duration = 100,
                    redraw = True),
          mode = "immediate",
-         transition =  dict("duration": 100,
-                        "easing": "quad-in"))
+         transition =  dict(duration = 100,
+                        easing = "quad-in"))
     ],
         label = day,
         
