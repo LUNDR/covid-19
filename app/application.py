@@ -731,7 +731,7 @@ for country in data['countriesAndTerritories'].unique():
         if country == 'World':
             trace = go.Bar(y = names,
                     x = chart_data.iloc[:,0], 
-                    name = ''.join(country.split('_')),
+                    name = ' '.join(country.split('_')),
                    text = ['{:,}'.format(x) for x in chart_data.iloc[:,0]],
                    textposition = ['inside','outside','outside','outside'],
                      marker = dict(color = 'firebrick'),
@@ -741,7 +741,7 @@ for country in data['countriesAndTerritories'].unique():
         else:
             trace = go.Bar(y = names,
                     x = chart_data.iloc[:,0], 
-                    name = ''.join(country.split('_')),
+                    name = ' '.join(country.split('_')),
                    text = ['{:,}'.format(x) for x in chart_data.iloc[:,0]],
                    textposition = 'outside',
                     marker = dict(color = colour),
@@ -778,12 +778,6 @@ app.layout = html.Div(
         html.Div([
             html.Div([
                 html.H2(children='Covid-19 Data Dashboard',
-#                    className = "nine columns",
-                    style = {
-                    'text-align': 'left',
-                    'display': 'inline-block',
-                    'margin-top':'0.5%',
-                    'margin-left':'1.5%'}),
                 html.Img(
                             src ="assets/seed.jpg",
               
@@ -796,9 +790,16 @@ app.layout = html.Div(
                                        'margin-right': '1%',
                                        'float': 'right',
                                        'display': 'inline-block'}),
+#                    className = "nine columns",
+                    style = {
+                    'text-align': 'left',
+                    'display': 'inline-block',
+                    'margin-top':'0.5%',
+                    'margin-left':'1.5%'}),
+                
                                        
                 html.Div(children = '''
-                                Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
+                                Visualizations of the''' + html.A('European Centre for Disease Prevention and Control data', href='https://www.ecdc.europa.eu/en')+ '''on cases and deaths from COVID-19
                                 ''', style = { 'width': '74%',
                                 'display': 'inline-block',
                                 'margin-bottom':'1.5%',
