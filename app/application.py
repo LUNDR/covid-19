@@ -777,7 +777,7 @@ app.layout = html.Div(
     html.Div([
         html.Div([
             html.Div([
-                html.H2(children='Covid-19 Data Dashboard',
+                html.H2(children='Covid-19 Data Dashboard'),
                 html.Img(
                             src ="assets/seed.jpg",
               
@@ -789,7 +789,7 @@ app.layout = html.Div(
                                        'margin-top': 0,
                                        'margin-right': '1%',
                                        'float': 'right',
-                                       'display': 'inline-block'}),
+                                       'display': 'inline-block'})],
 #                    className = "nine columns",
                     style = {
                     'text-align': 'left',
