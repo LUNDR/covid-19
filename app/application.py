@@ -297,7 +297,6 @@ layout = go.Layout(
   
     title = "<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b>",
      font=dict(
-               family="Arial",
                 size=11
 
             ))
@@ -833,9 +832,9 @@ app.layout = html.Div(
                         className = "ten columns", 
                         style = {
                         'display': 'inline-block',
-                        'margin-left':'15%',
-                        'margin-right':'15%',
-                        'margin-top': '1.5%'}),
+                        'margin-left':'30%',
+                        'margin-top': '1.5%'
+                        'margin-bottom': '1.5%'}),
                         ], className='row', 
             style = {}),
 
