@@ -781,14 +781,15 @@ app.layout = html.Div(
              html.Div([
                  html.Table([
                         html.Tr([html.Td('World wide Deaths'), html.Td('100,000')]),
-                        ]),
+                        ],
+                        style = {'background-color':'white'})
                         ],
                         className = "five columns",
                         style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
                         'margin-top': '1.5%',
-                        'background-color':'white'}),
+                        }),
              
              
              
