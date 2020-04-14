@@ -841,7 +841,7 @@ app.layout = html.Div(
 
         html.Div([
             html.H5(children='Dashboard created with Python and Plotly',
-                    className = "twelve columns",
+                    
                     style ={
                          'margin':'1.5%'})
        
