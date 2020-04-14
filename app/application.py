@@ -845,8 +845,8 @@ app.layout = html.Div(
                     style ={
                          'margin':'1.5%'})
        
-                ]),className = "footer",
-                style ={'background-color': '#d3d3d3'}
+                ],className = "footer"
+                style ={'background-color': '#d3d3d3'})
                 ]), style ={'background-color': '#f2f3f4'}
 
 )
