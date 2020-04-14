@@ -772,7 +772,7 @@ app.layout = html.Div(
                             
                            
                         )],
-                        className = "six columns",
+                        className = "five columns",
                         style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
@@ -783,7 +783,7 @@ app.layout = html.Div(
                             figure= map1,
                            
                         )],
-                        className = "six columns",
+                        className = "five columns",
                         style = { 
                         'display': 'inline-block',
                         'margin-left':'1.5%',
@@ -797,7 +797,7 @@ app.layout = html.Div(
                             figure= fig2,
                            
                         )], 
-                        className = "six columns",
+                        className = "five columns",
                         style = { 
                         'display': 'inline-block',
                         'margin-left':'1.5%',
@@ -808,7 +808,7 @@ app.layout = html.Div(
                             figure= fig3,
                            
                         )], 
-                        className = "six columns",
+                        className = "five columns",
                         style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
@@ -820,8 +820,9 @@ app.layout = html.Div(
                       html.Div([
                         dcc.Graph(
                             figure= fig4,
-                            className = "six columns",
+                           
                         )], 
+                        className = "five columns", 
                         style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
