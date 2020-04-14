@@ -753,6 +753,7 @@ app.layout = html.Div(
                             style = {
                                        
                                        'max-height': '100%',
+                                       'max-width' : 'auto',
                                        'position': 'relative',
                                        'margin-top': 0,
                                        'margin-right': '1%',
@@ -760,7 +761,8 @@ app.layout = html.Div(
                                        'display': 'inline-block'}),
                                  ], className = "container",
                                  style = {'max-width' : 'none',
-                                 'padding': 0}),
+                                 'padding': 0,
+                                 'height': '3%'}),
 
                     
             html.Div(children = '''
@@ -783,7 +785,8 @@ app.layout = html.Div(
                         style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
-                        'margin-top': '1.5%'}),
+                        'margin-top': '1.5%',
+                        'background-color':'white'}),
              
              
              
