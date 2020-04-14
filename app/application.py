@@ -703,7 +703,7 @@ for i in countries:
     except:
         pass
 
-config = {responsive: true}
+config = {'responsive': True}
 fig4 = go.Figure(plots, config)
 fig4.update_layout(
 
