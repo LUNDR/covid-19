@@ -739,24 +739,27 @@ app.title = 'COVID-19 Cases & Deaths Dashboard'
 app.layout = html.Div(
     html.Div([
         html.Div([
-            html.H2(children='Covid-19 Data Dashboard',
-                className = "nine columns",
-                style = {
-                'text-align': 'left',
-                'display': 'inline-block',
-                'margin-top':'0.5%',
-                'margin-left':'1.5%'}),
-            html.Img(
-                        src ="assets/seed.jpg",
-          
-                        style = {
-                                   
-                                   'height': '3%',
-                                   'position': 'relative',
-                                   'margin-top': 0,
-                                   'margin-right': '1%',
-                                   'float': 'right',
-                                   'display': 'inline-block'}),
+            html.Div([
+                html.H2(children='Covid-19 Data Dashboard',
+                    className = "nine columns",
+                    style = {
+                    'text-align': 'left',
+                    'display': 'inline-block',
+                    'margin-top':'0.5%',
+                    'margin-left':'1.5%'}),
+                html.Img(
+                            src ="assets/seed.jpg",
+              
+                            style = {
+                                       
+                                       'height': '3%',
+                                       'position': 'relative',
+                                       'margin-top': 0,
+                                       'margin-right': '1%',
+                                       'float': 'right',
+                                       'display': 'inline-block'}),
+                                 ], className = "container",
+                                 style = {'width' : '100%'}),
 
                     
             html.Div(children = '''
@@ -769,12 +772,25 @@ app.layout = html.Div(
             
     
     html.Div([
+             
+             html.Div([
+                 html.Table([
+                        html.Tr([html.Td('World wide Deaths'), html.Td('100,000')]),
+                        ]),
+                        ],
+                        className = "five columns",
+                        style = {
+                        'display': 'inline-block',
+                        'margin-left':'1.5%',
+                        'margin-top': '1.5%'}),
+             
+             
+             
              html.Div([
                         dcc.Graph(
                             figure= map1,
                             responsive = False,
-                            
-                           
+
                         )],
                         className = "five columns",
                         style = {
@@ -782,17 +798,7 @@ app.layout = html.Div(
                         'margin-left':'1.5%',
                         'margin-top': '1.5%'}),
                              
-             html.Div([
-                        dcc.Graph(
-                            figure= fig4,
-                            responsive = False,
-                           
-                        )],
-                        className = "five columns",
-                        style = { 
-                        'display': 'inline-block',
-                        'margin-left':'1.5%',
-                        'margin-top': '1.5%'})
+
             ], className='row',
             style = {}),
                         
@@ -824,7 +830,19 @@ app.layout = html.Div(
             ], className='row', 
             style = {}),
     html.Div([
-                      html.Div([
+            html.Div([
+                        dcc.Graph(
+                            figure= fig4,
+                            responsive = False,
+                           
+                        )],
+                        className = "five columns",
+                        style = { 
+                        'display': 'inline-block',
+                        'margin-left':'1.5%',
+                        'margin-top': '1.5%'}),
+   
+            html.Div([
                         dcc.Graph(
                             figure= fig1,
                             responsive = False,
