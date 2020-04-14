@@ -752,14 +752,15 @@ app.layout = html.Div(
               
                             style = {
                                        
-                                       'height': '3%',
+                                       'max-height': '100%',
                                        'position': 'relative',
                                        'margin-top': 0,
                                        'margin-right': '1%',
                                        'float': 'right',
                                        'display': 'inline-block'}),
                                  ], className = "container",
-                                 style = {'width' : '100%'}),
+                                 style = {'max-width' : 'none',
+                                 'padding': 0}),
 
                     
             html.Div(children = '''
