@@ -748,7 +748,6 @@ app.layout = html.Div(
                 'margin-left':'1.5%'}),
             html.Img(
                         src ="assets/seed.jpg",
-                        className = "one columns",
           
                         style = {
                                    'max-width': '100%',
@@ -844,10 +843,10 @@ app.layout = html.Div(
             html.H5(children='Dashboard created with Python and Plotly',
                     className = "twelve columns",
                     style ={
-                    'background-color': '#d3d3d3',
-                    'margin':'1.5%'})
+                         'margin':'1.5%'})
        
                 ],className = "footer",
+                style ={'background-color': '#d3d3d3'}
                 
                 ),
                ]), style ={'background-color': '#f2f3f4'}
