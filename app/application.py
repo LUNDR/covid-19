@@ -17,6 +17,7 @@ from palettable.tableau import Tableau_20
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 
 # define functions
 
@@ -726,7 +727,7 @@ fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}
 
 
 app = dash.Dash(__name__, 
-                external_stylesheets=["https://codepen.io/amyoshino/pen/jzXypZ.css"],
+                external_stylesheets=[dbc.themes.BOOTSTRAP],
                 meta_tags=[
                 {"name": "viewport", "content": "width=device-width, initial-scale=1"}
                 ]
@@ -829,10 +830,10 @@ app.layout = html.Div(
                             responsive = False,
                            
                         )], 
-                        className = "ten columns", 
+                        className = "five columns", 
                         style = {
                         'display': 'inline-block',
-                        'margin-left':'30%',
+                        'margin-left':'1.5%',
                         'margin-top': '1.5%',
                         'margin-bottom': '1.5%'}),
                         ], className='row', 
@@ -840,11 +841,13 @@ app.layout = html.Div(
 
         html.Div([
             html.H5(children='Dashboard created with Python and Plotly',
-                    className = "nine columns",
-                style = {
-                'margin':'1.5%'})
+                    className = "twelve columns",
+                    style ={
+                    'background-color': '#d3d3d3',
+                    'margin':'1.5%'}
+       
                 ],className = "footer",
-                style ={'background-color': '#d3d3d3'}
+                
                 ),
                ]), style ={'background-color': '#f2f3f4'}
 
