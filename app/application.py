@@ -833,7 +833,7 @@ app.layout = html.Div(
                         style = {
                         'display': 'inline-block',
                         'margin-left':'30%',
-                        'margin-top': '1.5%'
+                        'margin-top': '1.5%',
                         'margin-bottom': '1.5%'}),
                         ], className='row', 
             style = {}),
@@ -843,7 +843,9 @@ app.layout = html.Div(
                     className = "nine columns",
                 style = {
                 'margin':'1.5%'})
-                ],className = "footer"),
+                ],className = "footer",
+                style ={'background-color': '#d3d3d3'}
+                ),
                ]), style ={'background-color': '#f2f3f4'}
 
 )
