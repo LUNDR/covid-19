@@ -844,7 +844,7 @@ app.layout = html.Div(
                     className = "twelve columns",
                     style ={
                     'background-color': '#d3d3d3',
-                    'margin':'1.5%'}
+                    'margin':'1.5%'})
        
                 ],className = "footer",
                 
