@@ -127,7 +127,7 @@ data['date'] = [pd.to_datetime(str(x)).strftime('%d %b') for x in data['dateRep'
 
 #create objects to be used universally
 # create a list of date strings to cycle through for animations
-days = data['dateRep'][data['dateRep'] > pd.to_datetime('15-02-2020')].sort_values(ascending=True).unique()
+days = data['dateRep'][data['dateRep'] > pd.to_datetime('31-12-2019')].sort_values(ascending=True).unique()
 days = [pd.to_datetime(str(x)).strftime('%d %b') for x in days]
 
 # calculate the date of latest data included and make it a string
@@ -733,22 +733,24 @@ app = dash.Dash(__name__,
                 ]
                 )
 application = app.server
-app.title = 'COVID-19 Data Dashboard'
-#app.css.append_css({'external_url': 'https://codepen.io/amyoshino/pen/jzXypZ.css'})
+app.title = 'COVID-19 Cases & Deaths Dashboard'
+
 
 app.layout = html.Div(
     html.Div([
         html.Div([
             html.H2(children='Covid-19 Data Dashboard',
-                style = { 'width': '74%',
+                className = "nine columns"
+                style = {
                 'text-align': 'left',
                 'display': 'inline-block',
                 'margin-top':'0.5%',
                 'margin-left':'1.5%'}),
             html.Img(
                         src ="assets/seed.jpg",
+                        className = "two columns",
           
-                        style = { 'width': '5%',
+                        style = {
                                    'height': '5%',
                                    'position': 'relative',
                                    'margin-top': 0,
@@ -768,7 +770,7 @@ app.layout = html.Div(
     html.Div([
              html.Div([
                         dcc.Graph(
-                            figure= fig1,
+                            figure= map1,
                             responsive = False,
                             
                            
@@ -781,7 +783,7 @@ app.layout = html.Div(
                              
              html.Div([
                         dcc.Graph(
-                            figure= map1,
+                            figure= fig4,
                             responsive = False,
                            
                         )],
@@ -823,21 +825,23 @@ app.layout = html.Div(
     html.Div([
                       html.Div([
                         dcc.Graph(
-                            figure= fig4,
+                            figure= fig1,
                             responsive = False,
                            
                         )], 
-                        className = "five columns", 
+                        className = "eight columns", 
                         style = {
                         'display': 'inline-block',
-                        'margin-left':'1.5%',
+                        'margin-left':'10%',
+                        'margin-right':'10%',
                         'margin-top': '1.5%'}),
                         ], className='row', 
             style = {}),
 
         html.Div([
             html.P(children='Dash board created with Python and Plotly',
-                style = { 'width': '74%',
+                    className = "nine columns",
+                style = {
                 'margin':'1.5%'})
                 ],className = "row"),
                ]), style ={'background-color' :"#f2f3f4" }
