@@ -718,10 +718,47 @@ fig4.layout.xaxis.update(title={'text':x_title,'font':{'size':x_title_font_size}
                         )
 fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}}, range=[0,40]
                         )  
+##### headline chart
+
+traces = []
+names = ['Total Cases', 'Total Deaths', 'Latest Daily Cases', 'Latest Daily Deaths']
+
+
+for country in data['countriesAndTerritories'].unique():
+    colour = data[data['countriesAndTerritories'] == country]['colour'].tolist()[0]
+    chart_data = data[(data['dateRep']==data['dateRep'].max()) & (data['countriesAndTerritories'] == country)][['total_cases','total_deaths','cases','deaths']].T
+    try:
+        if country == 'World':
+            trace = go.Bar(y = names,
+                    x = chart_data.iloc[:,0], 
+                    name = ''.join(country.split('_')),
+                   text = ['{:,}'.format(x) for x in chart_data.iloc[:,0]],
+                   textposition = ['inside','outside','outside','outside'],
+                     marker = dict(color = 'firebrick'),
+                   orientation='h',
+                         )
+            traces.append(trace)
+        else:
+            trace = go.Bar(y = names,
+                    x = chart_data.iloc[:,0], 
+                    name = ''.join(country.split('_')),
+                   text = ['{:,}'.format(x) for x in chart_data.iloc[:,0]],
+                   textposition = 'outside',
+                    marker = dict(color = colour),
+                   orientation='h',
+                         visible = 'legendonly')
+            traces.append(trace)
+    except:
+        pass
+
+headline = go.Figure(traces)
+headline.update_layout( yaxis=dict(autorange="reversed"),
+                 title = '<b>Headline Figures: Cases and Deaths</b> <BR>' + latest_data_string)
 
 
 
 
+#### The app
 
 
 
@@ -779,17 +816,16 @@ app.layout = html.Div(
     html.Div([
              
              html.Div([
-                 html.Table([
-                        html.Tr([html.Td('World wide Deaths'), html.Td('100,000')]),
-                        ],
-                        style = {'background-color':'white'})
-                        ],
+                        dcc.Graph(
+                            figure= headline,
+                            responsive = False,
+
+                        )],
                         className = "five columns",
                         style = {
                         'display': 'inline-block',
                         'margin-left':'1.5%',
-                        'margin-top': '1.5%',
-                        }),
+                        'margin-top': '1.5%'}),
              
              
              
