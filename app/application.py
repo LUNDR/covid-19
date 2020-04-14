@@ -840,10 +840,12 @@ app.layout = html.Div(
             style = {}),
 
         html.Div([
-            html.H5(children='Dashboard created with Python and Plotly',
+            html.H6(children='Dashboard created with Python and Plotly',
                     
                     style ={
-                         'margin-top':'1.5%'})
+                         'margin-top':'0.5%',
+                         'margin-left':'1.5%',
+                         'margin-bottom':'0%'})
        
                 ],className = "footer",
                 style ={'background-color': '#d3d3d3'})
