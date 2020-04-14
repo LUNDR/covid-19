@@ -752,25 +752,26 @@ app.layout = html.Div(
               
                             style = {
                                        
-                                       'max-height': '100%',
-                                       'max-width' : 'auto',
+                                       'height': '2%',
+                                       'width' : 'auto',
                                        'position': 'relative',
                                        'margin-top': 0,
                                        'margin-right': '1%',
                                        'float': 'right',
                                        'display': 'inline-block'}),
+                                       
+                html.Div(children = '''
+                                Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
+                                ''', style = { 'width': '74%',
+                                'display': 'inline-block',
+                                'margin-bottom':'1.5%',
+                                'margin-left':'1.5%'})        
+          
                                  ], className = "container",
                                  style = {'max-width' : 'none',
                                  'padding': 0,
                                  'height': '3%'}),
 
-                    
-            html.Div(children = '''
-                                Visualizations of the European Centre for Disease Prevention and Control data on cases and deaths from COVID-19
-                                ''', style = { 'width': '74%',
-                                'display': 'inline-block',
-                                'margin-bottom':'1.5%',
-                                'margin-left':'1.5%'})
                                 ],className = "header"),
             
     
