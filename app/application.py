@@ -830,7 +830,7 @@ app.layout = html.Div(
                             responsive = False,
                            
                         )], 
-                        className = "eight columns", 
+                        className = "nine columns", 
                         style = {
                         'display': 'inline-block',
                         'margin-left':'10%',
@@ -840,12 +840,12 @@ app.layout = html.Div(
             style = {}),
 
         html.Div([
-            html.H5(children='Dash board created with Python and Plotly',
+            html.H5(children='Dashboard created with Python and Plotly',
                     className = "nine columns",
                 style = {
                 'margin':'1.5%'})
-                ],className = "row"),
-               ]), style ={'background-color' :"#f2f3f4" }
+                ],className = "footer"),
+               ]), style ={}
 
 )
 
