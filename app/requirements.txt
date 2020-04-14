@@ -4,3 +4,4 @@ plotly
 palettable
 dash
 gunicorn
+dash_bootstrap_components

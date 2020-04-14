@@ -751,7 +751,8 @@ app.layout = html.Div(
                         className = "one columns",
           
                         style = {
-                                   'height': '3%',
+                                   'max-width': '100%',
+                                   'max-height': '100%',
                                    'position': 'relative',
                                    'margin-top': 0,
                                    'margin-right': '1%',
