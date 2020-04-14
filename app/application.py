@@ -703,8 +703,7 @@ for i in countries:
     except:
         pass
 
-config = {'responsive': True}
-fig4 = go.Figure(plots, config = config)
+fig4 = go.Figure(plots)
 fig4.update_layout(
 
                   title=plot_title,
@@ -769,7 +768,7 @@ app.layout = html.Div(
     html.Div([
              html.Div([
                         dcc.Graph(
-                            figure= fig1,
+                            figure= fig1,config = config
                             
                            
                         )],
@@ -782,6 +781,7 @@ app.layout = html.Div(
              html.Div([
                         dcc.Graph(
                             figure= map1,
+                            responsive = True,
                            
                         )],
                         className = "five columns",
