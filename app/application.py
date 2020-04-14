@@ -751,7 +751,7 @@ app.layout = html.Div(
                         className = "one columns",
           
                         style = {
-                                   'height': 'auto',
+                                   'height': '3%',
                                    'position': 'relative',
                                    'margin-top': 0,
                                    'margin-right': '1%',
@@ -845,7 +845,7 @@ app.layout = html.Div(
                 style = {
                 'margin':'1.5%'})
                 ],className = "footer"),
-               ]), style ={}
+               ]), style ={'background-color': 'f2f3f4'}
 
 )
 
