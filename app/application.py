@@ -768,7 +768,7 @@ app.layout = html.Div(
     html.Div([
              html.Div([
                         dcc.Graph(
-                            figure= fig1,config = config
+                            figure= fig1,
                             
                            
                         )],
