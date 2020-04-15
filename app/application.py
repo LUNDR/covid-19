@@ -163,22 +163,22 @@ app.layout = html.Div(
         ),
 
         html.Div([
-            html.Div(['Dashboard created by Rachel Lund (2020) using Python and Plotly'],
+            html.Div(['Plotly Dash Application created by Rachel Lund (2020)'],
                     style={
                         'height' : '3%',
                         'margin-top': '0%',
                         'font-size': '1em',
                         'margin-left': '1.5%',
                         'margin-bottom': '0%',
-                        'padding-top' : '20%',
-                        'padding-bottom': '20%'}
+                        'padding-top' : '5%',
+                        'padding-bottom': '5%'}
                     ),
             html.A([
                 html.Img(src = 'assets/github-logo.png',
                 style = {
                 'height' : 50,
                 'width' : 'auto',
-                'position' : 'relative',
+                'position' : 'center',
                 'float': 'center'})
                 ], href = 'https://github.com/LUNDR')
 
