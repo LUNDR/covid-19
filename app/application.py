@@ -20,7 +20,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 
 
-from charts import fig1, fig2, fig3, fig4, headline, map1
+from figures import fig1, fig2, fig3, fig4, headline, map1
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[
