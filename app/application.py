@@ -68,7 +68,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=headline,
-                    responsive=False,
+                    responsive=True,
 
                 )
             ],
@@ -84,7 +84,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=map1,
-                    responsive=False,
+                    responsive=True,
 
                 )
             ],
@@ -103,7 +103,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig2,
-                    responsive=False,
+                    responsive=True,
                 )
             ],
                 className="five columns",
@@ -116,7 +116,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig3,
-                    responsive=False,
+                    responsive=True,
                 )
             ],
                 className="five columns",
@@ -134,7 +134,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig4,
-                    responsive=False,
+                    responsive=True,
 
                 )
             ],
@@ -148,7 +148,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig1,
-                    responsive=False,
+                    responsive=True,
 
                 )
             ],
