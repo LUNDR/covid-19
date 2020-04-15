@@ -913,7 +913,7 @@ for country in data['countriesAndTerritories'].unique():
             data_dict = dict(type='bar',
                              y=names,
                              x=chart_data.iloc[:, 0],
-                             customdata = country,
+                             customdata = [country],
                              name=' '.join(country.split('_')),
                              text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
                              textposition=['inside', 'outside', 'outside', 'outside'],
@@ -922,11 +922,12 @@ for country in data['countriesAndTerritories'].unique():
                              orientation='h',
                              )
             traces.append(data_dict)
+            
         else:
             data_dict = dict(type='bar',
                              y=names,
                              x=chart_data.iloc[:, 0],
-                             customdata = country,
+                             customdata = [country],
                              name=' '.join(country.split('_')),
                              text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
                              textposition=['inside', 'outside', 'outside', 'outside'],
