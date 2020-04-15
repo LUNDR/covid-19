@@ -33,7 +33,7 @@ app.layout = html.Div(
     html.Div([
         html.Div([
             html.Div([
-                html.H2(children='Covid-19 Data Dashboard',
+                html.H3(children='Covid-19 Data Dashboard',
                         style={
                             'text-align': 'left',
                             'display': 'inline-block',
@@ -42,9 +42,10 @@ app.layout = html.Div(
                         ),
 
 
-                html.Div(children='''
-                                    Visualizations of data on cases and deaths from COVID-19 compiled by the European Centre for Disease Prevention and Control
-                                    ''', style={'width': '74%',
+                html.Div(children=['''
+                                    Visualizations of data on cases and deaths from COVID-19 compiled by the 
+                                    ''',html.A('European Centre for Disease Prevention and Control', href = 'https://www.ecdc.europa.eu/en')],
+                                    style={'width': '74%',
                                                 'display': 'inline-block',
                                                 'margin-bottom': '1.5%',
                                                 'margin-left': '1.5%'}
@@ -163,24 +164,25 @@ app.layout = html.Div(
         ),
 
         html.Div([
-            html.Div(['Plotly Dash Application created by Rachel Lund (2020)'],
+            html.Div(['Plotly Dash Application created by Rachel Lund (2020)',
+                html.A([
+                    html.Img(src = 'assets/github-logo.png',
+                                                            style = {
+                                                            'height' : 50,
+                                                            'width' : 'auto',
+                                                            'position' : 'center',
+                                                            'float': 'center'})
+                ], href = 'https://github.com/LUNDR')],
                     style={
                         'height' : '3%',
                         'margin-top': '0%',
                         'font-size': '1em',
                         'margin-left': '1.5%',
                         'margin-bottom': '0%',
-                        'padding-top' : '5%',
-                        'padding-bottom': '5%'}
+                        'padding-top' : '2%',
+                        'padding-bottom': '2%'}
                     ),
-            html.A([
-                html.Img(src = 'assets/github-logo.png',
-                style = {
-                'height' : 50,
-                'width' : 'auto',
-                'position' : 'center',
-                'float': 'center'})
-                ], href = 'https://github.com/LUNDR')
+    
 
 
         ],
