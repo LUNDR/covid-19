@@ -270,7 +270,7 @@ sliders = [dict(
                       visible=True,
                       ),
     transition=dict(duration=300),
-    pad=dict(t=50),
+    pad=dict(t=10),
     steps=steps
 )]
 
@@ -288,7 +288,7 @@ figure['layout'] = dict(
         countrywidth=0.5,
         countrycolor='#ffffff',
     ),
-    margin={"r":0,"t":10,"l":0,"b":0},
+    margin={"r":0,"t":100,"l":0,"b":0},
     updatemenus=[
         dict(
             type='buttons',
