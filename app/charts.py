@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import plotly
 import plotly.graph_objects as go
 
-#colours
+# colours
 from palettable.colorbrewer.qualitative import Paired_12
 from palettable.tableau import Tableau_20
 
@@ -21,48 +21,61 @@ import dash_bootstrap_components as dbc
 
 # define functions
 
+
 def make_chart_data(country):
     ''' makes a seperate dataset for a country
         takes country name as input '''
-    chart_data = data.loc[data['countriesAndTerritories'] == country].reset_index()
+    chart_data = data.loc[data['countriesAndTerritories']
+                          == country].reset_index()
     return chart_data
 
 # shifts the data to 'day 0 of the corona virus'
-def reindex(df, var, index_ = 10):
-    ''' creates a data series which shifts data so that the day 
+
+
+def reindex(df, var, index_=10):
+    ''' creates a data series which shifts data so that the day
     where the criteria index_ is reached is at index 0
     Note cases are indexed to weekly total, while deaths to cumulative total'''
     dta = df.copy()
-    
-    # First we need to identify the day at which the minimum number of cases/deaths is reached
-    # some countries have no data so the try/except allows the function to ignore them
-    try: 
-        first_day = dta[dta[var]>index_ ].index[0]
 
-    # The cumulative cases/deaths data are then shifted back so that the first day index_ is exceeded becomes index 0
+    # First we need to identify the day at which the minimum number of cases/deaths is reached
+    # some countries have no data so the try/except allows the function to
+    # ignore them
+    try:
+        first_day = dta[dta[var] > index_].index[0]
+
+    # The cumulative cases/deaths data are then shifted back so that the first
+    # day index_ is exceeded becomes index 0
         dta[var] = dta[var].shift(-first_day)
-    except:
+    except BaseException:
         dta[var] = np.nan
-    return dta 
+    return dta
 
 
 # Data read in and feature creation/ data wrangling
 
-data = pd.read_csv('https://opendata.ecdc.europa.eu/covid19/casedistribution/csv',usecols = list(range(0,10)))
+data = pd.read_csv(
+    'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv',
+    usecols=list(
+        range(
+            0,
+            10)))
 
 continents = pd.read_csv('assets/continents.csv')
 
 # make datetime
 data['dateRep'] = pd.to_datetime(data['dateRep'], dayfirst=True)
 
-#sort values by country and date
-data.sort_values(by=['countriesAndTerritories','dateRep'], ascending = True, inplace = True)
+# sort values by country and date
+data.sort_values(by=['countriesAndTerritories', 'dateRep'],
+                 ascending=True, inplace=True)
 
-#reindex the data now its sorted to prevent errors when creating aggregates
+# reindex the data now its sorted to prevent errors when creating aggregates
 data = data.reindex()
 
 # create a global aggregate figure for cases and deaths
-world = data[['dateRep','cases','deaths','popData2018']].groupby(by='dateRep').sum()
+world = data[['dateRep', 'cases', 'deaths',
+              'popData2018']].groupby(by='dateRep').sum()
 
 world['day'] = world.index.day
 world['month'] = world.index.month
@@ -70,51 +83,74 @@ world['year'] = world.index.year
 world['dateRep'] = world.index
 world['countriesAndTerritories'] = 'World'
 world['geoId'] = 'WD'
-world['countryterritoryCode']  = 'WLD'
+world['countryterritoryCode'] = 'WLD'
 data = pd.concat([data, world], ignore_index=True)
 
 # Create a continents var
 
-data = pd.merge(data, continents[['Continent_Name','Three_Letter_Country_Code']].drop_duplicates('Three_Letter_Country_Code'), how='left', left_on='countryterritoryCode', right_on='Three_Letter_Country_Code')
-#create cumulative sum of deaths and cases by country and death rate
-data['total_cases'] = data.groupby(by='countriesAndTerritories')['cases'].cumsum()
-data['total_deaths'] = data.groupby(by='countriesAndTerritories')['deaths'].cumsum()
+data = pd.merge(data,
+                continents[['Continent_Name',
+                            'Three_Letter_Country_Code']].drop_duplicates('Three_Letter_Country_Code'),
+                how='left',
+                left_on='countryterritoryCode',
+                right_on='Three_Letter_Country_Code')
+# create cumulative sum of deaths and cases by country and death rate
+data['total_cases'] = data.groupby(by='countriesAndTerritories')[
+    'cases'].cumsum()
+data['total_deaths'] = data.groupby(by='countriesAndTerritories')[
+    'deaths'].cumsum()
 
 # create 7 day rolling average of deaths and cases
 
 
-data['deaths_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])['deaths'].rolling(7).sum().values
-data['cases_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])['cases'].rolling(7).sum().values
-data['death_rate'] = data['total_deaths']/data['total_cases']*100
+data['deaths_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])[
+    'deaths'].rolling(7).sum().values
+data['cases_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])[
+    'cases'].rolling(7).sum().values
+data['death_rate'] = data['total_deaths'] / data['total_cases'] * 100
 
 # Create cumulative deaths and cases per capita
-data['deaths_per_cap'] = data['total_deaths']/data['popData2018']
-data['cases_per_cap'] = data['total_cases']/data['popData2018']
+data['deaths_per_cap'] = data['total_deaths'] / data['popData2018']
+data['cases_per_cap'] = data['total_cases'] / data['popData2018']
 
 # create death rates variable
-data['death_rate'] = data['total_deaths']/data['total_cases']*100
+data['death_rate'] = data['total_deaths'] / data['total_cases'] * 100
 
-#Shorten to DRC
-data = data.replace({'Democratic_Republic_of_the_Congo':'D.R.C'}, regex=True)
-data = data.replace({'Falkland_Islands_(Malvinas)':'Falklands'}, regex=True)
-data = data.replace({'Democratic_Republic_of_the_Congo':'D.R.C'}, regex=True)
-data = data.replace({'Cases_on_an_international_conveyance_Japan':'Cruise Ship (Japan)'}, regex=True)
-data = data.replace({'Saint_Vincent_and_the_Grenadines':'St.Vincent & the Grenadines'}, regex=True)
-data = data.replace({'United_States_Virgin_Islands':'U.S Virgin Islands'}, regex=True)
+# Shorten to DRC
+data = data.replace({'Democratic_Republic_of_the_Congo': 'D.R.C'}, regex=True)
+data = data.replace({'Falkland_Islands_(Malvinas)': 'Falklands'}, regex=True)
+data = data.replace({'Democratic_Republic_of_the_Congo': 'D.R.C'}, regex=True)
+data = data.replace(
+    {'Cases_on_an_international_conveyance_Japan': 'Cruise Ship (Japan)'}, regex=True)
+data = data.replace(
+    {'Saint_Vincent_and_the_Grenadines': 'St.Vincent & the Grenadines'}, regex=True)
+data = data.replace(
+    {'United_States_Virgin_Islands': 'U.S Virgin Islands'}, regex=True)
 
 # Formatting
-## colours
+# colours
 
-# sort values so hopefully countries with similar number of cases end up with different colours
-a = data.sort_values(by=['total_cases','countriesAndTerritories','dateRep'],ascending = True)
+# sort values so hopefully countries with similar number of cases end up
+# with different colours
+a = data.sort_values(
+    by=['total_cases', 'countriesAndTerritories', 'dateRep'], ascending=True)
 
-colour_list = (Tableau_20.hex_colors*int(len(data['countriesAndTerritories'].unique())/len(Tableau_20.hex_colors)+1))[:len(data['countriesAndTerritories'].unique())]
-colour_dict = dict(zip(list(dict.fromkeys(a['countriesAndTerritories'])),colour_list))
+colour_list = (Tableau_20.hex_colors *
+               int(len(data['countriesAndTerritories'].unique()) /
+                   len(Tableau_20.hex_colors) +
+                   1))[:len(data['countriesAndTerritories'].unique())]
+colour_dict = dict(
+    zip(list(dict.fromkeys(a['countriesAndTerritories'])), colour_list))
 data['colour'] = [colour_dict[x] for x in data['countriesAndTerritories']]
 
 # colour dictionary for continents
-colours = {'Asia':"royalblue", 'Europe':"crimson", 'Africa':"lightseagreen", 'Oceania':"orange", 'North America':"gold",
-       'South America':'mediumslateblue', "nan":"peru"}
+colours = {"Asia": "royalblue",
+           "Europe": "crimson",
+           "Africa": "lightseagreen",
+           "Oceania": "orange",
+           "North America": "gold",
+           "South America": 'mediumslateblue',
+           "nan": "peru"}
 
 #
 title_font_family = 'Arial'
@@ -123,12 +159,14 @@ x_title_font_size = 11
 y_title_font_size = 11
 
 # create a 'date' variable that is a string
-data['date'] = [pd.to_datetime(str(x)).strftime('%d %b') for x in data['dateRep']]
+data['date'] = [pd.to_datetime(str(x)).strftime('%d %b')
+                for x in data['dateRep']]
 
 
-#create objects to be used universally
+# create objects to be used universally
 # create a list of date strings to cycle through for animations
-days = data['dateRep'][data['dateRep'] > pd.to_datetime('31-12-2019')].sort_values(ascending=True).unique()
+days = data['dateRep'][data['dateRep'] > pd.to_datetime(
+    '31-12-2019')].sort_values(ascending=True).unique()
 days = [pd.to_datetime(str(x)).strftime('%d %b') for x in days]
 
 # calculate the date of latest data included and make it a string
@@ -137,7 +175,7 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 #######################
 
-#Animated Map
+# Animated Map
 
 figure = {
     'data': [],
@@ -147,7 +185,7 @@ figure = {
 }
 
 
-### data
+# data
 
 day = days[-1]
 data_ = []
@@ -158,19 +196,22 @@ chart_data = data[data['date'] == day]
 for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
     colour = colours[cont]
     df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
-    data_dict = dict(type = 'scattergeo',
-                locationmode = 'ISO-3',
-                locations = df_sub['countryterritoryCode'].tolist(),
-                marker  = dict(
-                            size = df_sub['total_cases']/200,
-                            color = colour,
-                            line_color= '#ffffff',
-                            line_width=0.5,
-                            sizemode = 'area'
-                            ),
-                name = '{}'.format(cont),
-                text = ['{}<BR>Total Cases: {}'.format(df_sub['countriesAndTerritories'][x],df_sub['total_cases'][x]) for x in range(len(df_sub))]
-               )
+    data_dict = dict(
+        type='scattergeo',
+        locationmode='ISO-3',
+        locations=df_sub['countryterritoryCode'].tolist(),
+        marker=dict(
+            size=df_sub['total_cases'] / 200,
+            color=colour,
+            line_color='#ffffff',
+            line_width=0.5,
+            sizemode='area'),
+        name='{}'.format(cont),
+        text=[
+            '{}<BR>Total Cases: {}'.format(
+                df_sub['countriesAndTerritories'][x],
+                df_sub['total_cases'][x]) for x in range(
+                    len(df_sub))])
     figure['data'].append(data_dict)
 
 
@@ -180,91 +221,105 @@ steps = []
 
 for day in days:
     chart_data = data[data['date'] == day]
-    frame = {'data': [], 'name': str(day)}
+    frame = dict(data=[], name=str(day))
     for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
         colour = colours[cont]
         df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
-        data_dict = dict(type = 'scattergeo',
-                locationmode = 'ISO-3',
-                locations = df_sub['countryterritoryCode'].tolist(),
-                marker  = dict(
-                            size = df_sub['total_cases']/200,
-                            color = colour,
-                            line_color= '#ffffff',
-                            line_width=0.5,
-                            sizemode = 'area'
-                            ),
-                name = '{}'.format(cont),
-                text = ['{}<BR>Total Cases: {}'.format(df_sub['countriesAndTerritories'][x],df_sub['total_cases'][x]) for x in range(len(df_sub))]
-               )
+        data_dict = dict(
+            type='scattergeo',
+            locationmode='ISO-3',
+            locations=df_sub['countryterritoryCode'].tolist(),
+            marker=dict(
+                size=df_sub['total_cases'] / 200,
+                color=colour,
+                line_color='#ffffff',
+                line_width=0.5,
+                sizemode='area'),
+            name='{}'.format(cont),
+            text=[
+                '{}<BR>Total Cases: {}'.format(
+                    df_sub['countriesAndTerritories'][x],
+                    df_sub['total_cases'][x]) for x in range(
+                    len(df_sub))])
         frame['data'].append(data_dict)
     figure['frames'].append(frame)
-    
+
     step = dict(
         method="animate",
         args=[
-        [day],
-        dict(frame = dict(duration = 100,
-                   redraw = True),
-         mode = "immediate",
-         transition =  dict(duration = 100,
-                        easing = "quad-in"))
-    ],
-        label = day,
-        
+            [day],
+            dict(frame=dict(duration=100,
+                            redraw=True),
+                 mode="immediate",
+                 transition=dict(duration=100,
+                                 easing="quad-in"))
+        ],
+        label=day,
+
     )
-    
+
     # append step to step list
     steps.append(step)
-    
 
 
 # Create and add aslider
-sliders = [dict(   
-    y = 0,
-    active=len(days)-1,
-    currentvalue=dict(prefix = "",
-                  visible = True.
-                  offset = 200),
-    transition = dict(duration = 300),
-    pad=dict(t = 50),
+sliders = [dict(
+    y=0,
+    active=len(days) - 1,
+    currentvalue=dict(prefix="",
+                      visible=True,
+                      ),
+    transition=dict(duration=300),
+    pad=dict(t=50),
     steps=steps
 )]
 
-### layout
+# layout
 figure['layout'] = dict(
-                    titlefont =dict(
-                        size =  title_font_size
-                    ),
-                    title_text = '<b> Covid-19 cases </b> <BR> As reported at ' + latest_data_string,
-                    showlegend =  True,
-                    geo = dict(
-                        scope = 'world',
-                        landcolor = 'rgb(217, 217, 217)',
-                        coastlinecolor = '#ffffff',
-                        countrywidth = 0.5,
-                        countrycolor = '#ffffff',
-                   
-                    ),
-                    updatemenus = [dict(type ='buttons',
-                                        buttons=list([
-                                            dict(
-                                                args=[None,dict(frame = dict(duration =  200,
-                                                                      redraw = True),
-                                                            mode =  "immediate", 
-                                                            transition = dict(duration  = 200,
-                                                                           easing  = "quad-in"))],
-                                                label="Play",
-                                                method="animate"
-                                            )
-                                        ]
-                                        ))],
-                    sliders = sliders
-                   )
-      
+    titlefont=dict(
+        size=title_font_size,
+        family=title_font_family),
+    title_text='<b> Covid-19 cases </b> <BR> As reported at ' +
+    latest_data_string,
+    showlegend=True,
+    geo=dict(
+        scope='world',
+        landcolor='rgb(217, 217, 217)',
+        coastlinecolor='#ffffff',
+        countrywidth=0.5,
+        countrycolor='#ffffff',
+    ),
+    updatemenus=[
+        dict(
+            type='buttons',
+            buttons=list(
+                [
+                    dict(
+                        args=[
+                            None,
+                            dict(
+                                frame=dict(
+                                    duration=200,
+                                    redraw=True),
+                                mode="immediate",
+                                transition=dict(
+                                    duration=200,
+                                    easing="quad-in"))],
+                        label="Play",
+                        method="animate")]))],
+    sliders=sliders)
+
 map1 = go.Figure(figure)
 
 # Death rate chart
+
+figure = {
+    'data': [],
+    'layout': {},
+    'frames': [],
+    'config': {'scrollzoom': True}
+}
+
 # choose the first date in the 'days' list as your data
 day = days[-1]
 
@@ -274,37 +329,32 @@ num_ = 204
 # define the threshold for being shown
 threshold = 100
 
-#subset the data by date
-chart_data = chart_data = data.loc[(data['date'] == day) & (data['total_cases'] > threshold)].sort_values(by = 'death_rate', ascending = False)
+# subset the data by date
+chart_data = chart_data = data.loc[(data['date'] == day) & (
+    data['total_cases'] > threshold)].sort_values(by='death_rate', ascending=False)
 
 # select only the first num_ countries in the new dataframe
 chart_data_2 = chart_data[0:num_]
 
-# create a colour variable for the new dataframe, assigning each country a colour according to the colour dictionary
-chart_data_2['colour'] = [colours[str(x)] for x in chart_data_2['Continent_Name']]
+# create a colour variable for the new dataframe, assigning each country a
+# colour according to the colour dictionary
+chart_data_2['colour'] = [colours[str(x)]
+                          for x in chart_data_2['Continent_Name']]
 
 # define the chart
-data_ = [go.Bar(x = [' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
-                y=chart_data_2['death_rate'],
-                name = '',
-                 text = chart_data_2['countriesAndTerritories'].tolist(),
-                customdata=chart_data_2['total_cases'],
-#                 textposition='auto',
-                marker=dict(color=chart_data_2['colour'].tolist()),
-               hovertemplate = "<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")]
+data_dict = dict(type='bar',
+                 x=[' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
+                 y=chart_data_2['death_rate'],
+                 name='',
+                 text=chart_data_2['countriesAndTerritories'].tolist(),
+                 customdata=chart_data_2['total_cases'],
+                 marker=dict(color=chart_data_2['colour'].tolist()),
+                 hovertemplate="<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")
+
+figure['data'] = data_dict
 
 
-### layout
-    
-layout = go.Layout(
-  
-    title = "<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b>",
-     font=dict(
-                size=11
-
-            ))
-
-### frames 
+# frames
 
 # define lists to capture frames and steps in a loop
 frames = []
@@ -312,104 +362,111 @@ steps = []
 
 # loop through days making a new frame and a new step each time
 for day in days:
-    # create data subset, based on date, and threshold, sort values, take the first num_ countries then assign colours
-    chart_data = chart_data = data.loc[(data['date'] == day) & (data['total_cases'] > threshold)].sort_values(by = 'death_rate', ascending = False)
+
+    # create data subset, based on date, and threshold, sort values, take the
+    # first num_ countries then assign colours
+    chart_data = chart_data = data.loc[(data['date'] == day) & (
+        data['total_cases'] > threshold)].sort_values(by='death_rate', ascending=False)
     chart_data_2 = chart_data[0:num_]
-    chart_data_2['colour'] = [colours[str(x)] for x in chart_data_2['Continent_Name']]
-    
-    # create chart 
-    frame = go.Frame(name = day, 
-                     data =[ go.Bar(x = [' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
-                                                y=chart_data_2['death_rate'],
-                                                name = '',
-                                                 text = chart_data_2['countriesAndTerritories'].tolist(),
-                                            customdata=chart_data_2['total_deaths'],
-#                                                 textposition='auto',
-                                                marker=dict(color=chart_data_2['colour'].tolist()),
-                                                hovertemplate = "<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")]
-                                               )
-    # add to chart list    
-    frames.append(frame)  
-    
+    chart_data_2['colour'] = [colours[str(x)]
+                              for x in chart_data_2['Continent_Name']]
+
+    frame = dict(data=[], name=str(day))
+    # create chart
+    data_dict = dict(type='bar',
+                     x=[' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
+                     y=chart_data_2['death_rate'],
+                     name='',
+                     text=chart_data_2['countriesAndTerritories'].tolist(),
+                     customdata=chart_data_2['total_cases'],
+                     marker=dict(color=chart_data_2['colour'].tolist()),
+                     hovertemplate="<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")
+
+    # add to chart list
+    frame['data'].append(data_dict)
+    figure['frames'].append(frame)
+
     # create steps
     step = dict(
         method="animate",
         args=[
-        [day],
-        {"frame": {"duration": 100,
-                   "redraw": True},
-         "mode": "immediate",
-         "transition": {"duration": 100,
-                        "easing": "quad-in"}}
-    ],
-        label = day,
-        
+            [day],
+            dict(frame=dict(duration=100,
+                            redraw=True),
+                 mode="immediate",
+                 transition=dict(duration=100,
+                                 easing="quad-in"))
+        ],
+        label=day,
+
     )
-    
+
     # append step to step list
     steps.append(step)
 
 
-
 # Create and add aslider
-sliders = [dict(   
-    y = -0.3,
-    active=len(days)-1,
-    currentvalue={"prefix": "Date: ",
-                  "visible" :True},
-    transition = {"duration": 300},
-    pad={"t": 50},
+sliders = [dict(
+    y=-0.3,
+    active=len(days) - 1,
+    currentvalue=dict(prefix="Date: ",
+                      visible=True),
+    transition=dict(duration=300),
+    pad=dict(t=50),
     steps=steps
 )]
 
-# append slider information to layout.
-layout['sliders'] = sliders
-
-#add a footnote
-footnote = dict(xref='paper', 
-                xanchor='right',
-                text = "Note: Differences in the scope of testing <BR>for the virus and in reporting across <BR> countries means that figures <BR> should be compared with caution; <BR> Only countries with more than 100 cases are shown",
-                x=0.95, 
-                yanchor='bottom',
-                yshift = -100,
-                xshift = 0,
-                showarrow=False,
-                 font=dict(
-             #   family="Ariel",
-                size=10
-
-            ),
-                bgcolor="#ffffff",
-                bordercolor="#D3D3D3",
-                borderwidth=2,
-                borderpad=4,
-                y=20)
-
-layout['annotations'] = [footnote]
-
-# make the chart
-fig1 = go.Figure(data_,layout,frames)
-
-#fix the axes
-fig1.layout.yaxis.update(range=[0,
-                              20],title = 'Ratio (%)')
+figure['layout'] = dict(
+    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b>",
+    font=dict(
+        size=title_font_size,
+        family=title_font_family),
+    sliders=sliders)
 
 
-### deaths log chart
+# add a footnote
+footnote = dict(
+    xref='paper',
+    xanchor='right',
+    text="Note: Differences in the scope of testing <BR>for the virus and in reporting across <BR> countries means that figures <BR> should be compared with caution; <BR> Only countries with more than 100 cases are shown",
+    x=0.95,
+    yanchor='bottom',
+    yshift=-
+    100,
+    xshift=0,
+    showarrow=False,
+    font=dict(
+        size=10),
+    bgcolor="#ffffff",
+    bordercolor="#D3D3D3",
+    borderwidth=2,
+    borderpad=4,
+    y=20)
+
+figure['layout']['annotations'] = [footnote]
+
+
+# deaths log chart
 
 # choose the countries we want on the plot
 countries = data['countriesAndTerritories'].unique()
 
 # choose whether we want to plot total_cases or total_deaths
-cat_ = 'deaths' # deaths / cases
-type_ = '_7_day_sum' # '_7_day_sum' / 'total_' /''
-var = cat_+type_
+cat_ = 'deaths'  # deaths / cases
+type_ = '_7_day_sum'  # '_7_day_sum' / 'total_' /''
+var = cat_ + type_
 
 # choose how many cumulative deaths/or cases to use as point 0
 index_ = 10
 
 # list the countries you want to be on there as a default
-default_list = ['United_States_of_America','Japan','United_Kingdom','Italy','Switzerland','China']
+default_list = [
+    'United_States_of_America',
+    'Japan',
+    'United_Kingdom',
+    'Italy',
+    'Switzerland',
+    'China']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -418,128 +475,160 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 # define plot title and axis titles
 
 if type_ == '_7_day_sum':
-    plot_title = "<b>COVID-19 "+cat_.capitalize()+": 7 day rolling average</b><BR>"+latest_data_string
+    plot_title = "<b>COVID-19 " + \
+        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string
 elif type_ == 'total_':
-    plot_title = "<b>COVID-19 "+cat_.capitalize()+"</b> <BR> cumulative total <BR>"+latest_data_string
+    plot_title = "<b>COVID-19 " + \
+        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
 else:
-     plot_title = "<b>COVID-19 "+cat_.capitalize()+"</b><BR>"+latest_data_string
+    plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
+        latest_data_string
 
-    
-x_title = "Days since "+str(index_)+" "+cat_+" reached</b>"
+
+x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
 y_title = cat_.capitalize() + " (log scale)"
-    
+
 
 # Build traces to go on the plot
 
-dfs = dict()
-traces = dict()
-plots = []
-annotations = []
 
+figure = {
+    'data': [],
+    'layout': {},
+    'config': {'scrollzoom': True}
+}
+
+dfs = dict()
+annotations = []
+traces = []
 
 for i in countries:
     try:
         if i in default_list:
-            dfs[i] = reindex(make_chart_data(i),var,index_)
-            traces[i] = go.Scatter(x=dfs[i].index,
-                                   y=dfs[i][var],
-                                   mode = 'lines', 
-                                   line = dict(shape ='hv',color = dfs[i]['colour'][0]),
-                                   marker = dict(), 
-                                   line_shape = 'linear',
-                                   name = ' '.join(i.split('_')), # Removes the underscores in the legend names for countries
-                                   text = [' '.join(x.split('_')) for x in dfs[i]['countriesAndTerritories']], # Removes the underscores in the hoverlabel names
-                                   hovertemplate = "<br><b>%{text}</b><br><i> Weekly "+cat_.capitalize()+"</i>: %{y:,}<extra></extra>") # formats the hoverlabels
-            plots.append(traces[i])
+            dfs[i] = reindex(make_chart_data(i), var, index_)
+            data_dict = dict(type='scatter',
+                             x=dfs[i].index,
+                             y=dfs[i][var],
+                             mode='lines',
+                             line=dict(shape='hv', color=dfs[i]['colour'][0]),
+                             marker=dict(),
+                             line_shape='linear',
+                             # Removes the underscores in the legend names for
+                             # countries
+                             name=' '.join(i.split('_')),
+                             # Removes the underscores in the hoverlabel names
+                             text=[' '.join(x.split('_'))
+                                   for x in dfs[i]['countriesAndTerritories']],
+                             hovertemplate="<br><b>%{text}</b><br><i> Weekly " + cat_.capitalize() + "</i>: %{y:,}<extra></extra>")  # formats the hoverlabels
+            traces.append(data_dict)
         else:
-            dfs[i] = reindex(make_chart_data(i),var,index_)
-            traces[i] = go.Scatter(x=dfs[i].index,
-                                   y=dfs[i][var],
-                                   mode = 'lines',
-                                   line = dict(shape ='hv',color = dfs[i]['colour'][0]),marker = dict(),
-                                   line_shape = 'linear',
-                                   name = ' '.join(i.split('_')), 
-                                   visible = 'legendonly',
-                                   text = [' '.join(x.split('_')) for x in dfs[i]['countriesAndTerritories']],
-                                   hovertemplate = "<br><b>%{text}</b><br><i> Weekly "+cat_.capitalize()+"</i>: %{y:,}<extra></extra>")
-            plots.append(traces[i])
-            
-    except:
+            dfs[i] = reindex(make_chart_data(i), var, index_)
+            data_dict = dict(type='scatter',
+                             x=dfs[i].index,
+                             y=dfs[i][var],
+                             mode='lines',
+                             line=dict(shape='hv', color=dfs[i]['colour'][0]),
+                             marker=dict(),
+                             line_shape='linear',
+                             # Removes the underscores in the legend names for
+                             # countries
+                             name=' '.join(i.split('_')),
+                             # Removes the underscores in the hoverlabel names
+                             text=[' '.join(x.split('_'))
+                                   for x in dfs[i]['countriesAndTerritories']],
+                             hovertemplate="<br><b>%{text}</b><br><i> Weekly " + \
+                             cat_.capitalize() + "</i>: %{y:,}<extra></extra>",
+                             visible='legendonly')  # formats the hoverlabels
+            traces.append(data_dict)
+    except BaseException:
         pass
-    
 
 
 # create traces for the lines you want to plot (as for the other lines)
-    
-three_days = go.Scatter(x=np.array(range(0,90)),
-                        y=index_*(2**(1/3))**np.array(range(0,90)), 
-                        mode = 'lines', 
-                        line = dict(color='#999999', shape ='hv', dash='dot'),
-                        line_shape = 'linear', 
-                        name = 'Doubling every three days',
-                        hoverinfo='skip')
 
-seven_days = go.Scatter(x=np.array(range(0,90)),
-                        y=index_*(2**(1/7))**np.array(range(0,90)),
-                        mode = 'lines',
-                        line = dict(color='#999999',shape ='hv',dash='dot'),
-                        line_shape = 'linear', 
-                        name = 'Doubling every week',
-                        hoverinfo='skip')
+three_days = dict(type='scatter',
+                  x=np.array(range(0, 90)),
+                  y=index_ * (2**(1 / 3))**np.array(range(0, 90)),
+                  mode='lines',
+                  line=dict(color='#999999', shape='hv', dash='dot'),
+                  line_shape='linear',
+                  name='Doubling every three days',
+                  hoverinfo='skip')
+
+seven_days = dict(type='scatter',
+                  x=np.array(range(0, 90)),
+                  y=index_ * (2**(1 / 7))**np.array(range(0, 90)),
+                  mode='lines',
+                  line=dict(color='#999999', shape='hv', dash='dot'),
+                  line_shape='linear',
+                  name='Doubling every week',
+                  hoverinfo='skip')
 
 # add the lines to the list of traces to plot
-plots.append(three_days)
-plots.append(seven_days)
+traces.append(three_days)
+traces.append(seven_days)
+
+figure['data'] = traces
 
 # add annotations to the lines so people can see what they are
 
 annotations.append(dict(xref='paper',
-                        x=0.5, 
+                        x=0.5,
                         y=4.7,
                         text='Doubling every <BR> 3 days',
-                        font=dict(family='Arial',size=10),showarrow=False))
+                        font=dict(family='Arial', size=10), showarrow=False))
 annotations.append(dict(xref='paper',
                         x=0.93,
                         y=3.8,
                         text='Doubling every <BR> week',
-                        font=dict(family='Arial',size=10),showarrow=False))
-    
+                        font=dict(family='Arial', size=10), showarrow=False))
+
 
 # add a footnote
 
-#footnote = dict(xref='paper', xanchor='right', x=1, yanchor='top',y=np.log10(index_),text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',font=dict(family='Arial',size=10),showarrow=False)
-#annotations.append(footnote)
-  
-    
-fig2 = go.Figure(plots)
-fig2.update_layout(yaxis_type="log",
+# footnote = dict(xref='paper',
+#                 xanchor='right',
+#                 x=1,
+#                 yanchor='top',
+#                 y=np.log10(index_),
+#                 text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',
+#                 font=dict(family='Arial',size=10),showarrow=False)
+# annotations.append(footnote)
 
-                  title=plot_title,
-                  annotations = annotations,
-                 titlefont ={
-                            "size": title_font_size
-                  })
 
-fig2.layout.xaxis.update(title={'text':x_title,'font':{'size':x_title_font_size}},
-                        range=[0, 90], 
-                        )
-fig2.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}},
-                        range=[np.log10(index_), 5])
+figure['layout'] = dict(
+    yaxis_type="log", title=plot_title, annotations=annotations, titlefont=dict(
+        size=title_font_size, family=title_font_family), xaxis=dict(
+            title=dict(
+                text=x_title, font=dict(
+                    size=x_title_font_size)), range=[
+                        0, 90]), yaxis=dict(
+                            title=dict(
+                                text=x_title, font=dict(
+                                    size=x_title_font_size)), range=[
+                                        0, 5]))
 
+
+fig2 = go.Figure(figure)
 
 # log chart cases
 
-
 # choose whether we want to plot total_cases or total_deaths
-cat_ = 'cases' # deaths / cases
-type_ = '_7_day_sum' # '_7_day_sum' / 'total_' /''
-var = cat_+type_
+cat_ = 'cases'  # deaths / cases
+type_ = '_7_day_sum'  # '_7_day_sum' / 'total_' /''
+var = cat_ + type_
 
 # choose how many cumulative deaths/or cases to use as point 0
 index_ = 100
 
 # list the countries you want to be on there as a default
-default_list = ['United_States_of_America','Japan','United_Kingdom','Italy','Switzerland','China']
+default_list = [
+    'United_States_of_America',
+    'Japan',
+    'United_Kingdom',
+    'Italy',
+    'Switzerland',
+    'China']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -548,216 +637,310 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 # define plot title and axis titles
 
 if type_ == '_7_day_sum':
-    plot_title = "<b>COVID-19 "+cat_.capitalize()+": 7 day rolling average</b><BR>"+latest_data_string
+    plot_title = "<b>COVID-19 " + \
+        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string
 elif type_ == 'total_':
-    plot_title = "<b>COVID-19 "+cat_.capitalize()+"</b> <BR> cumulative total <BR>"+latest_data_string
+    plot_title = "<b>COVID-19 " + \
+        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
 else:
-     plot_title = "<b>COVID-19 "+cat_.capitalize()+"</b><BR>"+latest_data_string
+    plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
+        latest_data_string
 
-    
-x_title = "Days since "+str(index_)+" "+cat_+" reached</b>"
+
+x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
 y_title = cat_.capitalize() + " (log scale)"
-    
 
 # Build traces to go on the plot
 
-dfs = dict()
-traces = dict()
-plots = []
-annotations = []
 
+figure = {
+    'data': [],
+    'layout': {},
+    'config': {'scrollzoom': True}
+}
+
+dfs = dict()
+annotations = []
+traces = []
 
 for i in countries:
     try:
         if i in default_list:
-            dfs[i] = reindex(make_chart_data(i),var,index_)
-            traces[i] = go.Scatter(x=dfs[i].index,
-                                   y=dfs[i][var],
-                                   mode = 'lines', 
-                                   line = dict(shape ='hv',color = dfs[i]['colour'][0]),
-                                   marker = dict(), 
-                                   line_shape = 'linear',
-                                   name = ' '.join(i.split('_')), # Removes the underscores in the legend names for countries
-                                   text = [' '.join(x.split('_')) for x in dfs[i]['countriesAndTerritories']], # Removes the underscores in the hoverlabel names
-                                   hovertemplate = "<br><b>%{text}</b><br><i>Weekly "+cat_.capitalize()+"</i>: %{y:,}<extra></extra>") # formats the hoverlabels
-            plots.append(traces[i])
+            dfs[i] = reindex(make_chart_data(i), var, index_)
+            data_dict = dict(type='scatter',
+                             x=dfs[i].index,
+                             y=dfs[i][var],
+                             mode='lines',
+                             line=dict(shape='hv', color=dfs[i]['colour'][0]),
+                             marker=dict(),
+                             line_shape='linear',
+                             # Removes the underscores in the legend names for
+                             # countries
+                             name=' '.join(i.split('_')),
+                             # Removes the underscores in the hoverlabel names
+                             text=[' '.join(x.split('_'))
+                                   for x in dfs[i]['countriesAndTerritories']],
+                             hovertemplate="<br><b>%{text}</b><br><i> Weekly " + cat_.capitalize() + "</i>: %{y:,}<extra></extra>")  # formats the hoverlabels
+            traces.append(data_dict)
         else:
-            dfs[i] = reindex(make_chart_data(i),var,index_)
-            traces[i] = go.Scatter(x=dfs[i].index,
-                                   y=dfs[i][var],
-                                   mode = 'lines',
-                                   line = dict(shape ='hv',color = dfs[i]['colour'][0]),marker = dict(),
-                                   line_shape = 'linear',
-                                   name = ' '.join(i.split('_')), 
-                                   visible = 'legendonly',
-                                   text = [' '.join(x.split('_')) for x in dfs[i]['countriesAndTerritories']],
-                                   hovertemplate = "<br><b>%{text}</b><br><i>Weekly "+cat_.capitalize()+"</i>: %{y:,}<extra></extra>")
-            plots.append(traces[i])
-            
-    except:
+            dfs[i] = reindex(make_chart_data(i), var, index_)
+            data_dict = dict(type='scatter',
+                             x=dfs[i].index,
+                             y=dfs[i][var],
+                             mode='lines',
+                             line=dict(shape='hv', color=dfs[i]['colour'][0]),
+                             marker=dict(),
+                             line_shape='linear',
+                             # Removes the underscores in the legend names for
+                             # countries
+                             name=' '.join(i.split('_')),
+                             # Removes the underscores in the hoverlabel names
+                             text=[' '.join(x.split('_'))
+                                   for x in dfs[i]['countriesAndTerritories']],
+                             hovertemplate="<br><b>%{text}</b><br><i> Weekly " + \
+                             cat_.capitalize() + "</i>: %{y:,}<extra></extra>",
+                             visible='legendonly')  # formats the hoverlabels
+            traces.append(data_dict)
+    except BaseException:
         pass
-    
 
 
 # create traces for the lines you want to plot (as for the other lines)
-    
-three_days = go.Scatter(x=np.array(range(0,90)),
-                        y=index_*(2**(1/3))**np.array(range(0,90)), 
-                        mode = 'lines', 
-                        line = dict(color='#999999', shape ='hv', dash='dot'),
-                        line_shape = 'linear', 
-                        name = 'Doubling every three days',
-                        hoverinfo='skip')
 
-seven_days = go.Scatter(x=np.array(range(0,90)),
-                        y=index_*(2**(1/7))**np.array(range(0,90)),
-                        mode = 'lines',
-                        line = dict(color='#999999',shape ='hv',dash='dot'),
-                        line_shape = 'linear', 
-                        name = 'Doubling every week',
-                        hoverinfo='skip')
+three_days = dict(type='scatter',
+                  x=np.array(range(0, 90)),
+                  y=index_ * (2**(1 / 3))**np.array(range(0, 90)),
+                  mode='lines',
+                  line=dict(color='#999999', shape='hv', dash='dot'),
+                  line_shape='linear',
+                  name='Doubling every three days',
+                  hoverinfo='skip')
+
+seven_days = dict(type='scatter',
+                  x=np.array(range(0, 90)),
+                  y=index_ * (2**(1 / 7))**np.array(range(0, 90)),
+                  mode='lines',
+                  line=dict(color='#999999', shape='hv', dash='dot'),
+                  line_shape='linear',
+                  name='Doubling every week',
+                  hoverinfo='skip')
 
 # add the lines to the list of traces to plot
-plots.append(three_days)
-plots.append(seven_days)
+traces.append(three_days)
+traces.append(seven_days)
+
+figure['data'] = traces
 
 # add annotations to the lines so people can see what they are
 
 annotations.append(dict(xref='paper',
-                        x=0.5, 
+                        x=0.5,
                         y=5.7,
                         text='Doubling every <BR> 3 days',
-                        font=dict(family='Arial',size=10),showarrow=False))
+                        font=dict(family='Arial', size=10), showarrow=False))
 annotations.append(dict(xref='paper',
                         x=0.93,
                         y=4.8,
                         text='Doubling every <BR> week',
-                        font=dict(family='Arial',size=10),showarrow=False))
-    
+                        font=dict(family='Arial', size=10), showarrow=False))
+
 
 # add a footnote
 
-#footnote = dict(xref='paper', xanchor='right', x=1, yanchor='top',y=np.log10(index_),text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',font=dict(family='Arial',size=10),showarrow=False)
-#annotations.append(footnote)
-  
-    
-fig3 = go.Figure(plots)
-fig3.update_layout(yaxis_type="log",
+# footnote = dict(xref='paper',
+#                 xanchor='right',
+#                 x=1,
+#                 yanchor='top',
+#                 y=np.log10(index_),
+#                 text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',
+#                 font=dict(family='Arial',size=10),showarrow=False)
+# annotations.append(footnote)
 
-                  title=plot_title,
-                  annotations = annotations,
-                 titlefont ={
-                            "size": title_font_size
-                  })
 
-fig3.layout.xaxis.update(title={'text':x_title,'font':{'size':x_title_font_size}},
-                        range=[0, 90], 
-                        )
-fig3.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}},
-                        range=[np.log10(index_), 6])
+figure['layout'] = dict(
+    yaxis_type="log", title=plot_title, annotations=annotations, titlefont=dict(
+        size=title_font_size, family=title_font_family), xaxis=dict(
+            title=dict(
+                text=x_title, font=dict(
+                    size=x_title_font_size)), range=[
+                        0, 90]), yaxis=dict(
+                            title=dict(
+                                text=x_title, font=dict(
+                                    size=x_title_font_size)), range=[
+                                        np.log10(index_), 6]))
 
+
+fig3 = go.Figure(figure)
+# bubble scatter chart
 
 # bubble scatter chart
+
+countries = data['countriesAndTerritories'].unique()
 
 # define titles
 x_title = 'Cases per 100,000 population'
 y_title = 'Deaths per 100,000 population'
-plot_title = '<b>Total cases of Covid-19 v Total deaths : per 100,000 population</b><BR>'+latest_data_string
+plot_title = '<b>Total cases of Covid-19 v Total deaths : per 100,000 population</b><BR>' + latest_data_string
 
 # what to show to start
-default_list = ['United_States_of_America','France','Netherlands','United_Kingdom','Italy','Switzerland','Germany','South_Korea', 'Spain']
+default_list = [
+    'United_States_of_America',
+    'France',
+    'Netherlands',
+    'United_Kingdom',
+    'Italy',
+    'Switzerland',
+    'Germany',
+    'South_Korea',
+    'Spain']
 
 # size reference for bubbles
-sizeref = 2. * max(data['popData2018']) / (150** 2)
+sizeref = 2. * max(data['popData2018']) / (150 ** 2)
 
 
-day = days[-1]
-plots = []
+figure = {
+    'data': [],
+    'layout': {},
+    'config': {'scrollzoom': True}
+}
 
+traces = []
 
 for i in countries:
     try:
-        if i in default_list:
-            chart_data = data.loc[(data['date'] == day)&(data['countriesAndTerritories']==i)]
-            traces[i] = go.Scatter(x=list(chart_data['cases_per_cap']*100000),
-                                    y = list(chart_data['deaths_per_cap']*100000),
-                                    text = [' '.join(x.split('_')) for x in chart_data['countriesAndTerritories']],
-                                   #textposition='auto',
-                                    marker =dict(color = chart_data['colour'],size=chart_data['popData2018'],sizeref=sizeref,sizemode='area',line=dict(color='#ffffff')),
-                                    mode='markers',
-                                   customdata=chart_data['popData2018']/1000000,
-                                   hovertemplate = "<br><b>%{text}</b><br>Cases per 100k people: %{x:0.1f}<BR> Deaths per 100k people: %{y:0.1f}<BR> Population (2018) %{customdata:,.0f}M<extra></extra>",
-                                      name = ' '.join(i.split('_')))
-            plots.append(traces[i])
+        chart_data = data.loc[(data['dateRep'] == max(data['dateRep'])) & (
+            data['countriesAndTerritories'] == i)]
+        if np.isnan(chart_data['popData2018'].tolist()[0]):
+            pass
+        elif i in default_list:
+            data_dict = dict(
+                type='scatter',
+                x=list(
+                    chart_data['cases_per_cap'] *
+                    100000),
+                y=list(
+                    chart_data['deaths_per_cap'] *
+                    100000),
+                text=[
+                    ' '.join(
+                        x.split('_')) for x in chart_data['countriesAndTerritories']],
+                marker=dict(
+                    color=chart_data['colour'],
+                    size=chart_data['popData2018'],
+                    sizeref=sizeref,
+                    sizemode='area',
+                    line=dict(
+                        color='#ffffff')),
+                mode='markers',
+                customdata=chart_data['popData2018'] /
+                1000000,
+                hovertemplate="<br><b>%{text}</b><br>Cases per 100k people: %{x:0.1f}<BR> Deaths per 100k people: %{y:0.1f}<BR> Population (2018) %{customdata:,.0f}M<extra></extra>",
+                name=' '.join(
+                    i.split('_')))
+            traces.append(data_dict)
         else:
-            chart_data = data.loc[(data['date'] == day)&(data['countriesAndTerritories']==i)]
-            traces[i] = go.Scatter(x=list(chart_data['cases_per_cap']*100000),
-                                    y = list(chart_data['deaths_per_cap']*100000),
-                                    text = [' '.join(x.split('_')) for x in chart_data['countriesAndTerritories']],
-                                   #textposition='auto',
-                                    marker =dict(color = chart_data['colour'],size=chart_data['popData2018'],sizeref=sizeref,sizemode='area'),
-                                    mode='markers',
-                                   visible = 'legendonly',
-                                   customdata=chart_data['popData2018']/1000000,
-                                   hovertemplate = "<br><b>%{text}</b><br>Cases per 100k people: %{x:0.1f}<BR> Deaths from Covid-19 per 100k people: %{y:0.1f}<BR> Population (2018) %{customdata:,.0f}M<extra></extra>",
-                                      name = ' '.join(i.split('_')))
-            plots.append(traces[i])
-    except:
+            data_dict = dict(
+                type='scatter',
+                x=list(
+                    chart_data['cases_per_cap'] *
+                    100000),
+                y=list(
+                    chart_data['deaths_per_cap'] *
+                    100000),
+                text=[
+                    ' '.join(
+                        x.split('_')) for x in chart_data['countriesAndTerritories']],
+                marker=dict(
+                    color=chart_data['colour'],
+                    size=chart_data['popData2018'],
+                    sizeref=sizeref,
+                    sizemode='area',
+                    line=dict(
+                        color='#ffffff')),
+                mode='markers',
+                customdata=chart_data['popData2018'] /
+                1000000,
+                hovertemplate="<br><b>%{text}</b><br>Cases per 100k people: %{x:0.1f}<BR> Deaths per 100k people: %{y:0.1f}<BR> Population (2018) %{customdata:,.0f}M<extra></extra>",
+                name=' '.join(
+                    i.split('_')),
+                visible='legendonly')
+            traces.append(data_dict)
+
+    except BaseException:
         pass
 
-fig4 = go.Figure(plots)
-fig4.update_layout(
+figure['data'] = traces
+figure['layout'] = dict(
+    title=plot_title, titlefont=dict(
+        size=title_font_size, family=title_font_family), xaxis=dict(
+            title=dict(
+                text=x_title, font=dict(
+                    size=x_title_font_size)), range=[
+                        0, 400], ), yaxis=dict(
+                            title=dict(
+                                text=y_title, font=dict(
+                                    size=y_title_font_size)), range=[
+                                        0, 40]))
 
-                  title=plot_title,
-                #plot_bgcolor = '#eeeeee',
-                 # annotations = ,
-                 titlefont ={
-                            "size": title_font_size
-                  })
 
-fig4.layout.xaxis.update(title={'text':x_title,'font':{'size':x_title_font_size}},
-                        range=[0, 400], 
-                        )
-fig4.layout.yaxis.update(title={'text':y_title,'font':{'size':y_title_font_size}}, range=[0,40]
-                        )  
-##### headline chart
+fig4 = go.Figure(figure)
+
+# headline chart
+
+figure = {
+    'data': [],
+    'layout': {},
+    'config': {'scrollzoom': True}
+}
 
 traces = []
-names = ['Total Cases', 'Total Deaths', 'Latest Daily Cases', 'Latest Daily Deaths']
+names = [
+    'Total Cases',
+    'Total Deaths',
+    'Latest Daily Cases',
+    'Latest Daily Deaths']
 
 
 for country in data['countriesAndTerritories'].unique():
-    colour = data[data['countriesAndTerritories'] == country]['colour'].tolist()[0]
-    chart_data = data[(data['dateRep']==data['dateRep'].max()) & (data['countriesAndTerritories'] == country)][['total_cases','total_deaths','cases','deaths']].T
+    colour = data[data['countriesAndTerritories'] == country]['colour'].tolist()[
+        0]
+    chart_data = data[(data['dateRep'] == data['dateRep'].max()) & (
+        data['countriesAndTerritories'] == country)][['total_cases', 'total_deaths', 'cases', 'deaths']].T
     try:
         if country == 'World':
-            trace = go.Bar(y = names,
-                    x = chart_data.iloc[:,0], 
-                    name = ' '.join(country.split('_')),
-                   text = ['{:,}'.format(x) for x in chart_data.iloc[:,0]],
-                   textposition = ['inside','outside','outside','outside'],
-                     marker = dict(color = 'firebrick'),
-                   orientation='h',
-                         )
-            traces.append(trace)
+            data_dict = dict(type='bar',
+                             y=names,
+                             x=chart_data.iloc[:, 0],
+                             name=' '.join(country.split('_')),
+                             text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
+                             textposition=['inside', 'outside', 'outside', 'outside'],
+                             marker=dict(color='firebrick'),
+                             orientation='h',
+                             )
+            traces.append(data_dict)
         else:
-            trace = go.Bar(y = names,
-                    x = chart_data.iloc[:,0], 
-                    name = ' '.join(country.split('_')),
-                   text = ['{:,}'.format(x) for x in chart_data.iloc[:,0]],
-                   textposition = 'outside',
-                    marker = dict(color = colour),
-                   orientation='h',
-                         visible = 'legendonly')
-            traces.append(trace)
-    except:
+            data_dict = dict(type='bar',
+                             y=names,
+                             x=chart_data.iloc[:, 0],
+                             name=' '.join(country.split('_')),
+                             text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
+                             textposition=['inside', 'outside', 'outside', 'outside'],
+                             marker=dict(color=colour),
+                             orientation='h',
+                             visible='legendonly'
+                             )
+            traces.append(data_dict)
+    except BaseException:
         pass
 
-headline = go.Figure(traces)
-headline.update_layout( yaxis=dict(autorange="reversed"),
-                 title = '<b>Headline Figures: Cases and Deaths</b> <BR>' + latest_data_string,
-                 titlefont ={
-                            "size": title_font_size
-                  })
+figure['data'] = traces
+figure['layout'] = dict(
+    yaxis=dict(
+        autorange="reversed"),
+    title='<b>Headline Figures: Cases and Deaths</b> <BR>' +
+    latest_data_string,
+    titlefont=dict(
+        size=title_font_size,
+        family=title_font_family))
 
-
+headline = go.Figure(figure)
