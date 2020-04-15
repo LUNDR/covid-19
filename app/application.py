@@ -174,9 +174,9 @@ app.layout = html.Div(
                                                             'position' : 'center',
                                                             'float': 'center'})
                 ], href = 'https://github.com/LUNDR'),
-                html.Div('    '),
+                html.Div('    ', style = {'display': 'inline-block'}),
                 html.A([
-                    html.Img(src = 'assets/plotly-logo.png',
+                    html.Img(src = 'assets/plotly-logo.jpg',
                                                             style = {
                                                             'height' : 50,
                                                             'width' : 'auto',
