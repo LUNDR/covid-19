@@ -154,7 +154,7 @@ colours = {"Asia": "royalblue",
 
 #
 title_font_family = 'Arial'
-title_font_size = 14
+title_font_size = 1
 x_title_font_size = 11
 y_title_font_size = 11
 
@@ -173,7 +173,7 @@ days = [pd.to_datetime(str(x)).strftime('%d %b') for x in days]
 latest_data = data['dateRep'].max()
 latest_data_string = latest_data.strftime("%d %b %Y")
 
-#######################
+###################################################################
 
 # Animated Map
 
@@ -279,8 +279,7 @@ figure['layout'] = dict(
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
-    title_text='<b> Covid-19 cases </b> <BR> As reported at ' +
-    latest_data_string,
+    title_text='<b> Covid-19 cases </b> <BR>,
     showlegend=True,
     geo=dict(
         scope='world',
@@ -417,7 +416,7 @@ sliders = [dict(
 )]
 
 figure['layout'] = dict(
-    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b>",
+    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b> <BR>",
     font=dict(
         size=title_font_size,
         family=title_font_family),
@@ -446,6 +445,8 @@ footnote = dict(
 figure['layout']['annotations'] = [footnote]
 
 fig1 = go.Figure(figure)
+
+#################################################################################################
 
 # deaths log chart
 
@@ -916,6 +917,7 @@ for country in data['countriesAndTerritories'].unique():
                              text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color='firebrick'),
+                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>"
                              orientation='h',
                              )
             traces.append(data_dict)
@@ -928,7 +930,8 @@ for country in data['countriesAndTerritories'].unique():
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color=colour),
                              orientation='h',
-                             visible='legendonly'
+                             visible='legendonly',
+                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>"
                              )
             traces.append(data_dict)
     except BaseException:
