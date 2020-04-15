@@ -77,7 +77,7 @@ app.layout = html.Div(
                 'display': 'inline-block',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center';}
+                'text-align':'center'}
             ),
 
 
