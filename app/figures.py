@@ -423,7 +423,7 @@ figure['layout'] = dict(
         xaxis=dict(
             title=dict(
                 text="%", font=dict(
-                    size=x_title_font_size)),
+                    size=x_title_font_size))),
     sliders=sliders)
 
 
