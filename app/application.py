@@ -166,7 +166,7 @@ app.layout = html.Div(
             html.Div(['Dashboard created by Rachel Lund (2020) with Python and Plotly',html.A('Code available on Github', href ='https://github.com/LUNDR')],
                     style={
                         'margin-top': '0.5%',
-                        'font-size': '0.5em',
+                        'font-size': '1em',
                         'margin-left': '1.5%',
                         'margin-bottom': '0%'}
                     ),

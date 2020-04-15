@@ -288,7 +288,7 @@ figure['layout'] = dict(
         countrywidth=0.5,
         countrycolor='#ffffff',
     ),
-    margin={"r":0,"t":100,"l":0,"b":0},
+    margin={"r":0,"t":500,"l":10,"b":0},
     updatemenus=[
         dict(
             type='buttons',
