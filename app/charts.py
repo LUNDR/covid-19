@@ -416,10 +416,13 @@ sliders = [dict(
 )]
 
 figure['layout'] = dict(
-    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases (%)</b> <BR>",
-    font=dict(
-        size=title_font_size,
-        family=title_font_family),
+    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>",
+     titlefont=dict(
+        size=title_font_size, family=title_font_family),
+        xaxis=dict(
+            title=dict(
+                text="%%, font=dict(
+                    size=x_title_font_size)),
     sliders=sliders)
 
 
@@ -903,7 +906,9 @@ names = [
     'Latest Daily Deaths']
 
 
+
 for country in data['countriesAndTerritories'].unique():
+    customdata = [country,country,country,country]
     colour = data[data['countriesAndTerritories'] == country]['colour'].tolist()[
         0]
     chart_data = data[(data['dateRep'] == data['dateRep'].max()) & (
@@ -913,9 +918,9 @@ for country in data['countriesAndTerritories'].unique():
             data_dict = dict(type='bar',
                              y=names,
                              x=chart_data.iloc[:, 0],
-                             customdata = [country,country,country,country],
+                             customdata = customdata,
                              name=' '.join(country.split('_')),
-                             text=['{}<BR>{:,}'.format(customdata, x) for x in chart_data.iloc[:, 0]],
+                             text=['<b>{}</b>: {:,}'.format(z, x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color='firebrick'),
                              hovertemplate = "<br><b>%{customdata}</b><br>%{y}: %{x:,}<extra></extra>",
@@ -929,8 +934,8 @@ for country in data['countriesAndTerritories'].unique():
                              x=chart_data.iloc[:, 0],
                              customdata = [country,country,country,country],
                              name=' '.join(country.split('_')),
-                             text=['{}<BR>{:,}'.format(customdata, x) for x in chart_data.iloc[:, 0]],
-                             textposition=['inside', 'outside', 'outside', 'outside'],
+                             text=['<b>{}</b>: {:,}'.format(' '.join(z.split('_')), x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
+                             textposition=['outside', 'outside', 'outside', 'outside'],
                              marker=dict(color=colour),
                              orientation='h',
                              visible='legendonly',
@@ -944,7 +949,7 @@ figure['data'] = traces
 figure['layout'] = dict(
     yaxis=dict(
         autorange="reversed"),
-    title='<b>Headline Figures: Cases and Deaths</b> <BR>' +
+    title='<b>Headline Figures: COVID-19 Cases and Deaths</b> <BR>' +
     latest_data_string,
     titlefont=dict(
         size=title_font_size,
