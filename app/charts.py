@@ -445,6 +445,7 @@ footnote = dict(
 
 figure['layout']['annotations'] = [footnote]
 
+fig1 = go.Figure(figure)
 
 # deaths log chart
 
