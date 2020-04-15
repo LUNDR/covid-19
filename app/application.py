@@ -165,16 +165,7 @@ app.layout = html.Div(
         ),
 
         html.Div([
-            html.Div(['Plotly Dash Application created by Rachel Lund (2020)        ',
-                html.A([
-                    html.Img(src = 'assets/github-logo.png',
-                                                            style = {
-                                                            'height' : 50,
-                                                            'width' : 'auto',
-                                                            'position' : 'center',
-                                                            'float': 'center'})
-                ], href = 'https://github.com/LUNDR'),
-                html.Div('    ', style = {'display': 'inline-block'}),
+            html.Div([
                 html.A([
                     html.Img(src = 'assets/plotly-logo.jpg',
                                                             style = {
@@ -182,7 +173,19 @@ app.layout = html.Div(
                                                             'width' : 'auto',
                                                             'position' : 'center',
                                                             'float': 'center'})
-                ], href = 'https://plotly.com/'),
+                ], href = 'https://plotly.com/')
+            'Plotly Dash Application created by Rachel Lund (2020)        ',
+                html.A([
+                    html.Img(src = 'assets/github-logo.png',
+                                                            style = {
+                                                            'height' : 50,
+                                                            'width' : 'auto',
+                                                            'position' : 'center',
+                                                            'float': 'center',
+                                                            'textAlign': 'center'})
+                ], href = 'https://github.com/LUNDR'),
+        
+,
 
                 
                 ],
