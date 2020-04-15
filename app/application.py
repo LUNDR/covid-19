@@ -176,7 +176,7 @@ app.layout = html.Div(
                 
                 html.Div('   A Plotly Dash Application created by Rachel Lund (2020)',
                 style = {'display': 'inline-block',
-                'margin-left': '1%'}),
+                'margin-left': '1.5%'}),
                 
                 html.Div(
                     html.A([
@@ -187,7 +187,7 @@ app.layout = html.Div(
                                                                 'position' : 'center',
                                                                 'align' : 'middle',
                                                                 'float': 'center',
-                                                                'margin-left': '1%'
+                                                                'margin-left': '20%'
                                                                 })
                     ], href = 'https://github.com/LUNDR'),
                     style = {'display': 'inline-block',
@@ -198,7 +198,7 @@ app.layout = html.Div(
                         'height' : '3%',
                         'margin-top': '0%',
                         'font-size': '1em',
-                        'margin-left': '1.5%',
+                        
                         'margin-bottom': '0%',
                         'padding-top' : '2%',
                         'padding-bottom': '2%',
