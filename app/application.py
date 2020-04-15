@@ -75,7 +75,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                'margin-left': '7%',
+                'margin-left': '1.5%',
                 'margin-top': '1.5%'}
             ),
 
@@ -91,7 +91,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                'margin-left': '7%',
+                'margin-left': '1.5%',
                 'margin-top': '1.5%'}),
 
 
@@ -109,7 +109,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                'margin-left': '7%',
+                'margin-left': '1.5%',
                 'margin-top': '1.5%'}
             ),
 
@@ -122,7 +122,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                    'margin-left': '7%',
+                    'margin-left': '1.5%',
                     'margin-top': '1.5%'}
             ),
 
@@ -141,7 +141,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                'margin-left': '7%',
+                'margin-left': '1.5%',
                     'margin-top': '1.5%'}
             ),
 
@@ -155,7 +155,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                    'margin-left': '7%',
+                    'margin-left': '1.5%',
                     'margin-top': '1.5%',
                     'margin-bottom': '1.5%'}
             ),
