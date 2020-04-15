@@ -188,7 +188,7 @@ app.layout = html.Div(
                                                                 'position' : 'center',
                                                                 'align' : 'middle',
                                                                 'float': 'center',
-                                                                'margin-left': '50%'
+                                                                'margin-left': '500%'
                                                                 })
                     ], href = 'https://github.com/LUNDR'),
                     style = {'display': 'inline-block',
