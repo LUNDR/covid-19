@@ -72,7 +72,7 @@ app.layout = html.Div(
 
                 )
             ],
-                className="five columns",
+                className="six columns",
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',
@@ -88,7 +88,7 @@ app.layout = html.Div(
 
                 )
             ],
-                className="five columns",
+                className="six columns",
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',
