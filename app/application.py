@@ -188,12 +188,9 @@ app.layout = html.Div(
                                                                 })
                     ], href = 'https://github.com/LUNDR'),
                     style = {'display': 'inline-block',
-                                'textAlign': 'center'}
-        
-,
-
-                
-                ],
+                                'textAlign': 'center'})
+            
+                ], className="footer",
                     style={
                         'height' : '3%',
                         'margin-top': '0%',
@@ -201,15 +198,11 @@ app.layout = html.Div(
                         'margin-left': '1.5%',
                         'margin-bottom': '0%',
                         'padding-top' : '2%',
-                        'padding-bottom': '2%'}
+                        'padding-bottom': '2%',
+                        'background-color': 'black'}
                     ),
     
-
-
-        ],
-            className="footer",
-            style={'background-color': 'black'}
-        ),
+            
     ],
         style={'background-color': '#f2f3f4'}
     )
