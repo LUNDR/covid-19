@@ -31,7 +31,7 @@
   float: left;
   box-sizing: border-box; }
   
- @media only screen and (max-width: 768px) {
+ @media only screen and (max-width: 1727px) {
   /* For mobile phones: */
   [class*="column"] {
     width: 100%;
@@ -39,14 +39,14 @@
 }
 
 /* For devices larger than 400px */
-@media (min-width: 400px) {
+/*@media (min-width: 400px) {
   .container {
     width: 85%;
     padding: 0; }
-}
+}*/
 
 /* For devices larger than 550px */
-@media (min-width: 550px) {
+@media (min-width: 1727px) {
   .container {
     width: 80%; }
   .column,
