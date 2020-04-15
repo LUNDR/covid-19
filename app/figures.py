@@ -181,7 +181,7 @@ figure = {
     'data': [],
     'layout': {},
     'frames': [],
-    'config': {'scrollzoom': True}
+    'config': {'scrollzoom': False}
 }
 
 
@@ -316,7 +316,7 @@ figure = {
     'data': [],
     'layout': {},
     'frames': [],
-    'config': {'scrollzoom': True}
+    'config': {'scrollzoom': False}
 }
 
 # choose the first date in the 'days' list as your data
@@ -419,10 +419,10 @@ figure['layout'] = dict(
     title="<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>",
      titlefont=dict(
         size=title_font_size, family=title_font_family),
-        xaxis=dict(
+        yaxis=dict(
             title=dict(
                 text="%", font=dict(
-                    size=x_title_font_size))),
+                    size=y_title_font_size))),
     sliders=sliders)
 
 
@@ -500,7 +500,7 @@ y_title = cat_.capitalize() + " (log scale)"
 figure = {
     'data': [],
     'layout': {},
-    'config': {'scrollzoom': True}
+    'config': {'scrollzoom': False}
 }
 
 dfs = dict()
@@ -661,7 +661,7 @@ y_title = cat_.capitalize() + " (log scale)"
 figure = {
     'data': [],
     'layout': {},
-    'config': {'scrollzoom': True}
+    'config': {'scrollzoom': False}
 }
 
 dfs = dict()
@@ -806,7 +806,7 @@ sizeref = 2. * max(data['popData2018']) / (150 ** 2)
 figure = {
     'data': [],
     'layout': {},
-    'config': {'scrollzoom': True}
+    'config': {'scrollzoom': False}
 }
 
 traces = []
@@ -895,7 +895,7 @@ fig4 = go.Figure(figure)
 figure = {
     'data': [],
     'layout': {},
-    'config': {'scrollzoom': True}
+    'config': {'scrollzoom': False}
 }
 
 traces = []
