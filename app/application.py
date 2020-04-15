@@ -175,7 +175,7 @@ app.layout = html.Div(
 
         ],
             className="footer",
-            style={'background-color': '#00000'}
+            style={'background-color': 'black'}
         ),
     ],
         style={'background-color': '#f2f3f4'}
