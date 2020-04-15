@@ -166,14 +166,14 @@ app.layout = html.Div(
 
         html.Div([
                 html.A([
-                    html.Img(src = 'assets/plotly-logo.jpg',
+                    html.Img(src = 'assets/github-logo.png',
                                                             style = {
                                                             'height' : 50,
                                                             'width' : 'auto',
                                                             'position' : 'center',
                                                             'float': 'center',
                                                             'margin-left' :'1.5%'})
-                ], href = 'https://plotly.com/'),
+                ], href = ' https://github.com/LUNDR'),
                 
                 html.Div('   A Plotly Dash Application created by Rachel Lund (2020)',
                 style = {'display': 'inline-block',
@@ -181,16 +181,16 @@ app.layout = html.Div(
                 
                 html.Div(
                     html.A([
-                        html.Img(src = 'assets/github-logo.png',
+                        html.Img(src = 'assets/plotly-logo.jpg ',
                                                                 style = {
                                                                 'height' : 50,
                                                                 'width' : 'auto',
                                                                 'position' : 'center',
                                                                 'align' : 'middle',
                                                                 'float': 'center',
-                                                                'margin-left': '500%'
+                                                                'margin-left': '900%'
                                                                 })
-                    ], href = 'https://github.com/LUNDR'),
+                    ], href = 'https://plotly.com/'),
                     style = {'display': 'inline-block',
                                 'textAlign': 'center'})
             
