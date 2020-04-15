@@ -154,7 +154,7 @@ colours = {"Asia": "royalblue",
 
 #
 title_font_family = 'Arial'
-title_font_size = 1
+title_font_size = 14
 x_title_font_size = 11
 y_title_font_size = 11
 
@@ -913,11 +913,12 @@ for country in data['countriesAndTerritories'].unique():
             data_dict = dict(type='bar',
                              y=names,
                              x=chart_data.iloc[:, 0],
+                             customdata = country,
                              name=' '.join(country.split('_')),
                              text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color='firebrick'),
-                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>",
+                             hovertemplate = "<br><b>%{customdata}</b><br>%{y}: %{x:,}<extra></extra>",
                              orientation='h',
                              )
             traces.append(data_dict)
@@ -925,13 +926,14 @@ for country in data['countriesAndTerritories'].unique():
             data_dict = dict(type='bar',
                              y=names,
                              x=chart_data.iloc[:, 0],
+                             customdata = country,
                              name=' '.join(country.split('_')),
                              text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color=colour),
                              orientation='h',
                              visible='legendonly',
-                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>",
+                             hovertemplate = "<br><b>%{customdata}</b><br>%{y}:%{x:,}<extra></extra>",
                              )
             traces.append(data_dict)
     except BaseException:
