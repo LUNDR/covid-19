@@ -288,6 +288,7 @@ figure['layout'] = dict(
         countrywidth=0.5,
         countrycolor='#ffffff',
     ),
+    margin={"r":0,"t":0,"l":0,"b":0},
     updatemenus=[
         dict(
             type='buttons',
@@ -421,7 +422,7 @@ figure['layout'] = dict(
         size=title_font_size, family=title_font_family),
         xaxis=dict(
             title=dict(
-                text="%%, font=dict(
+                text="%", font=dict(
                     size=x_title_font_size)),
     sliders=sliders)
 
