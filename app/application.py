@@ -33,7 +33,7 @@ app.layout = html.Div(
     html.Div([
         html.Div([
             html.Div([
-                html.H3(children='Covid-19 Data Dashboard',
+                html.H2(children='Covid-19 Data Dashboard',
                         style={
                             'text-align': 'left',
                             'display': 'inline-block',
