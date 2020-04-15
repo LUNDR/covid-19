@@ -166,7 +166,7 @@ app.layout = html.Div(
             html.Div(children='Dashboard created by Rachel Lund (2020) with Python and Plotly',
                     style={
                         'margin-top': '0.5%',
-                        'font-size':10
+                        'font-size':10,
                         'margin-left': '1.5%',
                         'margin-bottom': '0%'}
                     ),
