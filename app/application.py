@@ -72,11 +72,12 @@ app.layout = html.Div(
 
                 )
             ],
-                className="six columns",
+                className="five columns",
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',
-                'margin-top': '1.5%'}
+                'margin-top': '1.5%',
+                'text-align':'center';}
             ),
 
 
@@ -88,11 +89,12 @@ app.layout = html.Div(
 
                 )
             ],
-                className="six columns",
+                className="five columns",
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',
-                'margin-top': '1.5%'}),
+                'margin-top': '1.5%',
+                'text-align':'center'}),
 
 
         ], className='row',
