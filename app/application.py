@@ -170,7 +170,7 @@ app.layout = html.Div(
                         'margin-left': '1.5%',
                         'margin-bottom': '0%'}
                     ),
-            }),
+
 
         ],
             className="footer",
