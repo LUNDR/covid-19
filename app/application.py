@@ -173,11 +173,11 @@ app.layout = html.Div(
                         'padding-top' : '20%',
                         'padding-bottom': '20%'}
                     ),
-            html.Img([src = 'assets/github-logo.png'],
+            html.Img(src = 'assets/github-logo.png',
             style = {
             'height' : 50
             'width' : 'auto'
-            'float': 'center')
+            'float': 'center'})
 
 
         ],
