@@ -163,12 +163,14 @@ app.layout = html.Div(
         ),
 
         html.Div([
-            html.H6(children='Dashboard created with Python and Plotly',
+            html.Div(children='Dashboard created by Rachel Lund (2020) with Python and Plotly',
                     style={
                         'margin-top': '0.5%',
+                        'font-size':10
                         'margin-left': '1.5%',
                         'margin-bottom': '0%'}
                     ),
+            html.A('Code available on Github', href ='https://github.com/LUNDR'),
 
         ],
             className="footer",
