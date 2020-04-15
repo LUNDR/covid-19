@@ -163,8 +163,9 @@ app.layout = html.Div(
         ),
 
         html.Div([
-            html.Div(['Dashboard created by Rachel Lund (2020) with Python and Plotly',html.A('Code available on Github', href ='https://github.com/LUNDR')],
+            html.Div(['Dashboard created by Rachel Lund (2020) using Python and Plotly',html.A(' Code available on Github', href ='https://github.com/LUNDR')],
                     style={
+                        'height' : '3%'
                         'margin-top': '0.5%',
                         'font-size': '1em',
                         'margin-left': '1.5%',
@@ -174,7 +175,7 @@ app.layout = html.Div(
 
         ],
             className="footer",
-            style={'background-color': '#d3d3d3'}
+            style={'background-color': '#00000'}
         ),
     ],
         style={'background-color': '#f2f3f4'}
