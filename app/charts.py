@@ -917,7 +917,7 @@ for country in data['countriesAndTerritories'].unique():
                              text=['{:,}'.format(x) for x in chart_data.iloc[:, 0]],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color='firebrick'),
-                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>"
+                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>",
                              orientation='h',
                              )
             traces.append(data_dict)
@@ -931,7 +931,7 @@ for country in data['countriesAndTerritories'].unique():
                              marker=dict(color=colour),
                              orientation='h',
                              visible='legendonly',
-                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>"
+                             hovertemplate = "<br><b>%{country}</b><br>{x}: %{y:,}<extra></extra>",
                              )
             traces.append(data_dict)
     except BaseException:
