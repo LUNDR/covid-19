@@ -38,7 +38,8 @@ app.layout = html.Div(
                             'text-align': 'left',
                             'display': 'inline-block',
                             'margin-top': '0.5%',
-                            'margin-left': '1.5%'}
+                            'margin-left': '1.5%',
+                            'margin-right' : '30%'}
                         ),
 
 
@@ -164,7 +165,7 @@ app.layout = html.Div(
         ),
 
         html.Div([
-            html.Div(['Plotly Dash Application created by Rachel Lund (2020)',
+            html.Div(['Plotly Dash Application created by Rachel Lund (2020)        ',
                 html.A([
                     html.Img(src = 'assets/github-logo.png',
                                                             style = {
@@ -172,7 +173,19 @@ app.layout = html.Div(
                                                             'width' : 'auto',
                                                             'position' : 'center',
                                                             'float': 'center'})
-                ], href = 'https://github.com/LUNDR')],
+                ], href = 'https://github.com/LUNDR'),
+                html.Div('    '),
+                html.A([
+                    html.Img(src = 'assets/plotly-logo.png',
+                                                            style = {
+                                                            'height' : 50,
+                                                            'width' : 'auto',
+                                                            'position' : 'center',
+                                                            'float': 'center'})
+                ], href = 'https://plotly.com/'),
+
+                
+                ],
                     style={
                         'height' : '3%',
                         'margin-top': '0%',
