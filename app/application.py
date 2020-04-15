@@ -173,8 +173,8 @@ app.layout = html.Div(
                                                             'width' : 'auto',
                                                             'position' : 'center',
                                                             'float': 'center'})
-                ], href = 'https://plotly.com/')
-            'Plotly Dash Application created by Rachel Lund (2020)        ',
+                ], href = 'https://plotly.com/'),
+                'Plotly Dash Application created by Rachel Lund (2020)        ',
                 html.A([
                     html.Img(src = 'assets/github-logo.png',
                                                             style = {
