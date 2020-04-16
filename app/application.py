@@ -72,13 +72,13 @@ app.layout = html.Div(
 
                 )
             ],
-                className="five columns",
+                className="five columns ",
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center',
-                'float' : 'left'}
+                'text-align':'center'
+                }
             ),
 
 
@@ -95,11 +95,11 @@ app.layout = html.Div(
                 'display': 'inline-block',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center',
-                'float' : 'right'}),
+                'text-align':'center'
+                }),
 
 
-        ], className='row',
+        ], className='row justify-content-between',
             style={}
         ),
 
