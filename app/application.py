@@ -77,7 +77,8 @@ app.layout = html.Div(
                 'display': 'inline-block',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center'}
+                'text-align':'center',
+                'float' : 'left'}
             ),
 
 
@@ -94,7 +95,8 @@ app.layout = html.Div(
                 'display': 'inline-block',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center'}),
+                'text-align':'center',
+                'float' : 'right'}),
 
 
         ], className='row',
@@ -181,20 +183,7 @@ app.layout = html.Div(
                 style = {'display': 'inline-block',
                 'margin-left': '1.5%'}),
                 
-                html.Div(
-                    html.A([
-                        html.Img(src = 'assets/plotly-logo.jpg ',
-                                                                style = {
-                                                                'height' : 50,
-                                                                'width' : 'auto',
-                                                                'position' : 'center',
-                                                                'align' : 'middle',
-                                                                'float': 'center',
-                                                                'margin-left': '900%'
-                                                                })
-                    ], href = 'https://plotly.com/'),
-                    style = {'display': 'inline-block',
-                                'textAlign': 'center'})
+
             
                 ], className="footer",
                     style={
