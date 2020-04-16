@@ -93,7 +93,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                'margin-left': '1.5%',
+                'margin-right': '1.5%',
                 'margin-top': '1.5%',
                 'text-align':'center'
                 }),
@@ -126,11 +126,11 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                    'margin-left': '1.5%',
+                    'margin-right': '1.5%',
                     'margin-top': '1.5%'}
             ),
 
-        ], className='row',
+        ], className='row justify-content-between',
             style={}
         ),
 
@@ -164,7 +164,7 @@ app.layout = html.Div(
                     'margin-bottom': '1.5%'}
             ),
         ],
-            className='row',
+            className='row justify-content-between',
             style={}
         ),
 
