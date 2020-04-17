@@ -598,7 +598,7 @@ footnote = dict(xref='paper',
                  y=np.log10(index_),
                  text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',
                  font=dict(family='Arial',size=10),showarrow=False)
- annotations.append(footnote)
+annotations.append(footnote)
 
 
 figure['layout'] = dict(
