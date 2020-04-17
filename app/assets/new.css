@@ -31,7 +31,7 @@
   float: left;
   box-sizing: border-box; }
   
- @media only screen and (max-width: 1000px) {
+ @media only screen and (max-width: 1400px) {
   /* For mobile phones: */
   [class*="column"] {
     width: 100%;
@@ -46,7 +46,7 @@
 }*/
 
 /* For devices larger than 550px */
-@media (min-width: 1000px) {
+@media (min-width: 1400px) {
   .container {
     width: 80%; }
   .column,
