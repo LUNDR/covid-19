@@ -159,7 +159,7 @@ app.layout = html.Div(
                 className="five columns",
                 style={
                 'display': 'inline-block',
-                    'margin-left': '1.5%',
+                    'margin-right': '1.5%',
                     'margin-top': '1.5%',
                     'margin-bottom': '1.5%'}
             ),
