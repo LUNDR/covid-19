@@ -209,7 +209,7 @@ for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
         name='{}'.format(cont),
         text=[
             '{}<BR>Total Cases: {}'.format(
-                ' '.join(df_sub['countriesAndTerritories'][x].split('_'),
+                ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
                 df_sub['total_cases'][x]) for x in range(
                     len(df_sub))])
     figure['data'].append(data_dict)
@@ -238,7 +238,7 @@ for day in days:
             name='{}'.format(cont),
             text=[
                 '{}<BR>Total Cases: {}'.format(
-                    ' '.join(df_sub['countriesAndTerritories'][x].split('_'),
+                    ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
                     df_sub['total_cases'][x]) for x in range(
                     len(df_sub))])
         frame['data'].append(data_dict)
