@@ -1,14 +1,14 @@
 # Visualizations of Corona Virus Data with Python and Plotly 
 
-Tutorial to create and deploy visualizations of data on Covid-19from https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide
 
-Examples can be seen here:
+This repo contains:
 
-https://plotly.com/~RLUND/46/#plot
+* An'app' folder with the code with  the jupyter notebooks used as part of a webinar given on plotting the COVID-19 data with plotly with python given at the invitation of Reispar technologies.
 
-https://plotly.com/~RLUND/43/#plot
+The data used in this repo can be found on the [European Cente for Disease Contol and Prevention website](https://www.ecdc.europa.eu/en/publications-data/download-todays-data-geographic-distribution-covid-19-cases-worldwide)
 
 
+### Setup
 This project was created with Python 3.7.7 & miniconda version 4.8.1 using Windows 10.
 
 To install miniconda: https://docs.conda.io/en/latest/miniconda.html. 
@@ -45,7 +45,6 @@ To install nodejs (if you do not already hav this installed)
 
 
 To run plotly in a jupyter workbook you will need to do the following described here https://plotly.com/python/getting-started/#jupyterlab-support-python-35:
-
 
 
 
