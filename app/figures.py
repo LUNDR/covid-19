@@ -237,7 +237,7 @@ for day in days:
                 sizemode='area'),
             name='{}'.format(cont),
             text=[
-                '{}<BR>Total Cases: {}'.format(
+                '{}<BR>Total Cases: {:,}'.format(
                     ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
                     df_sub['total_cases'][x]) for x in range(
                     len(df_sub))])
@@ -591,14 +591,14 @@ annotations.append(dict(xref='paper',
 
 # add a footnote
 
-footnote = dict(xref='paper',
-                 xanchor='right',
-                 x=1,
-                 yanchor='top',
-                 y=np.log10(index_),
-                 text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',
-                 font=dict(family='Arial',size=10),showarrow=False)
-annotations.append(footnote)
+#footnote = dict(xref='paper',
+#                 xanchor='right',
+#                 x=1,
+#                yanchor='top',
+#                y=np.log10(index_),
+#                text='<BR> <BR> <BR> <BR> <BR>Sources: Chart by Rachel Lund (2020) https://github.com/LUNDR/covid-19; data from https://www.ecdc.europa.eu',
+#               font=dict(family='Arial',size=10),showarrow=False)
+#annotations.append(footnote)
 
 
 figure['layout'] = dict(

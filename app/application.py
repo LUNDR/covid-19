@@ -68,7 +68,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=headline,
-                    responsive='auto',
+                    responsive=False,
 
                 )
             ],
@@ -86,7 +86,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=map1,
-                    responsive='auto',
+                    responsive=False,
 
                 )
             ],
@@ -94,12 +94,13 @@ app.layout = html.Div(
                 style={
                 'display': 'inline-block',
                 'margin-right': '1.5%',
+                'margin-left': '1.5%',
                 'margin-top': '1.5%',
                 'text-align':'center'
                 }),
 
 
-        ], className='row justify-content-between',
+        ], className='row justify-content-center',
             style={}
         ),
 
@@ -107,7 +108,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig2,
-                    responsive='auto',
+                    responsive=False,
                 )
             ],
                 className="five columns",
@@ -120,17 +121,18 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig3,
-                    responsive='auto',
+                    responsive=False,
                 )
             ],
                 className="five columns",
                 style={
                 'display': 'inline-block',
                     'margin-right': '1.5%',
+                    'margin-left': '1.5%',
                     'margin-top': '1.5%'}
             ),
 
-        ], className='row justify-content-between',
+        ], className='row justify-content-center',
             style={}
         ),
 
@@ -138,7 +140,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig4,
-                    responsive='auto',
+                    responsive=False,
 
                 )
             ],
@@ -152,7 +154,7 @@ app.layout = html.Div(
             html.Div([
                 dcc.Graph(
                     figure=fig1,
-                    responsive='auto',
+                    responsive=False,
 
                 )
             ],
@@ -160,11 +162,12 @@ app.layout = html.Div(
                 style={
                 'display': 'inline-block',
                     'margin-right': '1.5%',
+                    'margin-left': '1.5%',
                     'margin-top': '1.5%',
                     'margin-bottom': '1.5%'}
             ),
         ],
-            className='row justify-content-between',
+            className='row justify-content-center',
             style={}
         ),
 
