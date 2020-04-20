@@ -59,7 +59,7 @@ data = pd.read_csv(
     usecols=list(
         range(
             0,
-            10)))
+            11)))
 
 continents = pd.read_csv('assets/continents.csv')
 
