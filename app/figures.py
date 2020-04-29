@@ -471,7 +471,7 @@ default_list = [
     'United_Kingdom',
     'Italy',
     'Switzerland',
-    'China']
+    'Spain']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -633,7 +633,7 @@ default_list = [
     'United_Kingdom',
     'Italy',
     'Switzerland',
-    'China']
+    'Spain']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -881,11 +881,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 500], ), yaxis=dict(
+                        0, 600], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
-                                        0, 50]))
+                                        0, 60]))
 
 
 fig4 = go.Figure(figure)
