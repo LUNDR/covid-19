@@ -20,7 +20,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 
 
-from figures import fig1, fig2, fig3, fig4, headline, map1
+from figures import fig1, fig2, fig3, fig4, headline, map1, fig5
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[
@@ -85,7 +85,7 @@ app.layout = html.Div(
 
             html.Div([
                 dcc.Graph(
-                    figure=map1,
+                    figure=fig5,
                     responsive=False,
 
                 )
@@ -170,6 +170,28 @@ app.layout = html.Div(
             className='row justify-content-center',
             style={}
         ),
+        
+        html.Div([
+            html.Div([
+                dcc.Graph(
+                    figure=map1,
+                    responsive=False,
+
+                )
+            ],
+                className="twelve columns",
+                style={
+                'display': 'inline-block',
+                'margin-left': '1.5%',
+                    'margin-top': '1.5%'}
+            ),
+
+        ],
+            className='row justify-content-center',
+            style={}
+        ),  
+        
+        
 
         html.Div([
                 html.A([

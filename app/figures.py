@@ -201,7 +201,7 @@ for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
         locationmode='ISO-3',
         locations=df_sub['countryterritoryCode'].tolist(),
         marker=dict(
-            size=df_sub['total_cases'] / 200,
+            size=df_sub['total_cases'] / 300,
             color=colour,
             line_color='#ffffff',
             line_width=0.5,
@@ -471,7 +471,7 @@ default_list = [
     'United_Kingdom',
     'Italy',
     'Switzerland',
-    'Spain']
+    'France']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -633,7 +633,7 @@ default_list = [
     'United_Kingdom',
     'Italy',
     'Switzerland',
-    'Spain']
+    'France']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -956,3 +956,110 @@ figure['layout'] = dict(
         family=title_font_family))
 
 headline = go.Figure(figure)
+
+###### excess deaths
+
+url = "https://github.com/TheEconomist/covid-19-excess-deaths-tracker/tree/master/output-data/excess-deaths"
+res = requests.get(url)      
+soup = bs4.BeautifulSoup(res.content, features="lxml")
+links = [] 
+for div in soup.find_all(name='a', attrs={'class':'js-navigation-open'}):
+    u = 'https://github.com'+div['href']
+    if '.csv' in u:
+        u2 = "https://raw.githubusercontent.com/TheEconomist/covid-19-excess-deaths-tracker/master/output-data/excess-deaths/"+u.split('/')[-1]
+        links.append(u2)
+    else:
+        pass
+
+def end_date_from_week(n,country):
+    return datetime.strptime(df[(df.country==country) & (df.week==n)]['end_date'].iloc[0],'%Y-%m-%d')
+        
+    
+df = pd.DataFrame()
+for l in links:
+    temp = pd.read_csv(l)
+    df = pd.concat([df,temp],axis = 0)
+df.loc[df.country=='Turkey','country'] = 'Istanbul (Turkey)'
+
+df_agg = df[df.country.isin(['Indonesia','Russia','Istanbul (Turkey)','United States'])].groupby(['country','year','week'], as_index = False).agg({'expected_deaths':'sum','excess_deaths':'sum','covid_deaths':'sum','total_deaths':'sum','non_covid_deaths':'sum','population':['sum','count']})
+
+maxes = dict(zip(df_agg.groupby('country').max()[('population','count')].index,df_agg.groupby('country').max()[('population','count')].values))
+
+df_agg['flag'] = 1
+temp=[]
+for i in range(len(df_agg)):
+    temp.append((df_agg[('population','count')][i] == maxes[df_agg.country[i]])*1)
+df_agg['flag'] = temp
+
+df_agg2 = df_agg[df_agg.flag>0].drop(columns=[('population','count'),'flag'])
+df_agg2.columns = [x[0] for x in df_agg2.columns]
+df_o = df[(df.country==df.region) & (df.week>0) ][[x for x in df_agg2.columns]]
+df_chart = pd.concat([df_o,df_agg2])
+
+figure = {
+    'data': [],
+    'config': {'scrollzoom': True}
+}
+
+
+
+### data
+colour = ['red','blue','green']
+chart_data = df_agg
+
+
+for i in ['Britain']:
+    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
+        data_dict = dict(mode='lines',
+                     x = [end_date_from_week(n,i) for n in df_chart[df_chart.country == i]['week']],
+                     y = [int(n) for n in df_chart[df_chart.country == i][k]],
+                    line=dict(
+                    width=1.5
+                    ),
+                name = '{}: {}'.format(i,' '.join(k.split('_')).capitalize()),
+                text = [],
+                hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending: %{x}<extra></extra>")
+               
+        figure['data'].append(data_dict)
+
+cou =[x for x in df_chart.country.unique()]
+cou.remove('Britain')
+for i in cou:
+    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
+        data_dict = dict(mode='lines',
+                     x = [end_date_from_week(n,i) for n in df_chart[df_chart.country == i]['week']],
+                     y = [int(n) for n in df_chart[df_chart.country == i][k]],
+                    line=dict(
+                    width=1.5
+                    ),
+                name = '{}: {}'.format(i,' '.join(k.split('_')).capitalize()),
+                text = [],
+                visible = 'legendonly',
+                hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending:  %{x}<extra></extra>")
+               
+        figure['data'].append(data_dict)
+        
+figure['layout'] = dict(
+    height = 600,
+    width = 900,
+    titlefont=dict(
+        size=title_font_size,
+        family=title_font_family),
+    hovermode = 'x',
+    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, which are independently modelled </i> ',
+    showlegend=True,
+    yaxis=dict(
+            title=dict(
+                text="Weekly Deaths", font=dict(
+                    size=y_title_font_size))),
+    xaxis=dict(
+            title=dict(
+                text="Week Ending", font=dict(
+                    size=y_title_font_size)))
+
+)
+
+
+
+
+fig5 = go.Figure(figure)
