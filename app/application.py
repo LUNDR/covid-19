@@ -19,6 +19,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
+# for scraping data
+import bs4
+import requests
+
 
 from figures import fig1, fig2, fig3, fig4, headline, map1, fig5
 
