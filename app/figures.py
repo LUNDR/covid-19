@@ -1043,7 +1043,7 @@ figure['layout'] = dict(
         size=title_font_size,
         family=title_font_family),
     hovermode = 'x',
-    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, which are independently modelled </i> ',
+    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, which are independently modelled </i></span> ',
     showlegend=True,
     yaxis=dict(
             title=dict(
@@ -1053,9 +1053,6 @@ figure['layout'] = dict(
             title=dict(
                 text="Week Ending", font=dict(
                     size=y_title_font_size))),
-        margin=dict(
-        pad=100
-    )
 
 
 )
