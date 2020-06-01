@@ -213,7 +213,7 @@ app.layout = html.Div(
                 
 
             
-                ], className="footer",
+                ], className=" row footer",
                     style={
                         'height' : '3%',
                         'margin-top': '0%',
