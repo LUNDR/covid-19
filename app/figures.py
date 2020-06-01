@@ -787,7 +787,7 @@ countries = data['countriesAndTerritories'].unique()
 # define titles
 x_title = 'Cases per 100,000 population'
 y_title = 'Deaths per 100,000 population'
-plot_title = '<b>Total cases of Covid-19 v Total deaths : per 100,000 population</b><BR>' + latest_data_string
+plot_title = '<b>Total cases of Covid-19 v Total deaths : per 100,000 population</b><BR>' + latest_data_string  + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 
 # what to show to start
 default_list = [
@@ -1059,8 +1059,8 @@ figure['layout'] = dict(
         l=50,
         r=50,
         b=100,
-        t=300,
-        pad=40
+        t=100,
+        pad=10
     )
 
 )
