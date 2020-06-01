@@ -284,7 +284,7 @@ figure['layout'] = dict(
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
-    title_text='<b> COVID-19 Total Cases </b> <BR>'+ '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
+    title_text='<b> COVID-19 Total Cases </b> <BR>'+ '<span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
     showlegend=True,
     geo=dict(
         scope='world',
@@ -421,7 +421,7 @@ sliders = [dict(
 )]
 
 figure['layout'] = dict(
-    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>",
+    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>"+ '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
      titlefont=dict(
         size=title_font_size, family=title_font_family),
         yaxis=dict(
@@ -486,10 +486,10 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 if type_ == '_7_day_sum':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string
+        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
+        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 else:
     plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
         latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
@@ -648,10 +648,10 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 if type_ == '_7_day_sum':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string
+        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
+        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 else:
     plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
         latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
@@ -954,8 +954,7 @@ figure['data'] = traces
 figure['layout'] = dict(
     yaxis=dict(
         autorange="reversed"),
-    title='<b>Headline Figures: COVID-19 Cases and Deaths</b> <BR>' +
-    latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
+    title='<b>Headline Figures: COVID-19 Cases and Deaths</b> <BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
     titlefont=dict(
         size=title_font_size,
         family=title_font_family))
