@@ -485,14 +485,11 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 # define plot title and axis titles
 
 if type_ == '_7_day_sum':
-    plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + ': 7 day rolling average</b><BR>' + latest_data_string +  '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
+    plot_title = "<b>COVID-19 " + cat_.capitalize() + ': 7 day rolling average</b><BR>' + latest_data_string +  '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
-    plot_title = '<b>COVID-19 ' + \
-        cat_.capitalize() + '</b> <BR> cumulative total <BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
+    plot_title = '<b>COVID-19 ' + cat_.capitalize() + '</b> <BR> cumulative total <BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 else:
-    plot_title = '<b>COVID-19 ' + cat_.capitalize() + '</b><BR>' + \
-        latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
+    plot_title = '<b>COVID-19 ' + cat_.capitalize() + '</b><BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 
 
 x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
@@ -1057,7 +1054,14 @@ figure['layout'] = dict(
     xaxis=dict(
             title=dict(
                 text="Week Ending", font=dict(
-                    size=y_title_font_size)))
+                    size=y_title_font_size))),
+     margin=dict(
+        l=50,
+        r=50,
+        b=100,
+        t=100,
+        pad=4
+    )
 
 )
 
@@ -1065,3 +1069,4 @@ figure['layout'] = dict(
 
 
 fig5 = go.Figure(figure)
+

@@ -49,7 +49,7 @@ app.layout = html.Div(
 
                 html.Div(children=['''
                                     Visualizations of data on cases and deaths from COVID-19 compiled by the 
-                                    ''',html.A('European Centre for Disease Prevention and Control', href = 'https://www.ecdc.europa.eu/en')],
+                                    '''],
                                     style={'width': '74%',
                                                 'display': 'inline-block',
                                                 'margin-bottom': '1.5%',
@@ -187,7 +187,8 @@ app.layout = html.Div(
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',
-                    'margin-top': '1.5%'}
+                'margin-top': '1.5%',
+                'margin-bottom': '1.5%'}
             ),
 
         ],
