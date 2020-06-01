@@ -486,7 +486,7 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 if type_ == '_7_day_sum':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + ': 7 day rolling average</b><BR>' + latest_data_string + + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
+        cat_.capitalize() + ': 7 day rolling average</b><BR>' + latest_data_string +  '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
     plot_title = '<b>COVID-19 ' + \
         cat_.capitalize() + '</b> <BR> cumulative total <BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
