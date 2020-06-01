@@ -134,7 +134,7 @@ app.layout = html.Div(
                     'margin-top': '1.5%'}
             ),
 
-        ], className='row justify-content-center',
+        ], className='row twelve columns justify-content-center',
             style={}
         ),
 
@@ -169,7 +169,7 @@ app.layout = html.Div(
                     'margin-bottom': '1.5%'}
             ),
         ],
-            className='row justify-content-center',
+            className='row twelve columns justify-content-center',
             style={}
         ),
         
@@ -190,7 +190,7 @@ app.layout = html.Div(
             ),
 
         ],
-            className='row justify-content-center',
+            className='row twelve columns justify-content-center',
             style={}
         ),  
         
