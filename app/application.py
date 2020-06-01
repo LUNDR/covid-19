@@ -81,7 +81,6 @@ app.layout = html.Div(
                 'display': 'inline-block',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center'
                 }
             ),
 
@@ -100,7 +99,6 @@ app.layout = html.Div(
                 'margin-right': '1.5%',
                 'margin-left': '1.5%',
                 'margin-top': '1.5%',
-                'text-align':'center'
                 }),
 
 
