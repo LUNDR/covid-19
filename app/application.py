@@ -63,7 +63,7 @@ app.layout = html.Div(
                          'float': 'left'}
             ),
 
-        ], className="header eleven columns"),
+        ], className="header row twelve columns"),
 
 
 
