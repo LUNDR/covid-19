@@ -654,7 +654,7 @@ elif type_ == 'total_':
         cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
 else:
     plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
-        latest_data_string + + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
+        latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 
 
 x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
