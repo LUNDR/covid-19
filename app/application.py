@@ -102,7 +102,7 @@ app.layout = html.Div(
                 }),
 
 
-        ], className='row justify-content-center',
+        ], className='row twelve columns justify-content-center',
             style={}
         ),
 
