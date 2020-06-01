@@ -183,7 +183,7 @@ app.layout = html.Div(
 
                 )
             ],
-                className="twelve columns",
+                className="ten columns",
                 style={
                 'display': 'inline-block',
                 'margin-left': '1.5%',

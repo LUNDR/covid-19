@@ -284,7 +284,7 @@ figure['layout'] = dict(
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
-    title_text='<b> COVID-19 Total Cases </b> <BR>',
+    title_text='<b> COVID-19 Total Cases </b> <BR>'+ '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
     showlegend=True,
     geo=dict(
         scope='world',
@@ -492,7 +492,7 @@ elif type_ == 'total_':
         cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
 else:
     plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
-        latest_data_string
+        latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 
 
 x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
@@ -654,7 +654,7 @@ elif type_ == 'total_':
         cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
 else:
     plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
-        latest_data_string
+        latest_data_string + + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 
 
 x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
@@ -790,7 +790,7 @@ countries = data['countriesAndTerritories'].unique()
 # define titles
 x_title = 'Cases per 100,000 population'
 y_title = 'Deaths per 100,000 population'
-plot_title = '<b>Total cases of Covid-19 v Total deaths : per 100,000 population</b><BR>' + latest_data_string
+plot_title = '<b>Total cases of Covid-19 v Total deaths : per 100,000 population</b><BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>'
 
 # what to show to start
 default_list = [
@@ -955,7 +955,7 @@ figure['layout'] = dict(
     yaxis=dict(
         autorange="reversed"),
     title='<b>Headline Figures: COVID-19 Cases and Deaths</b> <BR>' +
-    latest_data_string,
+    latest_data_string + '<br><span style="font-size: 12px;">Source:European Centre for Disease Prevention and Control</span>',
     titlefont=dict(
         size=title_font_size,
         family=title_font_family))
@@ -1045,8 +1045,6 @@ for i in cou:
         figure['data'].append(data_dict)
         
 figure['layout'] = dict(
-    height = 600,
-    width = 900,
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
