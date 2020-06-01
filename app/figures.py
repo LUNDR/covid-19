@@ -1039,8 +1039,6 @@ for i in cou:
         figure['data'].append(data_dict)
         
 figure['layout'] = dict(
-    height = 600,
-    width = 900,
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
