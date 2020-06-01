@@ -1056,10 +1056,6 @@ figure['layout'] = dict(
                 text="Week Ending", font=dict(
                     size=y_title_font_size))),
         margin=dict(
-        l=50,
-        r=50,
-        b=100,
-        t=100,
         pad=100
     )
 
