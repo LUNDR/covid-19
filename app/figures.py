@@ -284,7 +284,7 @@ figure['layout'] = dict(
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
-    title_text='<b> COVID-19 Total Cases </b> <BR>',
+    title_text='<b> COVID-19 Total Cases </b> <BR>' + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>',
     showlegend=True,
     geo=dict(
         scope='world',
@@ -421,7 +421,7 @@ sliders = [dict(
 )]
 
 figure['layout'] = dict(
-    title="<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>",
+    title='<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>' + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>',
      titlefont=dict(
         size=title_font_size, family=title_font_family),
         yaxis=dict(
@@ -486,13 +486,13 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 if type_ == '_7_day_sum':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string
+        cat_.capitalize() + ': 7 day rolling average</b><BR>' + latest_data_string + + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
-    plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string
+    plot_title = '<b>COVID-19 ' + \
+        cat_.capitalize() + '</b> <BR> cumulative total <BR>' + latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 else:
-    plot_title = "<b>COVID-19 " + cat_.capitalize() + "</b><BR>" + \
-        latest_data_string
+    plot_title = '<b>COVID-19 ' + cat_.capitalize() + '</b><BR>' + \
+        latest_data_string + '<br><span style="font-size: 12px;">Source: European Centre for Disease Prevention and Control</span>'
 
 
 x_title = "Days since " + str(index_) + " " + cat_ + " reached</b>"
@@ -1048,7 +1048,7 @@ figure['layout'] = dict(
         size=title_font_size,
         family=title_font_family),
     hovermode = 'x',
-    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, which are independently modelled </i></span> ',
+    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, <br> which are independently modelled </i></span> ',
     showlegend=True,
     yaxis=dict(
             title=dict(
