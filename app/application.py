@@ -48,7 +48,7 @@ app.layout = html.Div(
 
 
                 html.Div(children=['''
-                                    Visualizations of data on cases and deaths from COVID-19 compiled by the 
+                                    Visualizations of data on cases and deaths from COVID-19
                                     '''],
                                     style={'width': '74%',
                                                 'display': 'inline-block',
