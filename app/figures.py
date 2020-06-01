@@ -206,7 +206,7 @@ for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
         locationmode='ISO-3',
         locations=df_sub['countryterritoryCode'].tolist(),
         marker=dict(
-            size=df_sub['total_cases'] / 300,
+            size=df_sub['total_cases'] / 600,
             color=colour,
             line_color='#ffffff',
             line_width=0.5,
