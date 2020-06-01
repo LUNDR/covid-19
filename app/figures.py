@@ -960,42 +960,6 @@ headline = go.Figure(figure)
 
 ###### excess deaths
 
-# url = "https://github.com/TheEconomist/covid-19-excess-deaths-tracker/tree/master/output-data/excess-deaths"
-# res = requests.get(url)      
-# soup = bs4.BeautifulSoup(res.content, features="lxml")
-# links = [] 
-# for div in soup.find_all(name='a', attrs={'class':'js-navigation-open'}):
-#     u = 'https://github.com'+div['href']
-#     if '.csv' in u:
-#         u2 = "https://raw.githubusercontent.com/TheEconomist/covid-19-excess-deaths-tracker/master/output-data/excess-deaths/"+u.split('/')[-1]
-#         links.append(u2)
-#     else:
-#         pass
-
-# def end_date_from_week(n,country):
-#     return datetime.strptime(df[(df.country==country) & (df.week==n)]['end_date'].iloc[0],'%Y-%m-%d')
-        
-    
-# df = pd.DataFrame()
-# for l in links:
-#     temp = pd.read_csv(l)
-#     df = pd.concat([df,temp],axis = 0)
-# df.loc[df.country=='Turkey','country'] = 'Istanbul (Turkey)'
-
-# df_agg = df[df.country.isin(['Indonesia','Russia','Istanbul (Turkey)','United States'])].groupby(['country','year','week'], as_index = False).agg({'expected_deaths':'sum','excess_deaths':'sum','covid_deaths':'sum','total_deaths':'sum','non_covid_deaths':'sum','population':['sum','count']})
-
-# maxes = dict(zip(df_agg.groupby('country').max()[('population','count')].index,df_agg.groupby('country').max()[('population','count')].values))
-
-# df_agg['flag'] = 1
-# temp=[]
-# for i in range(len(df_agg)):
-#     temp.append((df_agg[('population','count')][i] == maxes[df_agg.country[i]])*1)
-# df_agg['flag'] = temp
-
-# df_agg2 = df_agg[df_agg.flag>0].drop(columns=[('population','count'),'flag'])
-# df_agg2.columns = [x[0] for x in df_agg2.columns]
-# df_o = df[(df.country==df.region) & (df.week>0) ][[x for x in df_agg2.columns]]
-# df_chart = pd.concat([df_o,df_agg2])
 
 df_chart = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/economistdata.tsv', sep ='\t')
 
@@ -1039,6 +1003,7 @@ for i in cou:
         figure['data'].append(data_dict)
         
 figure['layout'] = dict(
+     margin= dict(t=150),
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
