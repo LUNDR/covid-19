@@ -999,22 +999,18 @@ headline = go.Figure(figure)
 
 df_chart = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/economistdata.tsv', sep ='\t')
 
+
+
 figure = {
     'data': [],
     'config': {'scrollzoom': True}
 }
 
 
-
-### data
-colour = ['red','blue','green']
-chart_data = df_agg
-
-
 for i in ['Britain']:
     for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
         data_dict = dict(mode='lines',
-                     x = [end_date_from_week(n,i) for n in df_chart[df_chart.country == i]['week']],
+                     x = df_chart[df_chart.country == i].end_date_week,
                      y = [int(n) for n in df_chart[df_chart.country == i][k]],
                     line=dict(
                     width=1.5
@@ -1030,7 +1026,7 @@ cou.remove('Britain')
 for i in cou:
     for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
         data_dict = dict(mode='lines',
-                     x = [end_date_from_week(n,i) for n in df_chart[df_chart.country == i]['week']],
+                     x = df_chart[df_chart.country == i].end_date_week,
                      y = [int(n) for n in df_chart[df_chart.country == i][k]],
                     line=dict(
                     width=1.5
@@ -1043,11 +1039,13 @@ for i in cou:
         figure['data'].append(data_dict)
         
 figure['layout'] = dict(
+    height = 600,
+    width = 900,
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
     hovermode = 'x',
-    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, <br> which are independently modelled </i></span> ',
+    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, which are independently modelled </i> ',
     showlegend=True,
     yaxis=dict(
             title=dict(
@@ -1057,7 +1055,7 @@ figure['layout'] = dict(
             title=dict(
                 text="Week Ending", font=dict(
                     size=y_title_font_size))),
-     margin=dict(
+        margin=dict(
         l=50,
         r=50,
         b=100,
@@ -1065,10 +1063,13 @@ figure['layout'] = dict(
         pad=100
     )
 
+
 )
 
 
 
 
 fig5 = go.Figure(figure)
+
+
 
