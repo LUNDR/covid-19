@@ -204,7 +204,7 @@ app.layout = html.Div(
                                                             'width' : 'auto',
                                                             'position' : 'center',
                                                             'float': 'center',
-                                                            'margin-left' :'1.5%'})
+                                                            'margin-left' :'30%'})
                 ], href = ' https://github.com/LUNDR'),
                 
                 html.Div('   A Plotly Dash Application created by Rachel Lund (2020)',

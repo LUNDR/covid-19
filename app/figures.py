@@ -770,11 +770,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 100]), yaxis=dict(
+                        0, 130]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
-                                        np.log10(index_), 6]))
+                                        0, 6]))
 
 
 fig3 = go.Figure(figure)
@@ -883,11 +883,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 600], ), yaxis=dict(
+                        0, 700], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
-                                        0, 60]))
+                                        0, 70]))
 
 
 fig4 = go.Figure(figure)
