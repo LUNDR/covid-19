@@ -964,15 +964,16 @@ headline = go.Figure(figure)
 df_chart = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/economistdata.tsv', sep ='\t')
 
 
-
 figure = {
     'data': [],
     'config': {'scrollzoom': True}
 }
 
+visible_0 = []
+visible_1 = []
 
 for i in ['Britain']:
-    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
+    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths','expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
         data_dict = dict(mode='lines',
                      x = df_chart[df_chart.country == i].end_date_week,
                      y = [int(n) for n in df_chart[df_chart.country == i][k]],
@@ -981,14 +982,53 @@ for i in ['Britain']:
                     ),
                 name = '{}: {}'.format(i,' '.join(k.split('_')).capitalize()),
                 text = [],
+                visible=False,
                 hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending: %{x}<extra></extra>")
                
         figure['data'].append(data_dict)
+        visible_0.append(True)
+        visible_1.append(False)
 
+
+for i in ['Britain']:
+    for j,k in enumerate(['expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
+        data_dict = dict(mode='lines',
+                     x = df_chart[df_chart.country == i].end_date_week,
+                     y = [int(n) for n in df_chart[df_chart.country == i][k]],
+                    line=dict(
+                    width=1.5
+                    ),
+                name = '{}: {}'.format(i,' '.join(k.split('_')).capitalize()),
+                text = [],
+                visible = True,
+                hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending: %{x}<extra></extra>")
+               
+        figure['data'].append(data_dict)
+        visible_0.append(False)
+        visible_1.append(True)
+        
+        
 cou =[x for x in df_chart.country.unique()]
 cou.remove('Britain')
 for i in cou:
-    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
+    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths','expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
+        data_dict = dict(mode='lines',
+                     x = df_chart[df_chart.country == i].end_date_week,
+                     y = [int(n) for n in df_chart[df_chart.country == i][k]],
+                    line=dict(
+                    width=1.5
+                    ),
+                name = '{}: {}'.format(i,' '.join(k.split('_')).capitalize()),
+                text = [],
+                visible = False,
+                hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending:  %{x}<extra></extra>")
+               
+        figure['data'].append(data_dict)
+        visible_0.append(False)
+        visible_1.append('legendonly')
+            
+for i in cou:
+    for j,k in enumerate(['expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
         data_dict = dict(mode='lines',
                      x = df_chart[df_chart.country == i].end_date_week,
                      y = [int(n) for n in df_chart[df_chart.country == i][k]],
@@ -1001,14 +1041,18 @@ for i in cou:
                 hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending:  %{x}<extra></extra>")
                
         figure['data'].append(data_dict)
-        
+        visible_0.append('legendonly')
+        visible_1.append(False)            
+####    
 figure['layout'] = dict(
-     margin= dict(t=150),
+    margin= dict( t=150),
+
+    title = dict(yanchor = 'top', pad = dict(b = 200, t=200)),
     titlefont=dict(
         size=title_font_size,
         family=title_font_family),
     hovermode = 'x',
-    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 11px;">Source:The Economist</span><br><span style="font-size: 11px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa, <br>which are independently modelled </i></span> ',
+    title_text='<b>Weekly Expected Deaths, Total Deaths & Excess Deaths </b><br><span style="font-size: 12px;">Source:The Economist</span><br><span style="font-size: 12px;"><i>Expected deaths are calculated as an average of 2015/16-2019, except for Spain and South Africa,<br> which are independently modelled </i> ',
     showlegend=True,
     yaxis=dict(
             title=dict(
@@ -1018,10 +1062,28 @@ figure['layout'] = dict(
             title=dict(
                 text="Week Ending", font=dict(
                     size=y_title_font_size))),
-
+    
+    updatemenus = list([
+    dict(active=1,
+         showactive = False,
+         buttons=list([   
+            dict(label = "Raw Numbers",
+                 method = "update",
+                 args = [{"visible": visible_0}]), # hide trace2
+            dict(label = "Per million people",
+                 method = "update",
+                 args = [{"visible": visible_1}]) # hide trace1
+            ]),
+         direction="down",
+            pad={"r": 10, "t": 10},
+            x=1.2,
+            xanchor="right",
+            y=1.3,
+            yanchor="top"
+        
+        )])
 
 )
-
 
 
 
