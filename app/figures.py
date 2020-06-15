@@ -1079,9 +1079,9 @@ figure['layout'] = dict(
             ]),
          direction="down",
             pad={"r": 10, "t": 10},
-            x=1.2,
+            x=1.55,
             xanchor="right",
-            y=1.3,
+            y=1.2,
             yanchor="top"
         
         )])
