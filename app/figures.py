@@ -962,7 +962,9 @@ headline = go.Figure(figure)
 
 
 df_chart = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/economistdata.tsv', sep ='\t')
-
+df_chart['expected_deaths_per_mil'] = df_chart.expected_deaths/df_chart.population*1000000
+df_chart['excess_deaths_per_mil'] = df_chart.excess_deaths/df_chart.population*1000000
+df_chart['total_deaths_per_mil'] = df_chart.total_deaths/df_chart.population*1000000
 
 figure = {
     'data': [],
