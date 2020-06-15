@@ -966,6 +966,7 @@ df_chart['expected_deaths_per_mil'] = df_chart.expected_deaths/df_chart.populati
 df_chart['excess_deaths_per_mil'] = df_chart.excess_deaths/df_chart.population*1000000
 df_chart['total_deaths_per_mil'] = df_chart.total_deaths/df_chart.population*1000000
 
+
 figure = {
     'data': [],
     'config': {'scrollzoom': True}
@@ -975,7 +976,7 @@ visible_0 = []
 visible_1 = []
 
 for i in ['Britain']:
-    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths','expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
+    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
         data_dict = dict(mode='lines',
                      x = df_chart[df_chart.country == i].end_date_week,
                      y = [int(n) for n in df_chart[df_chart.country == i][k]],
@@ -1013,7 +1014,7 @@ for i in ['Britain']:
 cou =[x for x in df_chart.country.unique()]
 cou.remove('Britain')
 for i in cou:
-    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths','expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
+    for j,k in enumerate(['expected_deaths','total_deaths','excess_deaths']):
         data_dict = dict(mode='lines',
                      x = df_chart[df_chart.country == i].end_date_week,
                      y = [int(n) for n in df_chart[df_chart.country == i][k]],
@@ -1026,8 +1027,8 @@ for i in cou:
                 hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending:  %{x}<extra></extra>")
                
         figure['data'].append(data_dict)
-        visible_0.append(False)
-        visible_1.append('legendonly')
+        visible_0.append('legendonly')
+        visible_1.append(False)
             
 for i in cou:
     for j,k in enumerate(['expected_deaths_per_mil','total_deaths_per_mil','excess_deaths_per_mil']):
@@ -1043,8 +1044,8 @@ for i in cou:
                 hovertemplate = "<br><b>{}</b><br><i>{}".format(i,' '.join(k.split('_')).capitalize())+"</i>: %{y:,}<br>Week Ending:  %{x}<extra></extra>")
                
         figure['data'].append(data_dict)
-        visible_0.append('legendonly')
-        visible_1.append(False)            
+        visible_0.append(False)
+        visible_1.append('legendonly')            
 ####    
 figure['layout'] = dict(
     margin= dict( t=150),
@@ -1078,14 +1079,15 @@ figure['layout'] = dict(
             ]),
          direction="down",
             pad={"r": 10, "t": 10},
-            x=1.55,
+            x=1.2,
             xanchor="right",
-            y=1.2,
+            y=1.3,
             yanchor="top"
         
         )])
 
 )
+
 
 
 
