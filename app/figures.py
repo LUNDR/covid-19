@@ -60,8 +60,8 @@ def reindex(df, var, index_=10):
 
 # Data read in and feature creation/ data wrangling
 
-data = pd.read_csv(
-    'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv',
+data = pd.read_excel(
+    'https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-18.xlsx',
     usecols=list(
         range(
             0,
@@ -81,7 +81,7 @@ data = data.reindex()
 
 # create a global aggregate figure for cases and deaths
 world = data[['dateRep', 'cases', 'deaths',
-              'popData2018']].groupby(by='dateRep').sum()
+              'popData2019']].groupby(by='dateRep').sum()
 
 world['day'] = world.index.day
 world['month'] = world.index.month
@@ -116,8 +116,8 @@ data['cases_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])[
 data['death_rate'] = data['total_deaths'] / data['total_cases'] * 100
 
 # Create cumulative deaths and cases per capita
-data['deaths_per_cap'] = data['total_deaths'] / data['popData2018']
-data['cases_per_cap'] = data['total_cases'] / data['popData2018']
+data['deaths_per_cap'] = data['total_deaths'] / data['popData2019']
+data['cases_per_cap'] = data['total_cases'] / data['popData2019']
 
 # create death rates variable
 data['death_rate'] = data['total_deaths'] / data['total_cases'] * 100
