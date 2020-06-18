@@ -151,7 +151,7 @@ colour_list2 = (Tableau_20.hex_colors *
                    len(Tableau_20.hex_colors) +
                    1))[:len(data['countryterritoryCode'].unique())]
 colour_dict2 = dict(
-    zip(list(dict.fromkeys(a['countryterritoryCode'])), colour_list))
+    zip(list(dict.fromkeys(a['countryterritoryCode'])), colour_list2))
 
 
 
