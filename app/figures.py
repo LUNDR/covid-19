@@ -60,8 +60,8 @@ def reindex(df, var, index_=10):
 
 # Data read in and feature creation/ data wrangling
 
-data = pd.read_excel(
-    'https://www.ecdc.europa.eu/sites/default/files/documents/COVID-19-geographic-disbtribution-worldwide-2020-06-18.xlsx',
+data = pd.read_csv(
+    'https://covid-19-app-data.s3.eu-west-2.amazonaws.com/ECDCdata.csv',
     usecols=list(
         range(
             0,
