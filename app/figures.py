@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 from sklearn.metrics import mean_squared_error, r2_score
 
 # colours
-from palettable.colorbrewer.qualitative import Paired_12
+#from palettable.colorbrewer.qualitative import Paired_12
 from palettable.tableau import Tableau_20
 
 
