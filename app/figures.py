@@ -810,7 +810,7 @@ default_list = [
     'Spain']
 
 # size reference for bubbles
-sizeref = 2. * max(data['popData2018']) / (150 ** 2)
+sizeref = 2. * max(data['popData2019']) / (150 ** 2)
 
 
 figure = {
@@ -825,7 +825,7 @@ for i in countries:
     try:
         chart_data = data.loc[(data['dateRep'] == max(data['dateRep'])) & (
             data['countriesAndTerritories'] == i)]
-        if np.isnan(chart_data['popData2018'].tolist()[0]):
+        if np.isnan(chart_data['popData2019'].tolist()[0]):
             pass
         elif i in default_list:
             data_dict = dict(
@@ -841,13 +841,13 @@ for i in countries:
                         x.split('_')) for x in chart_data['countriesAndTerritories']],
                 marker=dict(
                     color=chart_data['colour'],
-                    size=chart_data['popData2018'],
+                    size=chart_data['popData2019'],
                     sizeref=sizeref,
                     sizemode='area',
                     line=dict(
                         color='#ffffff')),
                 mode='markers',
-                customdata=chart_data['popData2018'] /
+                customdata=chart_data['popData2019'] /
                 1000000,
                 hovertemplate="<br><b>%{text}</b><br>Cases per 100k people: %{x:0.1f}<BR> Deaths per 100k people: %{y:0.1f}<BR> Population (2018) %{customdata:,.0f}M<extra></extra>",
                 name=' '.join(
@@ -867,13 +867,13 @@ for i in countries:
                         x.split('_')) for x in chart_data['countriesAndTerritories']],
                 marker=dict(
                     color=chart_data['colour'],
-                    size=chart_data['popData2018'],
+                    size=chart_data['popData2019'],
                     sizeref=sizeref,
                     sizemode='area',
                     line=dict(
                         color='#ffffff')),
                 mode='markers',
-                customdata=chart_data['popData2018'] /
+                customdata=chart_data['popData2019'] /
                 1000000,
                 hovertemplate="<br><b>%{text}</b><br>Cases per 100k people: %{x:0.1f}<BR> Deaths per 100k people: %{y:0.1f}<BR> Population (2018) %{customdata:,.0f}M<extra></extra>",
                 name=' '.join(
