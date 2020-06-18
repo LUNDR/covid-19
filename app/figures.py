@@ -60,11 +60,7 @@ def reindex(df, var, index_=10):
 
 # Data read in and feature creation/ data wrangling
 
-data = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/ECDCdata.csv',
-    usecols=list(
-        range(0,11))
-                  )
-
+data = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/ECDCdata.csv',usecols=list(range(0,11)))
 continents = pd.read_csv('assets/continents.csv')
 
 # make datetime
