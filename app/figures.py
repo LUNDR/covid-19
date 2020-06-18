@@ -61,7 +61,8 @@ def reindex(df, var, index_=10):
 # Data read in and feature creation/ data wrangling
 
 data = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/ECDCdata.csv',usecols=list(range(0,11)))
-continents = pd.read_csv('assets/continents.csv')
+
+continents = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/continents.csv')
 
 # make datetime
 data['dateRep'] = pd.to_datetime(data['dateRep'], dayfirst=True)
@@ -809,7 +810,7 @@ default_list = [
     'Spain']
 
 # size reference for bubbles
-sizeref = 2. * max(data['popData2019']) / (150 ** 2)
+sizeref = 2. * max(data['popData2018']) / (150 ** 2)
 
 
 figure = {
@@ -840,7 +841,7 @@ for i in countries:
                         x.split('_')) for x in chart_data['countriesAndTerritories']],
                 marker=dict(
                     color=chart_data['colour'],
-                    size=chart_data['popData2019'],
+                    size=chart_data['popData2018'],
                     sizeref=sizeref,
                     sizemode='area',
                     line=dict(
