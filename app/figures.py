@@ -1116,7 +1116,7 @@ r2 = r2_score(y,y_pred)
 countries = [x for x in list(df_chart['country'].unique()) if x not in ['Istanbul (Turkey)']]
 
 
-data_shown = 'First week of March up to week ending '+df_chart[df_chart.week==week].iloc[0]['end_date_week'].strftime("%d-%b")
+data_shown = 'First week of March up to week ending '+df_chart[df_chart.week==week].iloc[0]['end_date_week']
 
 # define titles
 x_title = 'density(pop per sq.km)'
