@@ -7,3 +7,4 @@ dash_bootstrap_components
 bs4
 requests
 lxml
+scikit-learn

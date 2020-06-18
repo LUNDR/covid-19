@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 # for charting
 import plotly
 import plotly.graph_objects as go
+from sklearn.metrics import mean_squared_error, r2_score
 
 # colours
 from palettable.colorbrewer.qualitative import Paired_12
@@ -147,6 +148,18 @@ colour_list = (Tableau_20.hex_colors *
 colour_dict = dict(
     zip(list(dict.fromkeys(a['countriesAndTerritories'])), colour_list))
 data['colour'] = [colour_dict[x] for x in data['countriesAndTerritories']]
+
+## colour list for excess deaths chart
+
+colour_list2 = (Tableau_20.hex_colors *
+               int(len(data['countryterritoryCode'].unique()) /
+                   len(Tableau_20.hex_colors) +
+                   1))[:len(data['countryterritoryCode'].unique())]
+colour_dict2 = dict(
+    zip(list(dict.fromkeys(a['countryterritoryCode'])), colour_list))
+
+
+
 
 # colour dictionary for continents
 colours = {"Asia": "royalblue",
@@ -966,6 +979,8 @@ df_chart['expected_deaths_per_mil'] = df_chart.expected_deaths/df_chart.populati
 df_chart['excess_deaths_per_mil'] = df_chart.excess_deaths/df_chart.population*1000000
 df_chart['total_deaths_per_mil'] = df_chart.total_deaths/df_chart.population*1000000
 
+df_chart['colour'] = [colour_dict2[x] for x in df_chart['ISO']]
+
 
 figure = {
     'data': [],
@@ -1093,5 +1108,124 @@ figure['layout'] = dict(
 
 fig5 = go.Figure(figure)
 
+### excess deaths v pop density
 
+week = 19
+from sklearn.linear_model import LinearRegression
+X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
+y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
+reg=LinearRegression().fit(X, y)
+y_pred=reg.predict(X)
+r2 = r2_score(y,y_pred)
+
+countries = [x for x in list(df_chart['country'].unique()) if x not in ['Istanbul (Turkey)']]
+
+
+data_shown = 'First week of March up to week ending '+df_chart[df_chart.week==week].iloc[0]['end_date_week'].strftime("%d-%b")
+
+# define titles
+x_title = 'density(pop per sq.km)'
+y_title = 'excess deaths per million people.'
+plot_title = '<b>Cumulative excess deaths v population density </b><BR>' + data_shown + '<br><span style="font-size: 11px;">Source: World Bank and the Economist</span>'
+
+
+default_list=countries
+
+# size reference for bubbles
+
+figure = {
+    'data': [],
+    'layout': {},
+    'config': {'scrollzoom': False}
+}
+
+traces = []
+
+
+for i in countries:
+    try:
+        chart_data = df_chart.loc[df_chart['country'] == i]
+        chart_data = chart_data[chart_data['week']==week]
+#         if np.isnan(chart_data['popData2018'].tolist()[0]):
+#             pass
+        if i in default_list:
+            data_dict = dict(
+                type='scatter',
+                x=list(
+                    chart_data['density']),
+                y=list(
+                    chart_data['cumulative_excess_deaths_per_mil']),
+                text=[
+                    ' '.join(
+                        x.split('_')) for x in chart_data['country']],
+                marker=dict(
+                    color=chart_data['colour'],
+                    size=20,
+                    #sizeref=sizeref,
+                    sizemode='area',
+                    line=dict(
+                        color='#ffffff')),
+                mode='markers',
+                #customdata=chart_data['popData2018'] /
+                #1000000,
+                hovertemplate="<br><b>%{text}</b><br>Excess Deaths per million: %{y:0.0f}<extra></extra>",
+                name=' '.join(
+                    i.split('_')))
+            traces.append(data_dict)
+        else:
+            data_dict = dict(
+                type='scatter',
+                x=list(
+                    chart_data['density']),
+                y=list(
+                    chart_data['cumulative_excess_deaths_per_mil']),
+                text=[
+                    ' '.join(
+                        x.split('_')) for x in chart_data['country']],
+                marker=dict(
+                    color=chart_data['colour'],
+                    size=20,
+                    #sizeref=sizeref,
+                    sizemode='area',
+                    line=dict(
+                        color='#ffffff')),
+                mode='markers',
+                #customdata=chart_data['popData2018'] /
+                #1000000,
+                hovertemplate="<br><b>%{text}</b><br>Excess Deaths per million: %{y:0.0f}<extra></extra>",
+                name=' '.join(
+                    i.split('_')))
+            traces.append(data_dict)
+
+    except BaseException:
+        pass
+    
+reg_line = dict(type='scatter',
+                  x=df_chart[df_chart.week==week]['density'],
+                  y=y_pred,
+                  mode='lines',
+                  line=dict(color='#999999', shape='hv', dash='dot'),
+                  line_shape='linear',
+                  name='regression line',
+                  hovertemplate="<br><b>linear regression line</b>"+"<br>Increase in excess deaths per million for each additional person per sq.km: {:0.2f}<br> R-sq: {:0.2f}<extra></extra>".format(reg.coef_[0],r2))
+
+traces.append(reg_line)
+
+figure['data'] = traces
+figure['layout'] = dict(
+    title=plot_title, titlefont=dict(
+        size=title_font_size, family=title_font_family), xaxis=dict(
+            title=dict(
+                text=x_title, font=dict(
+                    size=x_title_font_size)) ),
+                    yaxis=dict(
+                            title=dict(
+                                text=y_title, font=dict(
+                                    size=y_title_font_size)), 
+                                    #range=[
+                                     #   0, 70]
+    ))
+
+
+fig6 = go.Figure(figure)
 

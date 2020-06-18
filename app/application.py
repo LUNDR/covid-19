@@ -24,7 +24,7 @@ import bs4
 import requests
 
 
-from figures import fig1, fig2, fig3, fig4, headline, map1, fig5
+from figures import fig1, fig2, fig3, fig4, headline, map1, fig5, fig6
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[
@@ -88,7 +88,7 @@ app.layout = html.Div(
 
             html.Div([
                 dcc.Graph(
-                    figure=fig5,
+                    figure=fig6,
                     responsive=False,
 
                 )
@@ -109,7 +109,7 @@ app.layout = html.Div(
         html.Div([
             html.Div([
                 dcc.Graph(
-                    figure=fig2,
+                    figure=fig5,
                     responsive=False,
                 )
             ],
@@ -122,7 +122,7 @@ app.layout = html.Div(
 
             html.Div([
                 dcc.Graph(
-                    figure=fig3,
+                    figure=fig2,
                     responsive=False,
                 )
             ],
@@ -141,7 +141,7 @@ app.layout = html.Div(
         html.Div([
             html.Div([
                 dcc.Graph(
-                    figure=fig4,
+                    figure=fig3,
                     responsive=False,
 
                 )
@@ -155,7 +155,7 @@ app.layout = html.Div(
 
             html.Div([
                 dcc.Graph(
-                    figure=fig1,
+                    figure=fig4,
                     responsive=False,
 
                 )
@@ -188,6 +188,21 @@ app.layout = html.Div(
                 'margin-top': '1.5%',
                 'margin-bottom': '1.5%'}
             ),
+            html.Div([
+                dcc.Graph(
+                    figure=fig1,
+                    responsive=False,
+
+                )
+            ],
+                className="five columns",
+                style={
+                'display': 'inline-block',
+                'margin-left': '1.5%',
+                'margin-top': '1.5%',
+                'margin-right': '1.5%',
+                'margin-bottom': '1.5%'}
+            )
 
         ],
             className='row twelve columns justify-content-center',
