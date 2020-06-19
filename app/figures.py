@@ -23,6 +23,7 @@ import dash_bootstrap_components as dbc
 # for scraping data
 import bs4
 import requests
+import boto3
 
 
 # define functions
@@ -59,75 +60,8 @@ def reindex(df, var, index_=10):
 
 
 # Data read in and feature creation/ data wrangling
-
-data = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/ECDCdata.csv',usecols=list(range(0,11)))
-
-continents = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/continents.csv')
-
-# make datetime
+data = pd.read_csv('https://covid-19-app-data.s3.eu-west-2.amazonaws.com/ECDCdata.tsv', sep ='\t')
 data['dateRep'] = pd.to_datetime(data['dateRep'], dayfirst=True)
-
-# sort values by country and date
-data.sort_values(by=['countriesAndTerritories', 'dateRep'],
-                 ascending=True, inplace=True)
-
-# reindex the data now its sorted to prevent errors when creating aggregates
-data = data.reindex()
-
-# create a global aggregate figure for cases and deaths
-world = data[['dateRep', 'cases', 'deaths',
-              'popData2019']].groupby(by='dateRep').sum()
-
-world['day'] = world.index.day
-world['month'] = world.index.month
-world['year'] = world.index.year
-world['dateRep'] = world.index
-world['countriesAndTerritories'] = 'World'
-world['geoId'] = 'WD'
-world['countryterritoryCode'] = 'WLD'
-data = pd.concat([data, world], ignore_index=True)
-
-# Create a continents var
-
-data = pd.merge(data,
-                continents[['Continent_Name',
-                            'Three_Letter_Country_Code']].drop_duplicates('Three_Letter_Country_Code'),
-                how='left',
-                left_on='countryterritoryCode',
-                right_on='Three_Letter_Country_Code')
-# create cumulative sum of deaths and cases by country and death rate
-data['total_cases'] = data.groupby(by='countriesAndTerritories')[
-    'cases'].cumsum()
-data['total_deaths'] = data.groupby(by='countriesAndTerritories')[
-    'deaths'].cumsum()
-
-# create 7 day rolling average of deaths and cases
-
-
-data['deaths_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])[
-    'deaths'].rolling(7).sum().values
-data['cases_7_day_sum'] = data.groupby(by=['countriesAndTerritories'])[
-    'cases'].rolling(7).sum().values
-data['death_rate'] = data['total_deaths'] / data['total_cases'] * 100
-
-# Create cumulative deaths and cases per capita
-data['deaths_per_cap'] = data['total_deaths'] / data['popData2019']
-data['cases_per_cap'] = data['total_cases'] / data['popData2019']
-
-# create death rates variable
-data['death_rate'] = data['total_deaths'] / data['total_cases'] * 100
-
-# Shorten to DRC
-data = data.replace({'Democratic_Republic_of_the_Congo': 'D.R.C'}, regex=True)
-data = data.replace({'Falkland_Islands_(Malvinas)': 'Falklands'}, regex=True)
-data = data.replace({'Democratic_Republic_of_the_Congo': 'D.R.C'}, regex=True)
-data = data.replace(
-    {'Cases_on_an_international_conveyance_Japan': 'Cruise Ship (Japan)'}, regex=True)
-data = data.replace(
-    {'Saint_Vincent_and_the_Grenadines': 'St.Vincent & the Grenadines'}, regex=True)
-data = data.replace(
-    {'United_States_Virgin_Islands': 'U.S Virgin Islands'}, regex=True)
-
 # Formatting
 # colours
 
