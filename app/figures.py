@@ -23,7 +23,6 @@ import dash_bootstrap_components as dbc
 # for scraping data
 import bs4
 import requests
-import boto3
 
 
 # define functions
