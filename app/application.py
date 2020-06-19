@@ -24,7 +24,7 @@ import bs4
 import requests
 
 
-from figures import fig1, fig2, fig3, fig4, headline, map1, fig5, fig6
+from figures import fig1, fig2, fig3, fig4, headline, map1, fig5
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], meta_tags=[
@@ -88,7 +88,7 @@ app.layout = html.Div(
 
             html.Div([
                 dcc.Graph(
-                    figure=fig6,
+                    figure=fig5,
                     responsive=False,
 
                 )
