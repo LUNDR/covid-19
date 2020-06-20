@@ -824,11 +824,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 700], ), yaxis=dict(
+                        0, 900], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
-                                        0, 70]))
+                                        0, 90]))
 
 
 fig4 = go.Figure(figure)
@@ -863,7 +863,7 @@ for country in data['countriesAndTerritories'].unique():
                              x=chart_data.iloc[:, 0],
                              customdata = customdata,
                              name=' '.join(country.split('_')),
-                             text=['<b>{}</b>: {:,}'.format(z, x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
+                             text=['<b>{}</b>: {:,0.1f}'.format(z, x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color='firebrick'),
                              hovertemplate = "<br><b>%{customdata}</b><br>%{y}: %{x:,}<extra></extra>",
@@ -877,7 +877,7 @@ for country in data['countriesAndTerritories'].unique():
                              x=chart_data.iloc[:, 0],
                              customdata = [country,country,country,country],
                              name=' '.join(country.split('_')),
-                             text=['<b>{}</b>: {:,}'.format(' '.join(z.split('_')), x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
+                             text=['<b>{}</b>: {:,0.1f}'.format(' '.join(z.split('_')), x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
                              textposition=['outside', 'outside', 'outside', 'outside'],
                              marker=dict(color=colour),
                              orientation='h',
@@ -1036,124 +1036,124 @@ figure['layout'] = dict(
 
 fig5 = go.Figure(figure)
 
-### excess deaths v pop density
+## excess deaths v pop density
 
-# week = 19
-# from sklearn.linear_model import LinearRegression
-# X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
-# y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
-# reg=LinearRegression().fit(X, y)
-# y_pred=reg.predict(X)
-# r2 = r2_score(y,y_pred)
+week = 19
+from sklearn.linear_model import LinearRegression
+X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
+y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
+reg=LinearRegression().fit(X, y)
+y_pred=reg.predict(X)
+r2 = r2_score(y,y_pred)
 
-# countries = [x for x in list(df_chart['country'].unique()) if x not in ['Istanbul (Turkey)']]
-
-
-# data_shown = 'First week of March up to week ending '+df_chart[df_chart.week==week].iloc[0]['end_date_week']
-
-# # define titles
-# x_title = 'density(pop per sq.km)'
-# y_title = 'excess deaths per million people.'
-# plot_title = '<b>Cumulative excess deaths v population density </b><BR>' + data_shown + '<br><span style="font-size: 11px;">Source: World Bank and the Economist</span>'
+countries = [x for x in list(df_chart['country'].unique()) if x not in ['Istanbul (Turkey)']]
 
 
-# default_list=countries
+data_shown = 'First week of March up to week ending '+df_chart[df_chart.week==week].iloc[0]['end_date_week']
 
-# # size reference for bubbles
-
-# figure = {
-#     'data': [],
-#     'layout': {},
-#     'config': {'scrollzoom': False}
-# }
-
-# traces = []
+# define titles
+x_title = 'density(pop per sq.km)'
+y_title = 'excess deaths per million people.'
+plot_title = '<b>Cumulative excess deaths v population density </b><BR>' + data_shown + '<br><span style="font-size: 11px;">Source: World Bank and the Economist</span>'
 
 
-# for i in countries:
-#     try:
-#         chart_data = df_chart.loc[df_chart['country'] == i]
-#         chart_data = chart_data[chart_data['week']==week]
-# #         if np.isnan(chart_data['popData2018'].tolist()[0]):
-# #             pass
-#         if i in default_list:
-#             data_dict = dict(
-#                 type='scatter',
-#                 x=list(
-#                     chart_data['density']),
-#                 y=list(
-#                     chart_data['cumulative_excess_deaths_per_mil']),
-#                 text=[
-#                     ' '.join(
-#                         x.split('_')) for x in chart_data['country']],
-#                 marker=dict(
-#                     color=chart_data['colour'],
-#                     size=20,
-#                     #sizeref=sizeref,
-#                     sizemode='area',
-#                     line=dict(
-#                         color='#ffffff')),
-#                 mode='markers',
-#                 #customdata=chart_data['popData2018'] /
-#                 #1000000,
-#                 hovertemplate="<br><b>%{text}</b><br>Excess Deaths per million: %{y:0.0f}<extra></extra>",
-#                 name=' '.join(
-#                     i.split('_')))
-#             traces.append(data_dict)
-#         else:
-#             data_dict = dict(
-#                 type='scatter',
-#                 x=list(
-#                     chart_data['density']),
-#                 y=list(
-#                     chart_data['cumulative_excess_deaths_per_mil']),
-#                 text=[
-#                     ' '.join(
-#                         x.split('_')) for x in chart_data['country']],
-#                 marker=dict(
-#                     color=chart_data['colour'],
-#                     size=20,
-#                     #sizeref=sizeref,
-#                     sizemode='area',
-#                     line=dict(
-#                         color='#ffffff')),
-#                 mode='markers',
-#                 #customdata=chart_data['popData2018'] /
-#                 #1000000,
-#                 hovertemplate="<br><b>%{text}</b><br>Excess Deaths per million: %{y:0.0f}<extra></extra>",
-#                 name=' '.join(
-#                     i.split('_')))
-#             traces.append(data_dict)
+default_list=countries
 
-#     except BaseException:
-#         pass
+# size reference for bubbles
+
+figure = {
+    'data': [],
+    'layout': {},
+    'config': {'scrollzoom': False}
+}
+
+traces = []
+
+
+for i in countries:
+    try:
+        chart_data = df_chart.loc[df_chart['country'] == i]
+        chart_data = chart_data[chart_data['week']==week]
+#         if np.isnan(chart_data['popData2018'].tolist()[0]):
+#             pass
+        if i in default_list:
+            data_dict = dict(
+                type='scatter',
+                x=list(
+                    chart_data['density']),
+                y=list(
+                    chart_data['cumulative_excess_deaths_per_mil']),
+                text=[
+                    ' '.join(
+                        x.split('_')) for x in chart_data['country']],
+                marker=dict(
+                    color=chart_data['colour'],
+                    size=20,
+                    #sizeref=sizeref,
+                    sizemode='area',
+                    line=dict(
+                        color='#ffffff')),
+                mode='markers',
+                #customdata=chart_data['popData2018'] /
+                #1000000,
+                hovertemplate="<br><b>%{text}</b><br>Excess Deaths per million: %{y:0.0f}<extra></extra>",
+                name=' '.join(
+                    i.split('_')))
+            traces.append(data_dict)
+        else:
+            data_dict = dict(
+                type='scatter',
+                x=list(
+                    chart_data['density']),
+                y=list(
+                    chart_data['cumulative_excess_deaths_per_mil']),
+                text=[
+                    ' '.join(
+                        x.split('_')) for x in chart_data['country']],
+                marker=dict(
+                    color=chart_data['colour'],
+                    size=20,
+                    #sizeref=sizeref,
+                    sizemode='area',
+                    line=dict(
+                        color='#ffffff')),
+                mode='markers',
+                #customdata=chart_data['popData2018'] /
+                #1000000,
+                hovertemplate="<br><b>%{text}</b><br>Excess Deaths per million: %{y:0.0f}<extra></extra>",
+                name=' '.join(
+                    i.split('_')))
+            traces.append(data_dict)
+
+    except BaseException:
+        pass
     
-# reg_line = dict(type='scatter',
-#                   x=df_chart[df_chart.week==week]['density'],
-#                   y=y_pred,
-#                   mode='lines',
-#                   line=dict(color='#999999', shape='hv', dash='dot'),
-#                   line_shape='linear',
-#                   name='regression line',
-#                   hovertemplate="<br><b>linear regression line</b>"+"<br>Increase in excess deaths per million for each additional person per sq.km: {:0.2f}<br> R-sq: {:0.2f}<extra></extra>".format(reg.coef_[0],r2))
+reg_line = dict(type='scatter',
+                  x=df_chart[df_chart.week==week]['density'],
+                  y=y_pred,
+                  mode='lines',
+                  line=dict(color='#999999', shape='hv', dash='dot'),
+                  line_shape='linear',
+                  name='regression line',
+                  hovertemplate="<br><b>linear regression line</b>"+"<br>Increase in excess deaths per million for each additional person per sq.km: {:0.2f}<br> R-sq: {:0.2f}<extra></extra>".format(reg.coef_[0],r2))
 
-# traces.append(reg_line)
+traces.append(reg_line)
 
-# figure['data'] = traces
-# figure['layout'] = dict(
-#     title=plot_title, titlefont=dict(
-#         size=title_font_size, family=title_font_family), xaxis=dict(
-#             title=dict(
-#                 text=x_title, font=dict(
-#                     size=x_title_font_size)) ),
-#                     yaxis=dict(
-#                             title=dict(
-#                                 text=y_title, font=dict(
-#                                     size=y_title_font_size)), 
-#                                     #range=[
-#                                      #   0, 70]
-#     ))
+figure['data'] = traces
+figure['layout'] = dict(
+    title=plot_title, titlefont=dict(
+        size=title_font_size, family=title_font_family), xaxis=dict(
+            title=dict(
+                text=x_title, font=dict(
+                    size=x_title_font_size)) ),
+                    yaxis=dict(
+                            title=dict(
+                                text=y_title, font=dict(
+                                    size=y_title_font_size)), 
+                                    #range=[
+                                     #   0, 70]
+    ))
 
 
-# fig6 = go.Figure(figure)
+fig6 = go.Figure(figure)
 
