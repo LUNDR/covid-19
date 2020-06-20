@@ -863,21 +863,21 @@ for country in data['countriesAndTerritories'].unique():
                              x=chart_data.iloc[:, 0],
                              customdata = customdata,
                              name=' '.join(country.split('_')),
-                             text=['<b>{}</b>: {:,0.1f}'.format(z, x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
+                             text=['<b>{}</b>: {:,.0f}'.format(z, x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
                              textposition=['inside', 'outside', 'outside', 'outside'],
                              marker=dict(color='firebrick'),
                              hovertemplate = "<br><b>%{customdata}</b><br>%{y}: %{x:,}<extra></extra>",
                              orientation='h',
                              )
             traces.append(data_dict)
-            
+ 
         else:
             data_dict = dict(type='bar',
                              y=names,
                              x=chart_data.iloc[:, 0],
                              customdata = [country,country,country,country],
                              name=' '.join(country.split('_')),
-                             text=['<b>{}</b>: {:,0.1f}'.format(' '.join(z.split('_')), x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
+                             text=['<b>{}</b>: {:,.0f}'.format(' '.join(z.split('_')), x) for x, z in zip(chart_data.iloc[:, 0], customdata)],
                              textposition=['outside', 'outside', 'outside', 'outside'],
                              marker=dict(color=colour),
                              orientation='h',
