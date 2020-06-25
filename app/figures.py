@@ -1038,7 +1038,7 @@ fig5 = go.Figure(figure)
 
 ## excess deaths v pop density
 
-week = 19
+week = 20
 from sklearn.linear_model import LinearRegression
 X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
 y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
