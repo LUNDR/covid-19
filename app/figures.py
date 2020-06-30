@@ -1045,7 +1045,7 @@ y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
 reg=LinearRegression().fit(X, y)
 y_pred=reg.predict(X)
 r2 = r2_score(y,y_pred)
-
+print(r2)
 countries = [x for x in list(df_chart['country'].unique()) if x not in ['Istanbul (Turkey)']]
 
 
