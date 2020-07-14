@@ -513,23 +513,23 @@ seven_days = dict(type='scatter',
                   hoverinfo='skip')
 
 # add the lines to the list of traces to plot
-traces.append(three_days)
-traces.append(seven_days)
+# traces.append(three_days)
+# traces.append(seven_days)
 
 figure['data'] = traces
 
 # add annotations to the lines so people can see what they are
 
-annotations.append(dict(xref='paper',
-                        x=0.5,
-                        y=4.7,
-                        text='Doubling every <BR> 3 days',
-                        font=dict(family='Arial', size=10), showarrow=False))
-annotations.append(dict(xref='paper',
-                        x=0.93,
-                        y=3.8,
-                        text='Doubling every <BR> week',
-                        font=dict(family='Arial', size=10), showarrow=False))
+# annotations.append(dict(xref='paper',
+#                         x=0.5,
+#                         y=4.7,
+#                         text='Doubling every <BR> 3 days',
+#                         font=dict(family='Arial', size=10), showarrow=False))
+# annotations.append(dict(xref='paper',
+#                         x=0.93,
+#                         y=3.8,
+#                         text='Doubling every <BR> week',
+#                         font=dict(family='Arial', size=10), showarrow=False))
 
 
 # add a footnote
@@ -545,12 +545,12 @@ annotations.append(dict(xref='paper',
 
 
 figure['layout'] = dict(
-    yaxis_type="log", title=plot_title, annotations=annotations, titlefont=dict(
+    yaxis_type="log", title=plot_title, titlefont=dict(
         size=title_font_size, family=title_font_family), xaxis=dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 120]), yaxis=dict(
+                        0, 140]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -674,23 +674,23 @@ seven_days = dict(type='scatter',
                   hoverinfo='skip')
 
 # add the lines to the list of traces to plot
-traces.append(three_days)
-traces.append(seven_days)
+# traces.append(three_days)
+# traces.append(seven_days)
 
 figure['data'] = traces
 
 # add annotations to the lines so people can see what they are
 
-annotations.append(dict(xref='paper',
-                        x=0.5,
-                        y=5.7,
-                        text='Doubling every <BR> 3 days',
-                        font=dict(family='Arial', size=10), showarrow=False))
-annotations.append(dict(xref='paper',
-                        x=0.93,
-                        y=4.8,
-                        text='Doubling every <BR> week',
-                        font=dict(family='Arial', size=10), showarrow=False))
+# annotations.append(dict(xref='paper',
+#                         x=0.5,
+#                         y=5.7,
+#                         text='Doubling every <BR> 3 days',
+#                         font=dict(family='Arial', size=10), showarrow=False))
+# annotations.append(dict(xref='paper',
+#                         x=0.93,
+#                         y=4.8,
+#                         text='Doubling every <BR> week',
+#                         font=dict(family='Arial', size=10), showarrow=False))
 
 
 # add a footnote
@@ -706,12 +706,12 @@ annotations.append(dict(xref='paper',
 
 
 figure['layout'] = dict(
-    yaxis_type="log", title=plot_title, annotations=annotations, titlefont=dict(
+    yaxis_type="log", title=plot_title,  titlefont=dict(
         size=title_font_size, family=title_font_family), xaxis=dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 130]), yaxis=dict(
+                        0, 150]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -824,11 +824,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 900], ), yaxis=dict(
+                        0, 1000], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
-                                        0, 90]))
+                                        0, 100]))
 
 
 fig4 = go.Figure(figure)
