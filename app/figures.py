@@ -550,7 +550,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 140]), yaxis=dict(
+                        0, 170]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -711,7 +711,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 150]), yaxis=dict(
+                        0, 180]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -824,7 +824,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 1200], ), yaxis=dict(
+                        0, 1500], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
