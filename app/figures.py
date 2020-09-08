@@ -176,7 +176,7 @@ for day in days:
             locationmode='ISO-3',
             locations=df_sub['countryterritoryCode'].tolist(),
             marker=dict(
-                size=df_sub['total_cases'] / 1000,
+                size=df_sub['total_cases'] / 10000,
                 color=colour,
                 line_color='#ffffff',
                 line_width=0.5,
@@ -413,11 +413,11 @@ index_ = 10
 # list the countries you want to be on there as a default
 default_list = [
     'United_States_of_America',
-    'Japan',
+    'Brazil',
     'United_Kingdom',
-    'Italy',
+    'Spain',
     'Switzerland',
-    'France']
+    'India']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -550,7 +550,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 170]), yaxis=dict(
+                        0, 250]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -572,11 +572,11 @@ index_ = 100
 # list the countries you want to be on there as a default
 default_list = [
     'United_States_of_America',
-    'Japan',
+    'Brazil',
     'United_Kingdom',
-    'Italy',
+    'Spain',
     'Switzerland',
-    'France']
+    'India']
 
 # calculate the date of latest data included and make it a string
 latest_data = data['dateRep'].max()
@@ -711,7 +711,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 180]), yaxis=dict(
+                        0, 250]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -740,7 +740,9 @@ default_list = [
     'Switzerland',
     'Germany',
     'South_Korea',
-    'Spain']
+    'Spain',
+'Brazil',
+'India']
 
 # size reference for bubbles
 sizeref = 2. * max(data['popData2019']) / (150 ** 2)
@@ -824,7 +826,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 1500], ), yaxis=dict(
+                        0, 2000], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
@@ -1038,7 +1040,7 @@ fig5 = go.Figure(figure)
 
 ## excess deaths v pop density
 
-week = 20
+week = 22
 from sklearn.linear_model import LinearRegression
 X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
 y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
