@@ -826,7 +826,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 2000], ), yaxis=dict(
+                        0, 3000], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
@@ -1040,7 +1040,7 @@ fig5 = go.Figure(figure)
 
 ## excess deaths v pop density
 
-week = 22
+week = 25
 from sklearn.linear_model import LinearRegression
 X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
 y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']
