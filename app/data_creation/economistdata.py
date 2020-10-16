@@ -101,7 +101,7 @@ den = wb2[wb2.groupby(by=['ISO'])['year'].transform(max)==wb2.year]
 
 
 
-con_dict = dict(zip(df_chart['country'].unique(),['AUT','BEL','GBR','CHL','DNK','FRA','DEU','ITA','NLD','NOR','PRT','ZAF','ESP','SWE','CHE','USA','TUR']))
+con_dict = dict(zip(df_chart['country'].unique(),['AUT','BEL','BRA','GBR','CHL','DNK','FRA','DEU','ITA','MEX','NLD','NOR','PRT','ZAF','ESP','SWE','CHE','USA','TUR']))
 
 df_chart['ISO']= df_chart.country.map(lambda x: con_dict[x])
 
