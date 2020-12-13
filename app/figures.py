@@ -826,11 +826,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 4000], ), yaxis=dict(
+                        0, 5000], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
-                                        0, 100]))
+                                        0, 200]))
 
 
 fig4 = go.Figure(figure)
