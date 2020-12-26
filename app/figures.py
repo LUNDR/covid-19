@@ -123,277 +123,277 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 # Animated Map
 
-figure = {
-    'data': [],
-    'layout': {},
-    'frames': [],
-    'config': {'scrollzoom': False}
-}
+# figure = {
+#     'data': [],
+#     'layout': {},
+#     'frames': [],
+#     'config': {'scrollzoom': False}
+# }
 
 
-# data
+# # data
 
-day = days[-1]
-data_ = []
-traces = []
-
-
-chart_data = data[data['date'] == day]
-for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
-    colour = colours[cont]
-    df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
-    data_dict = dict(
-        type='scattergeo',
-        locationmode='ISO-3',
-        locations=df_sub['countryterritoryCode'].tolist(),
-        marker=dict(
-            size=df_sub['total_cases'] / 1000,
-            color=colour,
-            line_color='#ffffff',
-            line_width=0.5,
-            sizemode='area'),
-        name='{}'.format(cont),
-        text=[
-            '{}<BR>Total Cases: {}'.format(
-                ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
-                df_sub['total_cases'][x]) for x in range(
-                    len(df_sub))])
-    figure['data'].append(data_dict)
+# day = days[-1]
+# data_ = []
+# traces = []
 
 
-### frames & steps
-frames = []
-steps = []
-
-for day in days:
-    chart_data = data[data['date'] == day]
-    frame = dict(data=[], name=str(day))
-    for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
-        colour = colours[cont]
-        df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
-        data_dict = dict(
-            type='scattergeo',
-            locationmode='ISO-3',
-            locations=df_sub['countryterritoryCode'].tolist(),
-            marker=dict(
-                size=df_sub['total_cases'] / 10000,
-                color=colour,
-                line_color='#ffffff',
-                line_width=0.5,
-                sizemode='area'),
-            name='{}'.format(cont),
-            text=[
-                '{}<BR>Total Cases: {:,}'.format(
-                    ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
-                    df_sub['total_cases'][x]) for x in range(
-                    len(df_sub))])
-        frame['data'].append(data_dict)
-    figure['frames'].append(frame)
-
-    step = dict(
-        method="animate",
-        args=[
-            [day],
-            dict(frame=dict(duration=100,
-                            redraw=True),
-                 mode="immediate",
-                 transition=dict(duration=100,
-                                 easing="quad-in"))
-        ],
-        label=day,
-
-    )
-
-    # append step to step list
-    steps.append(step)
+# chart_data = data[data['date'] == day]
+# for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
+#     colour = colours[cont]
+#     df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
+#     data_dict = dict(
+#         type='scattergeo',
+#         locationmode='ISO-3',
+#         locations=df_sub['countryterritoryCode'].tolist(),
+#         marker=dict(
+#             size=df_sub['total_cases'] / 1000,
+#             color=colour,
+#             line_color='#ffffff',
+#             line_width=0.5,
+#             sizemode='area'),
+#         name='{}'.format(cont),
+#         text=[
+#             '{}<BR>Total Cases: {}'.format(
+#                 ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
+#                 df_sub['total_cases'][x]) for x in range(
+#                     len(df_sub))])
+#     figure['data'].append(data_dict)
 
 
-# Create and add aslider
-sliders = [dict(
-    y=0,
-    active=len(days) - 1,
-    currentvalue=dict(prefix="",
-                      visible=True,
-                      ),
-    transition=dict(duration=300),
-    pad=dict(t=2),
-    steps=steps
-)]
+# ### frames & steps
+# frames = []
+# steps = []
 
-# layout
-figure['layout'] = dict(
-    titlefont=dict(
-        size=title_font_size,
-        family=title_font_family),
-    title_text='<b> COVID-19 Total Cases </b> <BR>' + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>',
-    showlegend=True,
-    geo=dict(
-        scope='world',
-        landcolor='rgb(217, 217, 217)',
-        coastlinecolor='#ffffff',
-        countrywidth=0.5,
-        countrycolor='#ffffff',
-    ),
-    updatemenus=[
-        dict(
-            type='buttons',
-            buttons=list(
-                [
-                    dict(
-                        args=[
-                            None,
-                            dict(
-                                frame=dict(
-                                    duration=200,
-                                    redraw=True),
-                                mode="immediate",
-                                transition=dict(
-                                    duration=200,
-                                    easing="quad-in"))],
-                        label="Play",
-                        method="animate")]))],
-    sliders=sliders)
+# for day in days:
+#     chart_data = data[data['date'] == day]
+#     frame = dict(data=[], name=str(day))
+#     for i, cont in enumerate(chart_data['Continent_Name'].unique()[:-1]):
+#         colour = colours[cont]
+#         df_sub = chart_data[chart_data['Continent_Name'] == cont].reset_index()
+#         data_dict = dict(
+#             type='scattergeo',
+#             locationmode='ISO-3',
+#             locations=df_sub['countryterritoryCode'].tolist(),
+#             marker=dict(
+#                 size=df_sub['total_cases'] / 10000,
+#                 color=colour,
+#                 line_color='#ffffff',
+#                 line_width=0.5,
+#                 sizemode='area'),
+#             name='{}'.format(cont),
+#             text=[
+#                 '{}<BR>Total Cases: {:,}'.format(
+#                     ' '.join(df_sub['countriesAndTerritories'][x].split('_')),
+#                     df_sub['total_cases'][x]) for x in range(
+#                     len(df_sub))])
+#         frame['data'].append(data_dict)
+#     figure['frames'].append(frame)
 
-map1 = go.Figure(figure)
+#     step = dict(
+#         method="animate",
+#         args=[
+#             [day],
+#             dict(frame=dict(duration=100,
+#                             redraw=True),
+#                  mode="immediate",
+#                  transition=dict(duration=100,
+#                                  easing="quad-in"))
+#         ],
+#         label=day,
 
-# Death rate chart
+#     )
 
-figure = {
-    'data': [],
-    'layout': {},
-    'frames': [],
-    'config': {'scrollzoom': False}
-}
-
-# choose the first date in the 'days' list as your data
-day = days[-1]
-
-# define the maximum number of countries to be shown on the graph
-num_ = 204
-
-# define the threshold for being shown
-threshold = 100
-
-# subset the data by date
-chart_data = chart_data = data.loc[(data['date'] == day) & (
-    data['total_cases'] > threshold)].sort_values(by='death_rate', ascending=False)
-
-# select only the first num_ countries in the new dataframe
-chart_data_2 = chart_data[0:num_]
-
-# create a colour variable for the new dataframe, assigning each country a
-# colour according to the colour dictionary
-chart_data_2['colour'] = [colours[str(x)]
-                          for x in chart_data_2['Continent_Name']]
-
-# define the chart
-data_dict = dict(type='bar',
-                 x=[' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
-                 y=chart_data_2['death_rate'],
-                 name='',
-                 text=chart_data_2['countriesAndTerritories'].tolist(),
-                 customdata=chart_data_2['total_cases'],
-                 marker=dict(color=chart_data_2['colour'].tolist()),
-                 hovertemplate="<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")
-
-figure['data'] = data_dict
+#     # append step to step list
+#     steps.append(step)
 
 
-# frames
+# # Create and add aslider
+# sliders = [dict(
+#     y=0,
+#     active=len(days) - 1,
+#     currentvalue=dict(prefix="",
+#                       visible=True,
+#                       ),
+#     transition=dict(duration=300),
+#     pad=dict(t=2),
+#     steps=steps
+# )]
 
-# define lists to capture frames and steps in a loop
-frames = []
-steps = []
+# # layout
+# figure['layout'] = dict(
+#     titlefont=dict(
+#         size=title_font_size,
+#         family=title_font_family),
+#     title_text='<b> COVID-19 Total Cases </b> <BR>' + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>',
+#     showlegend=True,
+#     geo=dict(
+#         scope='world',
+#         landcolor='rgb(217, 217, 217)',
+#         coastlinecolor='#ffffff',
+#         countrywidth=0.5,
+#         countrycolor='#ffffff',
+#     ),
+#     updatemenus=[
+#         dict(
+#             type='buttons',
+#             buttons=list(
+#                 [
+#                     dict(
+#                         args=[
+#                             None,
+#                             dict(
+#                                 frame=dict(
+#                                     duration=200,
+#                                     redraw=True),
+#                                 mode="immediate",
+#                                 transition=dict(
+#                                     duration=200,
+#                                     easing="quad-in"))],
+#                         label="Play",
+#                         method="animate")]))],
+#     sliders=sliders)
 
-# loop through days making a new frame and a new step each time
-for day in days:
+# map1 = go.Figure(figure)
 
-    # create data subset, based on date, and threshold, sort values, take the
-    # first num_ countries then assign colours
-    chart_data = chart_data = data.loc[(data['date'] == day) & (
-        data['total_cases'] > threshold)].sort_values(by='death_rate', ascending=False)
-    chart_data_2 = chart_data[0:num_]
-    chart_data_2['colour'] = [colours[str(x)]
-                              for x in chart_data_2['Continent_Name']]
+# # Death rate chart
 
-    frame = dict(data=[], name=str(day))
-    # create chart
-    data_dict = dict(type='bar',
-                     x=[' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
-                     y=chart_data_2['death_rate'],
-                     name='',
-                     text=chart_data_2['countriesAndTerritories'].tolist(),
-                     customdata=chart_data_2['total_cases'],
-                     marker=dict(color=chart_data_2['colour'].tolist()),
-                     hovertemplate="<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")
+# figure = {
+#     'data': [],
+#     'layout': {},
+#     'frames': [],
+#     'config': {'scrollzoom': False}
+# }
 
-    # add to chart list
-    frame['data'].append(data_dict)
-    figure['frames'].append(frame)
+# # choose the first date in the 'days' list as your data
+# day = days[-1]
 
-    # create steps
-    step = dict(
-        method="animate",
-        args=[
-            [day],
-            dict(frame=dict(duration=100,
-                            redraw=True),
-                 mode="immediate",
-                 transition=dict(duration=100,
-                                 easing="quad-in"))
-        ],
-        label=day,
+# # define the maximum number of countries to be shown on the graph
+# num_ = 204
 
-    )
+# # define the threshold for being shown
+# threshold = 100
 
-    # append step to step list
-    steps.append(step)
+# # subset the data by date
+# chart_data = chart_data = data.loc[(data['date'] == day) & (
+#     data['total_cases'] > threshold)].sort_values(by='death_rate', ascending=False)
 
+# # select only the first num_ countries in the new dataframe
+# chart_data_2 = chart_data[0:num_]
 
-# Create and add aslider
-sliders = [dict(
-    y=-0.3,
-    active=len(days) - 1,
-    currentvalue=dict(prefix="Date: ",
-                      visible=True),
-    transition=dict(duration=300),
-    pad=dict(t=50),
-    steps=steps
-)]
+# # create a colour variable for the new dataframe, assigning each country a
+# # colour according to the colour dictionary
+# chart_data_2['colour'] = [colours[str(x)]
+#                           for x in chart_data_2['Continent_Name']]
 
-figure['layout'] = dict(
-    title='<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>' + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>',
-     titlefont=dict(
-        size=title_font_size, family=title_font_family),
-        yaxis=dict(
-            title=dict(
-                text="%", font=dict(
-                    size=y_title_font_size))),
-    sliders=sliders)
+# # define the chart
+# data_dict = dict(type='bar',
+#                  x=[' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
+#                  y=chart_data_2['death_rate'],
+#                  name='',
+#                  text=chart_data_2['countriesAndTerritories'].tolist(),
+#                  customdata=chart_data_2['total_cases'],
+#                  marker=dict(color=chart_data_2['colour'].tolist()),
+#                  hovertemplate="<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")
+
+# figure['data'] = data_dict
 
 
-# add a footnote
-footnote = dict(
-    xref='paper',
-    xanchor='right',
-    text="Note: Differences in the scope of testing <BR>for the virus and in reporting across <BR> countries means that figures <BR> should be compared with caution; <BR> Only countries with more than 100 cases are shown",
-    x=0.95,
-    yanchor='bottom',
-    yshift=-
-    100,
-    xshift=0,
-    showarrow=False,
-    font=dict(
-        size=10),
-    bgcolor="#ffffff",
-    bordercolor="#D3D3D3",
-    borderwidth=2,
-    borderpad=4,
-    y=20)
+# # frames
 
-figure['layout']['annotations'] = [footnote]
+# # define lists to capture frames and steps in a loop
+# frames = []
+# steps = []
 
-fig1 = go.Figure(figure)
+# # loop through days making a new frame and a new step each time
+# for day in days:
+
+#     # create data subset, based on date, and threshold, sort values, take the
+#     # first num_ countries then assign colours
+#     chart_data = chart_data = data.loc[(data['date'] == day) & (
+#         data['total_cases'] > threshold)].sort_values(by='death_rate', ascending=False)
+#     chart_data_2 = chart_data[0:num_]
+#     chart_data_2['colour'] = [colours[str(x)]
+#                               for x in chart_data_2['Continent_Name']]
+
+#     frame = dict(data=[], name=str(day))
+#     # create chart
+#     data_dict = dict(type='bar',
+#                      x=[' '.join(x.split('_')) for x in chart_data_2['countriesAndTerritories']],
+#                      y=chart_data_2['death_rate'],
+#                      name='',
+#                      text=chart_data_2['countriesAndTerritories'].tolist(),
+#                      customdata=chart_data_2['total_cases'],
+#                      marker=dict(color=chart_data_2['colour'].tolist()),
+#                      hovertemplate="<br><b>%{text}</b><br> Death Rate (%): %{y:0.1f}<br>Total Cases: %{customdata:,}<extra></extra>")
+
+#     # add to chart list
+#     frame['data'].append(data_dict)
+#     figure['frames'].append(frame)
+
+#     # create steps
+#     step = dict(
+#         method="animate",
+#         args=[
+#             [day],
+#             dict(frame=dict(duration=100,
+#                             redraw=True),
+#                  mode="immediate",
+#                  transition=dict(duration=100,
+#                                  easing="quad-in"))
+#         ],
+#         label=day,
+
+#     )
+
+#     # append step to step list
+#     steps.append(step)
+
+
+# # Create and add aslider
+# sliders = [dict(
+#     y=-0.3,
+#     active=len(days) - 1,
+#     currentvalue=dict(prefix="Date: ",
+#                       visible=True),
+#     transition=dict(duration=300),
+#     pad=dict(t=50),
+#     steps=steps
+# )]
+
+# figure['layout'] = dict(
+#     title='<b>Ratio of total reported deaths from COVID-19 to total reported cases</b> <BR>' + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>',
+#      titlefont=dict(
+#         size=title_font_size, family=title_font_family),
+#         yaxis=dict(
+#             title=dict(
+#                 text="%", font=dict(
+#                     size=y_title_font_size))),
+#     sliders=sliders)
+
+
+# # add a footnote
+# footnote = dict(
+#     xref='paper',
+#     xanchor='right',
+#     text="Note: Differences in the scope of testing <BR>for the virus and in reporting across <BR> countries means that figures <BR> should be compared with caution; <BR> Only countries with more than 100 cases are shown",
+#     x=0.95,
+#     yanchor='bottom',
+#     yshift=-
+#     100,
+#     xshift=0,
+#     showarrow=False,
+#     font=dict(
+#         size=10),
+#     bgcolor="#ffffff",
+#     bordercolor="#D3D3D3",
+#     borderwidth=2,
+#     borderpad=4,
+#     y=20)
+
+# figure['layout']['annotations'] = [footnote]
+
+# fig1 = go.Figure(figure)
 
 #################################################################################################
 
@@ -404,7 +404,7 @@ countries = data['countriesAndTerritories'].unique()
 
 # choose whether we want to plot total_cases or total_deaths
 cat_ = 'deaths'  # deaths / cases
-type_ = '_7_day_sum'  # '_7_day_sum' / 'total_' /''
+type_ = '_weekly'  # '_7_day_sum' / 'total_' /''
 var = cat_ + type_
 
 # choose how many cumulative deaths/or cases to use as point 0
@@ -425,8 +425,8 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 # define plot title and axis titles
 
-if type_ == '_7_day_sum':
-    plot_title = "<b>COVID-19 " + cat_.capitalize() + ': 7 day rolling average</b><BR>' + latest_data_string +  '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>'
+if type_ == '_weekly':
+    plot_title = "<b>COVID-19 " + cat_.capitalize() + ': weekly total </b><BR>' + latest_data_string +  '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
     plot_title = '<b>COVID-19 ' + cat_.capitalize() + '</b> <BR> cumulative total <BR>' + latest_data_string + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>'
 else:
@@ -550,7 +550,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 300]), yaxis=dict(
+                        0, 50]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
@@ -563,7 +563,7 @@ fig2 = go.Figure(figure)
 
 # choose whether we want to plot total_cases or total_deaths
 cat_ = 'cases'  # deaths / cases
-type_ = '_7_day_sum'  # '_7_day_sum' / 'total_' /''
+type_ = '_weekly'  # '_7_day_sum' / 'total_' /''
 var = cat_ + type_
 
 # choose how many cumulative deaths/or cases to use as point 0
@@ -584,9 +584,9 @@ latest_data_string = latest_data.strftime("%d %b %Y")
 
 # define plot title and axis titles
 
-if type_ == '_7_day_sum':
+if type_ == '_weekly':
     plot_title = "<b>COVID-19 " + \
-        cat_.capitalize() + ": 7 day rolling average</b><BR>" + latest_data_string  + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>'
+        cat_.capitalize() + ": 7 day total </b><BR>" + latest_data_string  + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>'
 elif type_ == 'total_':
     plot_title = "<b>COVID-19 " + \
         cat_.capitalize() + "</b> <BR> cumulative total <BR>" + latest_data_string  + '<br><span style="font-size: 11px;">Source: European Centre for Disease Prevention and Control</span>'
@@ -711,11 +711,11 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 350]), yaxis=dict(
+                        0, 50]), yaxis=dict(
                             title=dict(
                                 text=x_title, font=dict(
                                     size=x_title_font_size)), range=[
-                                        0, 6.5]))
+                                        0,7]))
 
 
 fig3 = go.Figure(figure)
@@ -826,7 +826,7 @@ figure['layout'] = dict(
             title=dict(
                 text=x_title, font=dict(
                     size=x_title_font_size)), range=[
-                        0, 5000], ), yaxis=dict(
+                        0, 7000], ), yaxis=dict(
                             title=dict(
                                 text=y_title, font=dict(
                                     size=y_title_font_size)), range=[
@@ -857,7 +857,7 @@ for country in data['countriesAndTerritories'].unique():
     colour = data[data['countriesAndTerritories'] == country]['colour'].tolist()[
         0]
     chart_data = data[(data['dateRep'] == data['dateRep'].max()) & (
-        data['countriesAndTerritories'] == country)][['total_cases', 'total_deaths', 'cases', 'deaths']].T
+        data['countriesAndTerritories'] == country)][['total_cases', 'total_deaths', 'cases_weekly', 'deaths_weekly']].T
     try:
         if country == 'World':
             data_dict = dict(type='bar',
@@ -1040,7 +1040,7 @@ fig5 = go.Figure(figure)
 
 ## excess deaths v pop density
 
-week = 30
+week = 45
 from sklearn.linear_model import LinearRegression
 X = np.array(df_chart[df_chart.week==week]['density']).reshape(-1,1)
 y=df_chart[df_chart.week==week]['cumulative_excess_deaths_per_mil']

@@ -48,7 +48,7 @@ app.layout = html.Div(
 
 
                 html.Div(children=['''
-                                    Visualizations of data on cases and deaths from COVID-19
+                                    Visualizations of data on cases and deaths from COVID-19 (Now updated weekly due to change in ECDC data collection)
                                     '''],
                                     style={'width': '74%',
                                                 'display': 'inline-block',
@@ -173,41 +173,41 @@ app.layout = html.Div(
             style={}
         ),
         
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    figure=map1,
-                    responsive=False,
+#         html.Div([
+#             html.Div([
+#                 dcc.Graph(
+#                     figure=map1,
+#                     responsive=False,
 
-                )
-            ],
-                className="five columns",
-                style={
-                'display': 'inline-block',
-                'margin-left': '1.5%',
-                'margin-top': '1.5%',
-                'margin-bottom': '1.5%'}
-            ),
-            html.Div([
-                dcc.Graph(
-                    figure=fig1,
-                    responsive=False,
+#                 )
+#             ],
+#                 className="five columns",
+#                 style={
+#                 'display': 'inline-block',
+#                 'margin-left': '1.5%',
+#                 'margin-top': '1.5%',
+#                 'margin-bottom': '1.5%'}
+#             ),
+#             html.Div([
+#                 dcc.Graph(
+#                     figure=fig1,
+#                     responsive=False,
 
-                )
-            ],
-                className="five columns",
-                style={
-                'display': 'inline-block',
-                'margin-left': '1.5%',
-                'margin-top': '1.5%',
-                'margin-right': '1.5%',
-                'margin-bottom': '1.5%'}
-            )
+#                 )
+#             ],
+#                 className="five columns",
+#                 style={
+#                 'display': 'inline-block',
+#                 'margin-left': '1.5%',
+#                 'margin-top': '1.5%',
+#                 'margin-right': '1.5%',
+#                 'margin-bottom': '1.5%'}
+#             )
 
-        ],
-            className='row twelve columns justify-content-center',
-            style={}
-        ),  
+#         ],
+#             className='row twelve columns justify-content-center',
+#             style={}
+#         ),  
         
         
 
